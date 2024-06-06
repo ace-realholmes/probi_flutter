@@ -87,6 +87,7 @@ lib/
 ### List of dependencies and their use cases
 - [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage) - Secured local storage.
 - [auto_route](https://pub.dev/packages/auto_route) - Route management.
+- [provider](https://pub.dev/packages/provider) - State management
 - [freezed](https://pub.dev/packages/freezed) - Class/Model generation.
 - [dio](https://pub.dev/packages/dio) - Http Request handler.
 
