@@ -13,9 +13,6 @@ class PostApi {
       if(response.statusCode == 200){
         
       }
-
-
-
     } catch (e){
       throw Exception('Failed to find posts: $e');
     }
