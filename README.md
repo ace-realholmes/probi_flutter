@@ -2,8 +2,8 @@
 - Sample project for skills assesment
 
 ## What to do?
-- Sample project: Blog creation APP (API provided by JSON Placeholder)
-- Create a simple blog posting app using flutter
+- Sample project: Blog management app (API provided by JSON Placeholder)
+- Create a simple blog posting app using flutter and required packages.
 
 ### requirements
 
