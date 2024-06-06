@@ -75,7 +75,7 @@ lib/
   - screens : necessary screens for this feature implementation.
   - services : necessary services specifically created for this feature.
   - providers : necessary providers specifically created for this feature.
-  - widgets : widgets user specifically for this feature.
+  - widgets : widgets used specifically for this feature.
 
 ### Theme
 - Contains app-wide theme data.
