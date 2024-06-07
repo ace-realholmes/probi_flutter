@@ -44,13 +44,15 @@ class _PostScreenListState extends State<PostScreenList> {
           onPressed: () {
             context.router.pushNamed('/post/add');
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add, color: Colors.white,),
         ),
         appBar: AppBar(
           title: const Text("Product List"),
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.list, color: Colors.white,)),
+            IconButton(onPressed: (){
+              context.router.pushNamed('/post/favorites');
+            }, icon: Icon(Icons.list, color: Colors.white,)),
             IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode_outlined, color: Colors.white,))
           ],
         ),

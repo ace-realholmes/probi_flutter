@@ -27,6 +27,8 @@ final ThemeData lightTheme = ThemeData(
         fontSize: 14,
       )),
   inputDecorationTheme: InputDecorationTheme(
+    fillColor: Color(0xFFD9D9D9),
+    filled: true,
     border: const UnderlineInputBorder(),
     enabledBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: Colors.grey.shade400),
@@ -50,5 +52,8 @@ final ThemeData lightTheme = ThemeData(
   iconTheme: const IconThemeData(color: Colors.white),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Color(0xFF5D737E),
+    shape: CircleBorder(
+      side: BorderSide.none
+    )
   ),
 );
