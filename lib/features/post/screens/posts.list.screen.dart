@@ -38,7 +38,6 @@ class _PostScreenListState extends State<PostScreenList> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {

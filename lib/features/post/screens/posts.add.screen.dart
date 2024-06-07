@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:probi_flutter/themes/default.themes.dart';
 
 @RoutePage()
 class PostScreenAdd extends StatefulWidget {

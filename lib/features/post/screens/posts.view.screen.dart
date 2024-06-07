@@ -16,7 +16,6 @@ class _PostScreenViewState extends State<PostScreenView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Post View'),
-        automaticallyImplyLeading: false,
         leading: Icon(Icons.arrow_back, color: Colors.white,),
       ),
       body: Padding(

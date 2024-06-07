@@ -36,6 +36,7 @@ class PostSreenFavorites extends StatelessWidget {
           onPressed: () {
             context.router.back();
           },
+          color: Colors.white,
         ),
         title: const Text('Post Favorites'),
       ),
@@ -44,6 +45,8 @@ class PostSreenFavorites extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               title: Text(data[index].toString()),
+              subtitle: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+              trailing: Icon(Icons.favorite),
             );
           }),
     );
