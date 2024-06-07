@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:probi_flutter/themes/default.themes.dart';
 
 @RoutePage()
 class PostScreenList extends StatefulWidget {
@@ -32,18 +33,49 @@ class _PostScreenListState extends State<PostScreenList> {
     19,
     20
   ];
+
+  bool isDarkMode = false;
+
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.router.pushNamed('/post/add');
+          },
+          child: const Icon(Icons.add),
+        ),
+        appBar: AppBar(
+          title: const Text("Product List"),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(onPressed: (){}, icon: Icon(Icons.list, color: Colors.white,)),
+            IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode_outlined, color: Colors.white,))
+          ],
+        ),
         body: GridView.count(
-      shrinkWrap: true,
-      crossAxisCount: 2,
-      childAspectRatio: 2.0,
-      children: List.generate(data.length, (index) {
-        return ListTile(
-          title: Text("Data ${data[index]}"),
-        );
-      }),
-    ));
+          shrinkWrap: true,
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          children: List.generate(data.length, (index) {
+            return GestureDetector(
+              onTap: () {
+                context.router.pushNamed('/post/view');
+              },
+              child: Card(
+                child: Column(
+                  children: [
+                    Text('Data ${data[index]}'),
+                    Text(
+                      'Lorem ipsum dol',
+                      style: lightTheme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ));
   }
 }

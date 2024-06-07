@@ -13,9 +13,47 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Post Screen Update'),
-      ),
-    );
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context.router.back();
+            },
+          ),
+          title: Text('Update Post'),
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const TextField(
+                  minLines: 1,
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                const TextField(
+                  maxLines: 5,
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        context.router.replaceNamed('/post/list');
+                      },
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
+                      )),
+                )
+              ],
+            )));
   }
 }
