@@ -1,40 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class PostScreenFavorites extends StatelessWidget {
   PostScreenFavorites({super.key});
 
-  List<int> data = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final postController = Provider.of<PostProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            
             context.router.back();
           },
           color: Colors.white,
@@ -42,13 +21,16 @@ class PostScreenFavorites extends StatelessWidget {
         title: const Text('Post Favorites'),
       ),
       body: ListView.builder(
-          itemCount: data.length,
+          itemCount: postController.favoritePosts.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text(data[index].toString()),
-              subtitle: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-              trailing: Icon(Icons.favorite),
+              leading: Icon(Icons.note),
+              title: Text(postController.favoritePosts[index].title),
+              subtitle: Text(postController.favoritePosts[index].body),
+              trailing: IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {},
+              ),
             );
           }),
     );
