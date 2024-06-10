@@ -1,39 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class PostScreenView extends StatefulWidget {
-  const PostScreenView({super.key});
+  final int id;
+  final int index;
+  const PostScreenView({super.key, required this.id, required this.index});
 
   @override
   State<PostScreenView> createState() => _PostScreenViewState();
 }
 
 class _PostScreenViewState extends State<PostScreenView> {
-
   @override
   Widget build(BuildContext context) {
+    final postController = Provider.of<PostProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Post View'),
-        leading: Icon(Icons.arrow_back, color: Colors.white,),
+        title: const Text('Post View'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white,),
+          onPressed: (){
+            context.router.back();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
-                const SizedBox(width: 12,),
-                const Text(
-                  'User #',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                const SizedBox(
+                  width: 12,
                 ),
-                Expanded(child: SizedBox(height: 0,)),
-                IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border, color: Colors.black,)),
+                Text(
+                  'User #${postController.posts[widget.index].userId}',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                const Expanded(
+                    child: SizedBox(
+                  height: 0,
+                )),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.black,
+                    )),
                 PopupMenuButton<String>(
                   // icon: Icon(Icons.menu, color: Colors.black,),
                   iconColor: Colors.black,
@@ -51,7 +71,7 @@ class _PostScreenViewState extends State<PostScreenView> {
                       child: Row(
                         children: [
                           Icon(Icons.edit, color: Colors.blue),
-                          SizedBox(width: 8), 
+                          SizedBox(width: 8),
                           Text('Update'),
                         ],
                       ),
@@ -68,15 +88,19 @@ class _PostScreenViewState extends State<PostScreenView> {
                     ),
                   ],
                 ),
-              
-                
               ],
             ),
             const SizedBox(
               height: 12,
             ),
-            const Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec magna sem. Curabitur aliquam auctor hendrerit. Sed sed nisl in nunc euismod eleifend. Sed non '),
+            Text("Post #${postController.posts[widget.index].id.toString()}"),
+            const SizedBox(height: 6,),
+            Text(
+              postController.posts[widget.index].title,
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 6,),
+            Text(postController.posts[widget.index].body, textAlign: TextAlign.justify,),
           ],
         ),
       ),

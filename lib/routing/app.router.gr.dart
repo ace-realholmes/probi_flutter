@@ -53,9 +53,14 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     PostRouteView.name: (routeData) {
+      final args = routeData.argsAs<PostRouteViewArgs>();
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.PostScreenView(),
+        child: _i5.PostScreenView(
+          key: args.key,
+          id: args.id,
+          index: args.index,
+        ),
       );
     },
   };
@@ -134,14 +139,43 @@ class PostRouteUpdate extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PostScreenView]
-class PostRouteView extends _i6.PageRouteInfo<void> {
-  const PostRouteView({List<_i6.PageRouteInfo>? children})
-      : super(
+class PostRouteView extends _i6.PageRouteInfo<PostRouteViewArgs> {
+  PostRouteView({
+    _i7.Key? key,
+    required int id,
+    required int index,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
           PostRouteView.name,
+          args: PostRouteViewArgs(
+            key: key,
+            id: id,
+            index: index,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PostRouteView';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i6.PageInfo<PostRouteViewArgs> page =
+      _i6.PageInfo<PostRouteViewArgs>(name);
+}
+
+class PostRouteViewArgs {
+  const PostRouteViewArgs({
+    this.key,
+    required this.id,
+    required this.index,
+  });
+
+  final _i7.Key? key;
+
+  final int id;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'PostRouteViewArgs{key: $key, id: $id, index: $index}';
+  }
 }

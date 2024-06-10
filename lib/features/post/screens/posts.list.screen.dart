@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:logger/logger.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/services/navigator.service.dart';
+import 'package:probi_flutter/features/post/services/post.service.dart';
+import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:probi_flutter/themes/default.themes.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class PostScreenList extends StatefulWidget {
@@ -38,10 +44,14 @@ class _PostScreenListState extends State<PostScreenList> {
 
   @override
   Widget build(BuildContext context) {
+    final postController = Provider.of<PostProvider>(context);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.pushNamed('/post/add');
+            // NavigationService().navigate('/post/add');
+
+            PostApi().getAllPosts();
+            // Logger().i("List Screen: ${postController.posts[1]}");
           },
           child: const Icon(Icons.add, color: Colors.white,),
         ),
@@ -59,20 +69,35 @@ class _PostScreenListState extends State<PostScreenList> {
           shrinkWrap: true,
           crossAxisCount: 2,
           childAspectRatio: 1,
-          children: List.generate(data.length, (index) {
+          children: List.generate(postController.posts.length, (index) {
             return GestureDetector(
               onTap: () {
-                context.router.pushNamed('/post/view');
+                // context.router.pushNamed(PostRouteView(id: postController.posts[index].id));
+                context.router.push(PostRouteView(id: postController.posts[index].id, index: index));
               },
               child: Card(
-                child: Column(
-                  children: [
-                    Text('Data ${data[index]}'),
-                    Text(
-                      'Lorem ipsum dol',
-                      style: lightTheme.textTheme.bodyMedium,
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text("Post #${postController.posts[index].id}"),
+                          SizedBox(width: 6,),
+                          Text("- User #${postController.posts[index].userId.toString()}"),
+
+                        ],
+                      ),
+                      Text(postController.posts[index].title, style: TextStyle(fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),),
+                      Text(
+                        postController.posts[index].body,
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
