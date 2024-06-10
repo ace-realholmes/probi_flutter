@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class PostSreenFavorites extends StatelessWidget {
+class PostScreenFavorites extends StatelessWidget {
+  PostScreenFavorites({super.key});
+
   List<int> data = [
     1,
     2,
@@ -26,14 +28,13 @@ class PostSreenFavorites extends StatelessWidget {
     20
   ];
 
-  PostSreenFavorites({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
+            
             context.router.back();
           },
           color: Colors.white,
@@ -45,7 +46,8 @@ class PostSreenFavorites extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               title: Text(data[index].toString()),
-              subtitle: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+              subtitle: Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
               trailing: Icon(Icons.favorite),
             );
           }),

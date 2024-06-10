@@ -23,6 +23,13 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
               context.router.back();
             },
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context.router.pushNamed("/post/draft");
+                },
+                icon: Icon(Icons.drafts, color: Colors.white,))
+          ],
           title: Text('Update Post'),
         ),
         body: Padding(
@@ -30,18 +37,14 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
             child: Column(
               children: [
                 const TextField(
-                  decoration: InputDecoration(
-                    hintText: "Title"
-                  ),
+                  decoration: InputDecoration(hintText: "Title"),
                   minLines: 1,
                 ),
                 SizedBox(
                   height: 12,
                 ),
                 const TextField(
-                  decoration: InputDecoration(
-                    hintText: "Body"
-                  ),
+                  decoration: InputDecoration(hintText: "Body"),
                   maxLines: 5,
                 ),
                 SizedBox(

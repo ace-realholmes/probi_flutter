@@ -44,36 +44,51 @@ class _PostScreenListState extends State<PostScreenList> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     final postController = Provider.of<PostProvider>(context);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // NavigationService().navigate('/post/add');
+            context.router.push(PostRouteAdd());
 
             PostApi().getAllPosts();
-            // Logger().i("List Screen: ${postController.posts[1]}");
           },
-          child: const Icon(Icons.add, color: Colors.white,),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
         appBar: AppBar(
           title: const Text("Product List"),
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: (){
-              context.router.pushNamed('/post/favorites');
-            }, icon: Icon(Icons.list, color: Colors.white,)),
-            IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode_outlined, color: Colors.white,))
+            IconButton(
+                onPressed: () {
+                  context.router.pushNamed('/post/favorites');
+                },
+                icon: const Icon(
+                  Icons.list,
+                  color: Colors.white,
+                )),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.dark_mode_outlined,
+                  color: Colors.white,
+                ))
           ],
         ),
         body: GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,
-          childAspectRatio: 1,
+          childAspectRatio: screenSize.width / 0.4 / screenSize.height / 2,
           children: List.generate(postController.posts.length, (index) {
             return GestureDetector(
               onTap: () {
                 // context.router.pushNamed(PostRouteView(id: postController.posts[index].id));
-                context.router.push(PostRouteView(id: postController.posts[index].id, index: index));
+                context.router.push(PostRouteView(
+                    id: postController.posts[index].id, index: index));
               },
               child: Card(
                 child: Padding(
@@ -81,20 +96,29 @@ class _PostScreenListState extends State<PostScreenList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Image(
+                        image: AssetImage('assets/sticky-notes.jpg'),
+                        fit: BoxFit.cover,
+                      ),
                       Row(
                         children: [
                           Text("Post #${postController.posts[index].id}"),
-                          SizedBox(width: 6,),
-                          Text("- User #${postController.posts[index].userId.toString()}"),
-
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                              "- User #${postController.posts[index].userId.toString()}"),
                         ],
                       ),
-                      Text(postController.posts[index].title, style: TextStyle(fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),),
+                      Text(
+                        postController.posts[index].title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            overflow: TextOverflow.ellipsis),
+                      ),
                       Text(
                         postController.posts[index].body,
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis
-                        ),
+                        style: const TextStyle(overflow: TextOverflow.ellipsis),
                       ),
                     ],
                   ),

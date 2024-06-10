@@ -15,12 +15,16 @@ class NavigationService {
     return navigationKey.currentContext!.router.pushNamed(path);
   }
 
-  goBack() {
-    return navigationKey.currentContext!.router.back();
+  void goBack() {
+    if (navigationKey.currentContext != null) {
+      navigationKey.currentContext!.router.back();
+    } else {
+      print('Context is null, cannot go back');
+    }
   }
 
   showLoader() {
-    Future.delayed(Duration.zero, () {
+    Future.delayed(Duration(seconds: 2), () {
       showDialog(
           context: navigationKey.currentContext!,
           barrierDismissible: false,
@@ -33,5 +37,4 @@ class NavigationService {
           });
     });
   }
-
 }

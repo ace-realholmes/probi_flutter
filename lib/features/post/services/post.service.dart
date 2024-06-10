@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:probi_flutter/common/env.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
 
@@ -15,6 +16,8 @@ class PostApi {
             .map((json) => Post.fromJson(json as Map<String, dynamic>))
             .toList();
 
+        // Logger().d('Get Data: $data \n Get Posts: ${posts[10]}');
+        
         return posts;
       } else {
         throw Exception('Failed to load posts');
@@ -39,6 +42,25 @@ class PostApi {
 
     } catch(e){
       throw Exception('Failed to Get Post: $e');
+    }
+  }
+
+  Future<Post> postPost(String title, String body) async {
+    try{
+      final response = await dio.post(baseUrl, data: {"userId": 11, "title": title, "body": body});
+
+      Logger().d("Post Post Service: $response");
+
+      if(response.statusCode == 201){
+        Post post = Post.fromJson(response.data as Map<String, dynamic>);
+
+        Logger().d('Post Post: $post');
+        return post;
+      } else{
+        throw Exception('Failed to Post Post: ${response.statusMessage}');
+      }
+    } catch (e){
+      throw Exception('Failed to Post Post: $e');
     }
   }
 
