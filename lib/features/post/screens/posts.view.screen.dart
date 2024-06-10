@@ -56,9 +56,11 @@ class _PostScreenViewState extends State<PostScreenView> {
                     )),
                 PopupMenuButton<String>(
                   iconColor: Colors.black,
-                  onSelected: (String result) {
-                    if (result == 'update') {
-                      context.router.pushNamed('/post/update');
+                  onSelected: (String result) async {
+                    if (result == 'update')  {
+                      await postController.updatePost(widget.id);
+                      
+                      context.router.pushNamed("/post/update");
                     } else if (result == 'delete') {
                       context.router.pushNamed('/post/list');
                     }

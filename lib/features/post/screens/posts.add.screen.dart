@@ -21,9 +21,9 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
           await postController.storePost();
-          context.router.navigate(PostRouteList());
+          context.router.navigate(const PostRouteList());
         } else {
-          context.router.navigate(PostRouteList());
+          context.router.navigate(const PostRouteList());
         }
       },
       child: Scaffold(

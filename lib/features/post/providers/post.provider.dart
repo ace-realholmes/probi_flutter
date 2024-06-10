@@ -99,7 +99,15 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updatePost(int index) async {
+  updatePost(int id) async {
+    for(var post in posts){
+      if(post.id == id){
+        titleController.text = post.title;
+        bodyController.text = post.body;
 
+        notifyListeners();
+        break;
+      }
+    }
   }
 }
