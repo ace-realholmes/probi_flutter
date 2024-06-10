@@ -43,7 +43,7 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
                   onTap: () async {
                     await postController.draftPost(index);
 
-                    context.router.pushNamed("/post/add");
+                    context.router.popAndPush(PostRouteAdd());
                   });
             }));
   }

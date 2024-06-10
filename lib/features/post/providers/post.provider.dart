@@ -99,4 +99,7 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  updatePost(int index) async {
+
+  }
 }

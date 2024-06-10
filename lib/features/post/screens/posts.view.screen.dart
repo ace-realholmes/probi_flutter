@@ -55,7 +55,6 @@ class _PostScreenViewState extends State<PostScreenView> {
                       color: Colors.black,
                     )),
                 PopupMenuButton<String>(
-                  // icon: Icon(Icons.menu, color: Colors.black,),
                   iconColor: Colors.black,
                   onSelected: (String result) {
                     if (result == 'update') {
