@@ -29,7 +29,9 @@ class PostScreenFavorites extends StatelessWidget {
               subtitle: Text(postController.favoritePosts[index].body),
               trailing: IconButton(
                 icon: Icon(Icons.favorite),
-                onPressed: () {},
+                onPressed: () async {
+                  await postController.toggleFavoritePosts(postController.favoritePosts[index].id);
+                },
               ),
             );
           }),
