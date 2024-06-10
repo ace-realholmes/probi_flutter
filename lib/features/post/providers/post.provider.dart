@@ -8,7 +8,7 @@ import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
 
 class PostProvider extends ChangeNotifier {
-    final NavigationService _navigationService;
+  final NavigationService _navigationService;
   TextEditingController titleController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
 
@@ -20,7 +20,7 @@ class PostProvider extends ChangeNotifier {
 
   final secureStorage = const FlutterSecureStorage();
 
-  PostProvider(this._navigationService){
+  PostProvider(this._navigationService) {
     getAllPosts();
   }
 
@@ -36,7 +36,6 @@ class PostProvider extends ChangeNotifier {
     } else {
       favoritePost.add(id);
     }
-
     notifyListeners();
   }
 
@@ -89,7 +88,7 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
-  draftPost(int index) async{
+  draftPost(int index) async {
     titleController.text = title[index];
     bodyController.text = body[index];
 
@@ -100,8 +99,8 @@ class PostProvider extends ChangeNotifier {
   }
 
   updatePost(int id) async {
-    for(var post in posts){
-      if(post.id == id){
+    for (var post in posts) {
+      if (post.id == id) {
         titleController.text = post.title;
         bodyController.text = post.body;
 
