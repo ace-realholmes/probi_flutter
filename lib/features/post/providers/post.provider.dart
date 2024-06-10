@@ -109,4 +109,10 @@ class PostProvider extends ChangeNotifier {
       }
     }
   }
+
+  deletePost(int id) async {
+    await PostApi().deletePost(id);
+
+    notifyListeners();
+  }
 }

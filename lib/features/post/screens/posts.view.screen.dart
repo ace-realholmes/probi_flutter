@@ -82,6 +82,8 @@ class _PostScreenViewState extends State<PostScreenView> {
 
                       context.router.pushNamed("/post/update");
                     } else if (result == 'delete') {
+                      await postController.deletePost(widget.id);
+
                       context.router.pushNamed('/post/list');
                     }
                   },
