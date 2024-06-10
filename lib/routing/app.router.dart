@@ -10,6 +10,7 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: PostRouteView.page, path: "/post/view"),
     AutoRoute(page: PostRouteAdd.page, path: "/post/add"),
     AutoRoute(page: PostRouteUpdate.page, path: "/post/update"),
-    AutoRoute(page: PostRouteFavorites.page, path: "/post/favorites")
+    AutoRoute(page: PostRouteFavorites.page, path: "/post/favorites"),
+    AutoRoute(page: PostRouteDraft.page, path: "/post/draft")
   ];
 }
