@@ -15,9 +15,9 @@ class TextFieldBuild extends StatelessWidget {
     return TextField(
         controller: controller,
         maxLines: maxLines,
-        decoration: InputDecoration(hintText: hint,
-        filled: true,
-        fillColor: const Color.fromARGB(255, 252, 239, 239))
-        );
+        decoration: InputDecoration(
+          hintText: hint,
+          filled: true,
+        ));
   }
 }
