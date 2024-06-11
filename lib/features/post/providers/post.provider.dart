@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
@@ -24,8 +25,11 @@ class PostProvider extends ChangeNotifier {
   }
 
   getAllPosts() async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+
     posts = await PostApi().getAllPosts();
 
+    EasyLoading.dismiss();
     notifyListeners();
   }
 
@@ -42,7 +46,7 @@ class PostProvider extends ChangeNotifier {
       posts.where((post) => favoritePost.contains(post.id)).toList();
 
   createPost() async {
-
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     Post post =
         await PostApi().postPost(titleController.text, bodyController.text);
 
@@ -53,24 +57,31 @@ class PostProvider extends ChangeNotifier {
       titleController.clear();
       bodyController.clear();
     }
+
+    EasyLoading.dismiss();
   }
 
   storePost(int? id) async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     title.add(titleController.text);
     body.add(bodyController.text);
     postId.add(id!);
 
     await secureStorage.write(
-        key: "draftPosts", value: jsonEncode({"title": title, "body": body, "postId": postId}));
+        key: "draftPosts",
+        value: jsonEncode({"title": title, "body": body, "postId": postId}));
 
     Logger().i("Store Post\nTitle: $title\nBody: $body\nPost ID: $postId");
 
     titleController.clear();
     bodyController.clear();
     postId.clear();
+
+    EasyLoading.dismiss();
   }
 
   retrieveUserData() async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     final dataString = await secureStorage.read(key: 'draftPosts');
     if (dataString != null) {
       final data = jsonDecode(dataString);
@@ -81,22 +92,19 @@ class PostProvider extends ChangeNotifier {
       body.addAll(data['body'] as List<String>);
       postId.addAll(data['postId'] as List<int>);
     }
+
+    EasyLoading.dismiss();
   }
-
-  readPostData() async {
-    final dataString = await secureStorage.read(key: 'draftPosts');
-
-
-  }
-
 
   draftPost(int index) async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     titleController.text = title[index];
     bodyController.text = body[index];
 
     title.removeAt(index);
     body.removeAt(index);
 
+    EasyLoading.dismiss();
     notifyListeners();
   }
 
@@ -113,22 +121,26 @@ class PostProvider extends ChangeNotifier {
   }
 
   updatePost(int id) async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     Post post = await PostApi().patchPost(id);
 
     Logger().d("Update Post Provider: $post");
 
-    if(post.userId.toString().isNotEmpty || post.id.toString().isNotEmpty){
+    if (post.userId.toString().isNotEmpty || post.id.toString().isNotEmpty) {
       getAllPosts();
 
       titleController.clear();
       bodyController.clear();
     }
 
+    EasyLoading.dismiss();
   }
 
   deletePost(int id) async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     await PostApi().deletePost(id);
 
+    EasyLoading.dismiss();
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/navigator.service.dart';
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: DarkTheme().darkTheme,
             themeMode: themeProvider.themeMode,
             routerConfig: _appRouter.config(),
+            builder: EasyLoading.init(),
           );
         },
       ),

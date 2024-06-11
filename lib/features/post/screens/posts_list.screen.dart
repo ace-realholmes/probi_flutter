@@ -29,8 +29,6 @@ class _PostScreenListState extends State<PostScreenList> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             context.router.push(PostRouteAdd());
-
-            PostApi().getAllPosts();
           },
           child: const Icon(
             Icons.add,
