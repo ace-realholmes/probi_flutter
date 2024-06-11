@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
+import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
@@ -41,32 +42,31 @@ class _PostScreenAddState extends State<PostScreenAdd> {
               ),
               appBarTitle: "Post Add",
               actionWidgets: [
-                IconButton(onPressed: (){
-                  context.router.pushNamed("/post/draft");
-                }, icon: Icon(Icons.drafts))
+                IconButton(
+                    onPressed: () {
+                      context.router.pushNamed("/post/draft");
+                    },
+                    icon: Icon(Icons.drafts))
               ]),
-              
           body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  TextField(
-                    controller: postController.titleController,
-                    decoration: InputDecoration(hintText: "Title"),
-                    minLines: 1,
-                  ),
-                  SizedBox(
+                  TextFieldBuild(
+                      maxLines: 1,
+                      hint: "Title",
+                      controller: postController.titleController),
+                  const SizedBox(
                     height: 12,
                   ),
-                  TextField(
-                    controller: postController.bodyController,
-                    decoration: InputDecoration(hintText: "Body"),
-                    maxLines: 5,
-                  ),
-                  SizedBox(
+                  TextFieldBuild(
+                      maxLines: 5,
+                      hint: "Body",
+                      controller: postController.bodyController),
+                  const SizedBox(
                     height: 24,
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
@@ -78,7 +78,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
 
                           context.router.pushNamed("/post/list");
                         },
-                        child: Text(
+                        child: const Text(
                           'Submit',
                         )),
                   )

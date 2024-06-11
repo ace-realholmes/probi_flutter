@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
+import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -32,27 +33,27 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
             ),
             appBarTitle: "Post Update",
             actionWidgets: [
-              IconButton(onPressed: (){
-                context.router.pushNamed("/post/draft");
-              }, icon: Icon(Icons.drafts))
+              IconButton(
+                  onPressed: () {
+                    context.router.pushNamed("/post/draft");
+                  },
+                  icon: Icon(Icons.drafts))
             ]),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(
-                  controller: postController.titleController,
-                  decoration: InputDecoration(hintText: "Title"),
-                  minLines: 1,
-                ),
-                SizedBox(
+                TextFieldBuild(
+                    maxLines: 1,
+                    hint: "Title",
+                    controller: postController.titleController),
+                const SizedBox(
                   height: 12,
                 ),
-                TextField(
-                  controller: postController.bodyController,
-                  decoration: InputDecoration(hintText: "Body"),
-                  maxLines: 5,
-                ),
+                TextFieldBuild(
+                    maxLines: 5,
+                    hint: "Body",
+                    controller: postController.bodyController),
                 const SizedBox(
                   height: 24,
                 ),
