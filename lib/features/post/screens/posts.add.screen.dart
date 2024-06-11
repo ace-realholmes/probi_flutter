@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
-import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
@@ -28,33 +27,6 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         }
       },
       child: Scaffold(
-          // appBar: AppBar(
-          //   automaticallyImplyLeading: false,
-          //   leading: IconButton(
-          //     icon: const Icon(
-          //       Icons.arrow_back,
-          //     ),
-          //     onPressed: () async {
-          //       if (postController.titleController.text.isNotEmpty ||
-          //           postController.bodyController.text.isNotEmpty) {
-          //         await postController.storePost();
-          //         context.router.navigate(PostRouteList());
-          //       } else {
-          //         context.router.navigate(PostRouteList());
-          //       }
-          //     },
-          //   ),
-          //   actions: [
-          //     IconButton(
-          //         onPressed: () {
-          //           context.router.pushNamed("/post/draft");
-          //         },
-          //         icon: const Icon(
-          //           Icons.drafts,
-          //         ))
-          //   ],
-          //   title: const Text('Add Post'),
-          // ),
           appBar: buildAppBar(
               leading: BackButton(
                 onPressed: () async {

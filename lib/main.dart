@@ -4,7 +4,6 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/routing/app.router.dart';
-import 'package:probi_flutter/themes/default.themes.dart';
 import 'package:probi_flutter/themes/global.themes.dart';
 import 'package:provider/provider.dart';
 

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
-import 'package:probi_flutter/features/post/providers/theme.provider.dart';
-import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
-import 'package:probi_flutter/themes/default.themes.dart';
-import 'package:probi_flutter/themes/global.themes.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -28,7 +23,7 @@ class _PostScreenListState extends State<PostScreenList> {
     var screenSize = MediaQuery.of(context).size;
 
     final postController = Provider.of<PostProvider>(context);
-    final themeController = Provider.of<ThemeProvider>(context);
+    
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {

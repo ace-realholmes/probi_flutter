@@ -4,8 +4,6 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../routing/app.router.gr.dart';
-
 @RoutePage()
 class PostScreenUpdate extends StatefulWidget {
   const PostScreenUpdate({super.key});
