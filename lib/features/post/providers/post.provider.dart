@@ -43,11 +43,6 @@ class PostProvider extends ChangeNotifier {
       posts.where((post) => favoritePost.contains(post.id)).toList();
 
   createPost() async {
-    var fields = {
-      "userId": 11,
-      "title": titleController.text,
-      "body": bodyController.text
-    };
 
     Post post =
         await PostApi().postPost(titleController.text, bodyController.text);

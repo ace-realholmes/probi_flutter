@@ -13,14 +13,6 @@ class PostScreenFavorites extends StatelessWidget {
   Widget build(BuildContext context) {
     final postController = Provider.of<PostProvider>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: BackButton(
-      //     onPressed: () {
-      //       context.router.back();
-      //     },
-      //   ),
-      //   title: const Text('Post Favorites'),
-      // ),
       appBar: buildAppBar(
           leading: BackButton(
             onPressed: () => context.router.back(),

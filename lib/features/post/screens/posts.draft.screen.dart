@@ -21,17 +21,6 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
     postController.retrieveUserData;
 
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text("Draft Posts"),
-        //   leading: IconButton(
-        //     icon: const Icon(
-        //       Icons.arrow_back,
-        //     ),
-        //     onPressed: () {
-        //       context.router.back();
-        //     },
-        //   ),
-        // ),
         appBar: buildAppBar(
           leading: BackButton(
             onPressed: () => context.router.back(),

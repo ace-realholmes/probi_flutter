@@ -50,7 +50,6 @@ class _PostScreenListState extends State<PostScreenList> {
           children: List.generate(postController.posts.length, (index) {
             return GestureDetector(
               onTap: () {
-                // context.router.pushNamed(PostRouteView(id: postController.posts[index].id));
                 context.router.push(PostRouteView(
                     id: postController.posts[index].id, index: index));
               },

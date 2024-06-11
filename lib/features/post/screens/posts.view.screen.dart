@@ -28,17 +28,6 @@ class _PostScreenViewState extends State<PostScreenView> {
     }
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Post View'),
-      //   leading: IconButton(
-      //     icon: const Icon(
-      //       Icons.arrow_back,
-      //     ),
-      //     onPressed: () {
-      //       context.router.back();
-      //     },
-      //   ),
-      // ),
       appBar: buildAppBar(
         leading: IconButton(
             onPressed: () {
