@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PostProvider>(
-          create: (_) => PostProvider(NavigationService.instance),
+          create: (_) => PostProvider(),
         ),
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),

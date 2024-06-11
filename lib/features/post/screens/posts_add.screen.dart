@@ -21,7 +21,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
       onPopInvoked: (didPop) async {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
-          await postController.storePost();
+          await postController.storePost(0);
           context.router.navigate(const PostRouteList());
         } else {
           context.router.navigate(const PostRouteList());
@@ -33,7 +33,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                 onPressed: () async {
                   if (postController.titleController.text.isNotEmpty ||
                       postController.bodyController.text.isNotEmpty) {
-                    await postController.storePost();
+                    await postController.storePost(0);
                     context.router.navigateNamed("/post/list");
                   } else {
                     context.router.navigateNamed("/post/list");

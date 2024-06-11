@@ -4,23 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
-import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
 
 class PostProvider extends ChangeNotifier {
-  final NavigationService _navigationService;
   TextEditingController titleController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
 
   List<Post> posts = [];
   List<int> favoritePost = [];
 
+  List<int> postId = [];
   List<String> title = [];
   List<String> body = [];
 
   final secureStorage = const FlutterSecureStorage();
 
-  PostProvider(this._navigationService) {
+  PostProvider() {
     getAllPosts();
   }
 
@@ -56,20 +55,19 @@ class PostProvider extends ChangeNotifier {
     }
   }
 
-  storePost() async {
+  storePost(int? id) async {
     title.add(titleController.text);
     body.add(bodyController.text);
+    postId.add(id!);
 
     await secureStorage.write(
-        key: "draftPosts", value: jsonEncode({"title": title, "body": body}));
+        key: "draftPosts", value: jsonEncode({"title": title, "body": body, "postId": postId}));
 
-    Logger().d("Title Controller: ${titleController.text}");
-    Logger().d("Body Controller: ${bodyController.text}");
-
-    Logger().i("Store Post\nTitle: $title\nBody: $body");
+    Logger().i("Store Post\nTitle: $title\nBody: $body\nPost ID: $postId");
 
     titleController.clear();
     bodyController.clear();
+    postId.clear();
   }
 
   retrieveUserData() async {
@@ -78,10 +76,19 @@ class PostProvider extends ChangeNotifier {
       final data = jsonDecode(dataString);
       title.clear();
       body.clear();
+      postId.clear();
       title.addAll(data['title'] as List<String>);
       body.addAll(data['body'] as List<String>);
+      postId.addAll(data['postId'] as List<int>);
     }
   }
+
+  readPostData() async {
+    final dataString = await secureStorage.read(key: 'draftPosts');
+
+
+  }
+
 
   draftPost(int index) async {
     titleController.text = title[index];

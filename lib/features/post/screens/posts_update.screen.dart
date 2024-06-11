@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
@@ -18,6 +19,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
   @override
   Widget build(BuildContext context) {
     final postController = Provider.of<PostProvider>(context);
+    postController.retrieveUserData;
 
     return Scaffold(
         appBar: buildAppBar(
@@ -25,8 +27,13 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
               onPressed: () async {
                 if (postController.titleController.text.isNotEmpty ||
                     postController.bodyController.text.isNotEmpty) {
-                  await postController.storePost();
-                  context.router.navigateNamed("/post/list");
+                  if (postController.postId.contains(widget.id.toInt())) {
+                    context.router.navigateNamed("/post/list");
+                  } else {
+                    await postController.storePost(widget.id.toInt());
+                    Logger().i("Post ID: ${widget.id.toInt()}");
+                    context.router.navigateNamed("/post/list");
+                  }
                 } else {
                   context.router.navigateNamed("/post/list");
                 }
@@ -64,7 +71,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                   child: ElevatedButton(
                       onPressed: () async {
                         await postController.updatePost(widget.id);
-                        
+
                         context.router.replaceNamed('/post/list');
                       },
                       child: const Text(
