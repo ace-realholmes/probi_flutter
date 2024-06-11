@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 AppBar buildAppBar({
+  Widget? leading,
   required String appBarTitle,
-  bool? centerTitle,
   List<Widget>? actionWidgets,
 }) => AppBar(
+  leading: leading ?? const SizedBox(),
   title: Text(appBarTitle),
-  centerTitle: centerTitle ?? true,
+  automaticallyImplyLeading: false,
+  centerTitle: true,
   actions: actionWidgets ?? [],
 );

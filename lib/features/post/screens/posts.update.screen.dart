@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
@@ -19,33 +20,24 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
     final postController = Provider.of<PostProvider>(context);
 
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              
+        appBar: buildAppBar(
+            leading: BackButton(
+              onPressed: () async {
+                if (postController.titleController.text.isNotEmpty ||
+                    postController.bodyController.text.isNotEmpty) {
+                  await postController.storePost();
+                  context.router.navigateNamed("/post/list");
+                } else {
+                  context.router.navigateNamed("/post/list");
+                }
+              },
             ),
-            onPressed: () async {
-              if (postController.titleController.text.isNotEmpty ||
-                  postController.bodyController.text.isNotEmpty) {
-                await postController.storePost();
-                context.router.navigate(PostRouteList());
-              } else {
-                context.router.navigate(PostRouteList());
-              }
-            },
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  context.router.pushNamed("/post/draft");
-                },
-                icon: Icon(
-                  Icons.drafts,
-                ))
-          ],
-          title: Text('Update Post'),
-        ),
+            appBarTitle: "Post Update",
+            actionWidgets: [
+              IconButton(onPressed: (){
+                context.router.pushNamed("/post/draft");
+              }, icon: Icon(Icons.drafts))
+            ]),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -75,7 +67,6 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                       },
                       child: const Text(
                         'Submit',
-                        
                       )),
                 )
               ],

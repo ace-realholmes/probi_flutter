@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -27,17 +28,26 @@ class _PostScreenViewState extends State<PostScreenView> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Post View'),
+      // appBar: AppBar(
+      //   title: const Text('Post View'),
+      //   leading: IconButton(
+      //     icon: const Icon(
+      //       Icons.arrow_back,
+      //     ),
+      //     onPressed: () {
+      //       context.router.back();
+      //     },
+      //   ),
+      // ),
+      appBar: buildAppBar(
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () {
-            context.router.back();
-          },
-        ),
+            onPressed: () {
+              context.router.back();
+            },
+            icon: Icon(Icons.arrow_back)),
+        appBarTitle: 'Post View',
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

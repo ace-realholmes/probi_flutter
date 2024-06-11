@@ -5,6 +5,7 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
+import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:probi_flutter/themes/default.themes.dart';
 import 'package:probi_flutter/themes/global.themes.dart';
@@ -39,29 +40,14 @@ class _PostScreenListState extends State<PostScreenList> {
             Icons.add,
           ),
         ),
-        appBar: AppBar(
-          title: const Text("Product List"),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  context.router.pushNamed('/post/favorites');
-                },
-                icon: const Icon(
-                  Icons.list,
-                )),
-            IconButton(
-                onPressed: () {
-                  if(isDarkMode != false){
-                    themeController.setDarkScheme(GlobalThemData.darkColorScheme);
-                  } else{
-                    themeController.setLightScheme(GlobalThemData.lightColorScheme);
-                  }
-                },
-                icon: isDarkMode ? Icon(Icons.dark_mode) : Icon(Icons.dark_mode_outlined)
-                )
-          ],
-        ),
+        appBar: buildAppBar(
+          appBarTitle: "Post List",
+          actionWidgets: [
+            IconButton(onPressed: (){
+              context.router.pushNamed("/post/favorites");
+            }, icon: Icon(Icons.list)),
+            IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode_outlined))
+          ]),
         body: GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,
