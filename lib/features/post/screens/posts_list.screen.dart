@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
-import 'package:probi_flutter/features/post/services/post.service.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
@@ -17,18 +16,17 @@ class PostScreenList extends StatefulWidget {
 
 class _PostScreenListState extends State<PostScreenList> {
   bool isDarkMode = false;
+  late var screenSize = MediaQuery.of(context).size;
+
+  late final postController = Provider.of<PostProvider>(context);
+  late final themeController = Provider.of<ThemeProvider>(context);
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-
-    final postController = Provider.of<PostProvider>(context);
-    final themeController = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.push(PostRouteAdd());
+            context.router.push(const PostRouteAdd());
           },
           child: const Icon(
             Icons.add,
@@ -39,7 +37,7 @@ class _PostScreenListState extends State<PostScreenList> {
               onPressed: () {
                 context.router.pushNamed("/post/favorites");
               },
-              icon: Icon(Icons.list)),
+              icon: const Icon(Icons.list)),
           IconButton(
             onPressed: () {
               themeController.toggleTheme();
@@ -66,7 +64,7 @@ class _PostScreenListState extends State<PostScreenList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image(
+                      const Image(
                         image: AssetImage('assets/sticky-notes.jpg'),
                         fit: BoxFit.cover,
                       ),

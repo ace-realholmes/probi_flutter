@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:probi_flutter/common/env.dart';
@@ -33,7 +35,7 @@ class PostApi {
 
       if (response.statusCode == 200) {
         Post post = Post.fromJson(response.data as Map<String, dynamic>);
-        print('Get Post: ${post.body}');
+        log('Get Post: ${post.body}');
         return post;
       } else {
         throw Exception('Failed to Get Post: ${response.statusMessage}');
@@ -69,7 +71,7 @@ class PostApi {
 
       if (response.statusCode == 200) {
         Post post = Post.fromJson(response.data as Map<String, dynamic>);
-        print("Put Post: $post");
+        log("Put Post: $post");
         return post;
       } else {
         throw Exception("Failed to Put Post: ${response.statusMessage}");

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 @RoutePage()
 class PostScreenFavorites extends StatelessWidget {
-  PostScreenFavorites({super.key});
+  const PostScreenFavorites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PostScreenFavorites extends StatelessWidget {
           itemCount: postController.favoritePosts.length,
           itemBuilder: (BuildContext context, int index) {
             return buildListTile(
-                leadingWidget: Icon(Icons.note),
+                leadingWidget: const Icon(Icons.note),
                 titleTile: postController.favoritePosts[index].title.toString(),
                 subTile: postController.favoritePosts[index].body.toString(),
                 trailingWidget: IconButton(
@@ -30,7 +30,7 @@ class PostScreenFavorites extends StatelessWidget {
                       await postController.toggleFavoritePosts(
                           postController.favoritePosts[index].id);
                     },
-                    icon: Icon(Icons.favorite)));
+                    icon: const Icon(Icons.favorite)));
           }),
     );
   }

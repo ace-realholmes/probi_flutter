@@ -3,7 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
-import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/routing/app.router.dart';
 import 'package:probi_flutter/themes/dark.theme.dart';
 import 'package:probi_flutter/themes/default.theme.dart';

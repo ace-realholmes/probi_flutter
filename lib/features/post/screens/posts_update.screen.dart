@@ -16,11 +16,10 @@ class PostScreenUpdate extends StatefulWidget {
 }
 
 class _PostScreenUpdateState extends State<PostScreenUpdate> {
+  late final postController = Provider.of<PostProvider>(context);
+
   @override
   Widget build(BuildContext context) {
-    final postController = Provider.of<PostProvider>(context);
-    postController.retrieveUserData;
-
     return Scaffold(
         appBar: buildAppBar(
             leading: BackButton(
@@ -45,7 +44,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                   onPressed: () {
                     context.router.pushNamed("/post/draft");
                   },
-                  icon: Icon(Icons.drafts))
+                  icon: const Icon(Icons.drafts))
             ]),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -65,7 +64,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                 const SizedBox(
                   height: 24,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(

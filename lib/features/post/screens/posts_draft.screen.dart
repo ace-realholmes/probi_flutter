@@ -15,17 +15,15 @@ class PostScreenDraft extends StatefulWidget {
 }
 
 class _PostScreenDraftState extends State<PostScreenDraft> {
+  late final postController = Provider.of<PostProvider>(context);
   @override
   Widget build(BuildContext context) {
-    final postController = Provider.of<PostProvider>(context);
-    postController.retrieveUserData;
-
     return Scaffold(
         appBar: buildAppBar(
-          leading: BackButton(
-            onPressed: () => context.router.back(),
-          ),
-          appBarTitle: "Post Draft"),
+            leading: BackButton(
+              onPressed: () => context.router.back(),
+            ),
+            appBarTitle: "Post Draft"),
         body: ListView.builder(
             itemCount: postController.title.length,
             padding: const EdgeInsets.all(4),

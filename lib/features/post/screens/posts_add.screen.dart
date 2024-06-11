@@ -14,15 +14,16 @@ class PostScreenAdd extends StatefulWidget {
 }
 
 class _PostScreenAddState extends State<PostScreenAdd> {
+  late final postController = Provider.of<PostProvider>(context);
   @override
   Widget build(BuildContext context) {
-    final postController = Provider.of<PostProvider>(context);
     return PopScope(
       onPopInvoked: (didPop) async {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
           await postController.storePost(0);
           context.router.navigate(const PostRouteList());
+          
         } else {
           context.router.navigate(const PostRouteList());
         }
@@ -46,7 +47,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                     onPressed: () {
                       context.router.pushNamed("/post/draft");
                     },
-                    icon: Icon(Icons.drafts))
+                    icon: const Icon(Icons.drafts))
               ]),
           body: Padding(
               padding: const EdgeInsets.all(16.0),

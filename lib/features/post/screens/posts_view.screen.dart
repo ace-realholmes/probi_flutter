@@ -16,28 +16,19 @@ class PostScreenView extends StatefulWidget {
 }
 
 class _PostScreenViewState extends State<PostScreenView> {
-  bool isFavorite = false;
+  late final postController = Provider.of<PostProvider>(context);
 
   @override
   Widget build(BuildContext context) {
-    final postController = Provider.of<PostProvider>(context);
-
-    if (postController.favoritePost.contains(widget.id)) {
-      isFavorite = true;
-    } else {
-      isFavorite = false;
-    }
-
     return Scaffold(
       appBar: buildAppBar(
         leading: IconButton(
             onPressed: () {
               context.router.back();
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
         appBarTitle: 'Post View',
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -60,17 +51,17 @@ class _PostScreenViewState extends State<PostScreenView> {
                     child: SizedBox(
                   height: 0,
                 )),
-                IconButton(
-                    onPressed: () async {
-                      await postController.toggleFavoritePosts(widget.id);
-                    },
-                    icon: isFavorite
-                        ? const Icon(
-                            Icons.favorite,
-                          )
-                        : const Icon(
-                            Icons.favorite_border,
-                          )),
+                Consumer<PostProvider>(
+                  builder: (context, value, child) {
+                    final isFave = value.favoritePost.contains(widget.id);
+
+                    return IconButton(
+                      onPressed: () => value.toggleFavoritePosts(widget.id),
+                      icon:
+                          Icon(isFave ? Icons.favorite : Icons.favorite_border),
+                    );
+                  },
+                ),
                 PopupMenuButton<String>(
                   onSelected: (String result) async {
                     if (result == 'update') {
