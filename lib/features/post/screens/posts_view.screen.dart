@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
+import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -66,19 +67,16 @@ class _PostScreenViewState extends State<PostScreenView> {
                     icon: isFavorite
                         ? const Icon(
                             Icons.favorite,
-                            color: Colors.black,
                           )
                         : const Icon(
                             Icons.favorite_border,
-                            color: Colors.black,
                           )),
                 PopupMenuButton<String>(
-                  iconColor: Colors.black,
                   onSelected: (String result) async {
                     if (result == 'update') {
-                      await postController.updatePost(widget.id);
+                      await postController.toUpdatePost(widget.id);
 
-                      context.router.pushNamed("/post/update");
+                      context.router.push(PostRouteUpdate(id: widget.id));
                     } else if (result == 'delete') {
                       await postController.deletePost(widget.id);
 

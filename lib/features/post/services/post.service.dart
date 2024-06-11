@@ -85,7 +85,7 @@ class PostApi {
 
       if (response.statusCode == 200) {
         Post post = Post.fromJson(response.data as Map<String, dynamic>);
-        print("Patch post: ${post.body}");
+        
         return post;
       } else {
         throw Exception("Failed to patch post: ${response.statusMessage}");

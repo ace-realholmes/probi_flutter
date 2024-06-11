@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 
 @RoutePage()
 class PostScreenUpdate extends StatefulWidget {
-  const PostScreenUpdate({super.key});
+  const PostScreenUpdate({super.key, required this.id});
+  final int id;
 
   @override
   State<PostScreenUpdate> createState() => _PostScreenUpdateState();
@@ -61,7 +62,9 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        await postController.updatePost(widget.id);
+                        
                         context.router.replaceNamed('/post/list');
                       },
                       child: const Text(

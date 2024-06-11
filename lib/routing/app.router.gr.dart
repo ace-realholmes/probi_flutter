@@ -55,9 +55,13 @@ abstract class $AppRouter extends _i7.RootStackRouter {
       );
     },
     PostRouteUpdate.name: (routeData) {
+      final args = routeData.argsAs<PostRouteUpdateArgs>();
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.PostScreenUpdate(),
+        child: _i5.PostScreenUpdate(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     PostRouteView.name: (routeData) {
@@ -147,16 +151,40 @@ class PostRouteList extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.PostScreenUpdate]
-class PostRouteUpdate extends _i7.PageRouteInfo<void> {
-  const PostRouteUpdate({List<_i7.PageRouteInfo>? children})
-      : super(
+class PostRouteUpdate extends _i7.PageRouteInfo<PostRouteUpdateArgs> {
+  PostRouteUpdate({
+    _i8.Key? key,
+    required int id,
+    List<_i7.PageRouteInfo>? children,
+  }) : super(
           PostRouteUpdate.name,
+          args: PostRouteUpdateArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PostRouteUpdate';
 
-  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+  static const _i7.PageInfo<PostRouteUpdateArgs> page =
+      _i7.PageInfo<PostRouteUpdateArgs>(name);
+}
+
+class PostRouteUpdateArgs {
+  const PostRouteUpdateArgs({
+    this.key,
+    required this.id,
+  });
+
+  final _i8.Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'PostRouteUpdateArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

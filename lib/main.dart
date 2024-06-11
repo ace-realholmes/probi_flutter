@@ -4,7 +4,8 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/navigator.service.dart';
 import 'package:probi_flutter/routing/app.router.dart';
-import 'package:probi_flutter/themes/global.themes.dart';
+import 'package:probi_flutter/themes/dark.theme.dart';
+import 'package:probi_flutter/themes/default.theme.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
@@ -37,8 +38,8 @@ class _MyAppState extends State<MyApp> {
         builder: (context, themeProvider, child) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: GlobalThemData.lightThemeData,
-            darkTheme: GlobalThemData.darkThemeData,
+            theme: LightTheme().lightTheme,
+            darkTheme: DarkTheme().darkTheme,
             themeMode: themeProvider.themeMode,
             routerConfig: _appRouter.config(),
           );

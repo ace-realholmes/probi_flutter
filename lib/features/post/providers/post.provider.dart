@@ -93,7 +93,7 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updatePost(int id) async {
+  toUpdatePost(int id) async {
     for (var post in posts) {
       if (post.id == id) {
         titleController.text = post.title;
@@ -103,6 +103,20 @@ class PostProvider extends ChangeNotifier {
         break;
       }
     }
+  }
+
+  updatePost(int id) async {
+    Post post = await PostApi().patchPost(id);
+
+    Logger().d("Update Post Provider: $post");
+
+    if(post.userId.toString().isNotEmpty || post.id.toString().isNotEmpty){
+      getAllPosts();
+
+      titleController.clear();
+      bodyController.clear();
+    }
+
   }
 
   deletePost(int id) async {
