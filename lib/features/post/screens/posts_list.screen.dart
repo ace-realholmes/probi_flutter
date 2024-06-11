@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
@@ -15,7 +16,6 @@ class PostScreenList extends StatefulWidget {
 }
 
 class _PostScreenListState extends State<PostScreenList> {
-  
   bool isDarkMode = false;
 
   @override
@@ -23,7 +23,8 @@ class _PostScreenListState extends State<PostScreenList> {
     var screenSize = MediaQuery.of(context).size;
 
     final postController = Provider.of<PostProvider>(context);
-    
+    final themeController = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -35,14 +36,22 @@ class _PostScreenListState extends State<PostScreenList> {
             Icons.add,
           ),
         ),
-        appBar: buildAppBar(
-          appBarTitle: "Post List",
-          actionWidgets: [
-            IconButton(onPressed: (){
-              context.router.pushNamed("/post/favorites");
-            }, icon: Icon(Icons.list)),
-            IconButton(onPressed: (){}, icon: Icon(Icons.dark_mode_outlined))
-          ]),
+        appBar: buildAppBar(appBarTitle: "Post List", actionWidgets: [
+          IconButton(
+              onPressed: () {
+                context.router.pushNamed("/post/favorites");
+              },
+              icon: Icon(Icons.list)),
+          IconButton(
+            onPressed: () {
+              themeController.toggleTheme();
+              setState(() {
+                isDarkMode = !isDarkMode;
+              });
+            },
+            icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
+          )
+        ]),
         body: GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,

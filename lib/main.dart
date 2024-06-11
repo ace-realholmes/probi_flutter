@@ -27,15 +27,22 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PostProvider>(
-          create: (_) => PostProvider(NavigationService.instance)),
-        ChangeNotifierProvider<ThemeProvider>(create: (_)=> ThemeProvider())
+          create: (_) => PostProvider(NavigationService.instance),
+        ),
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (context) => ThemeProvider(),
+        ),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: GlobalThemData.lightThemeData,
-        darkTheme: GlobalThemData.darkThemeData,
-        themeMode: ThemeProvider().themeMode,
-        routerConfig: _appRouter.config(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: GlobalThemData.lightThemeData,
+            darkTheme: GlobalThemData.darkThemeData,
+            themeMode: themeProvider.themeMode,
+            routerConfig: _appRouter.config(),
+          );
+        },
       ),
     );
   }
