@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/widgets/list_tile.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,8 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
         appBar: AppBar(
           title: Text("Draft Posts"),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
-              color: Colors.white,
             ),
             onPressed: () {
               context.router.back();
@@ -33,18 +33,20 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
         ),
         body: ListView.builder(
             itemCount: postController.title.length,
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.all(4),
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                  leading: Icon(Icons.drafts),
-                  title: Text(postController.title[index]),
-                  subtitle: Text(postController.body[index]),
-                  trailing: Icon(Icons.edit),
-                  onTap: () async {
-                    await postController.draftPost(index);
+              
+              return buildListTile(
+                  leadingWidget: const Icon(Icons.drafts),
+                  titleTile: postController.title[index].toString(),
+                  subTile: postController.body[index].toString(),
+                  trailingWidget: IconButton(
+                      onPressed: () async {
+                        await postController.draftPost(index);
 
-                    context.router.popAndPush(PostRouteAdd());
-                  });
+                        context.router.popAndPush(const PostRouteAdd());
+                      },
+                      icon: const Icon(Icons.edit)));
             }));
   }
 }

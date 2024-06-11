@@ -32,7 +32,6 @@ class _PostScreenAddState extends State<PostScreenAdd> {
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back,
-                color: Colors.white,
               ),
               onPressed: () async {
                 if (postController.titleController.text.isNotEmpty ||
@@ -51,7 +50,6 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                   },
                   icon: const Icon(
                     Icons.drafts,
-                    color: Colors.white,
                   ))
             ],
             title: const Text('Add Post'),
@@ -90,7 +88,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                         },
                         child: Text(
                           'Submit',
-                          style: TextStyle(color: Colors.white),
+                          
                         )),
                   )
                 ],

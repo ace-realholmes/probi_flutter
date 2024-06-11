@@ -23,7 +23,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.white,
+              
             ),
             onPressed: () async {
               if (postController.titleController.text.isNotEmpty ||
@@ -42,7 +42,6 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                 },
                 icon: Icon(
                   Icons.drafts,
-                  color: Colors.white,
                 ))
           ],
           title: Text('Update Post'),
@@ -76,7 +75,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                       },
                       child: const Text(
                         'Submit',
-                        style: TextStyle(color: Colors.white),
+                        
                       )),
                 )
               ],

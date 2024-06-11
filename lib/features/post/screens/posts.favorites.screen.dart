@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/widgets/list_tile.widget.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -16,23 +17,19 @@ class PostScreenFavorites extends StatelessWidget {
           onPressed: () {
             context.router.back();
           },
-          color: Colors.white,
         ),
         title: const Text('Post Favorites'),
       ),
       body: ListView.builder(
           itemCount: postController.favoritePosts.length,
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: Icon(Icons.note),
-              title: Text(postController.favoritePosts[index].title),
-              subtitle: Text(postController.favoritePosts[index].body),
-              trailing: IconButton(
-                icon: Icon(Icons.favorite),
-                onPressed: () async {
-                  await postController.toggleFavoritePosts(postController.favoritePosts[index].id);
-                },
-              ),
+            return buildListTile(
+              leadingWidget: Icon(Icons.note),
+              titleTile: postController.favoritePosts[index].title.toString(),
+              subTile: postController.favoritePosts[index].body.toString(),
+              trailingWidget: IconButton(onPressed: () async{
+                await postController.toggleFavoritePosts(postController.favoritePosts[index].id);
+              }, icon: Icon(Icons.favorite))
             );
           }),
     );
