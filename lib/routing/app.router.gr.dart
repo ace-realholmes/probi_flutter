@@ -10,17 +10,17 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
-import 'package:probi_flutter/features/post/screens/posts.add.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_add.screen.dart'
     as _i1;
-import 'package:probi_flutter/features/post/screens/posts.draft.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_draft.screen.dart'
     as _i2;
-import 'package:probi_flutter/features/post/screens/posts.favorites.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_favorites.screen.dart'
     as _i3;
-import 'package:probi_flutter/features/post/screens/posts.list.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_list.screen.dart'
     as _i4;
-import 'package:probi_flutter/features/post/screens/posts.update.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_update.screen.dart'
     as _i5;
-import 'package:probi_flutter/features/post/screens/posts.view.screen.dart'
+import 'package:probi_flutter/features/post/screens/posts_view.screen.dart'
     as _i6;
 
 abstract class $AppRouter extends _i7.RootStackRouter {
