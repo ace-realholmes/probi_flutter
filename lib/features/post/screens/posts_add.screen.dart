@@ -16,6 +16,14 @@ class PostScreenAdd extends StatefulWidget {
 class _PostScreenAddState extends State<PostScreenAdd> {
   late final postController = Provider.of<PostProvider>(context);
 
+  navigateToPostList() {
+    context.router.navigate(const PostRouteList());
+  }
+
+  navigateToPostDraft() {
+    context.router.pushNamed("/post/draft");
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -23,9 +31,9 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
           await postController.storePost(0);
-          context.router.navigate(const PostRouteList());
+          navigateToPostList();
         } else {
-          context.router.navigate(const PostRouteList());
+          navigateToPostList();
         }
       },
       child: Scaffold(
@@ -36,17 +44,20 @@ class _PostScreenAddState extends State<PostScreenAdd> {
               if (postController.titleController.text.isNotEmpty ||
                   postController.bodyController.text.isNotEmpty) {
                 await postController.storePost(0);
-                context.router.navigate(const PostRouteList());
+                navigateToPostList();
               } else {
-                context.router.navigate(const PostRouteList());
+                navigateToPostList();
               }
+
+              postController.toggleTitleError(false);
+              postController.toggleBodyError(false);
             },
           ),
           appBarTitle: "Post Add",
           actionWidgets: [
             IconButton(
               onPressed: () {
-                context.router.pushNamed("/post/draft");
+                navigateToPostDraft();
               },
               icon: const Icon(Icons.drafts),
             )
@@ -87,7 +98,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                       postController.createPost();
                       postController.titleController.clear();
                       postController.bodyController.clear();
-                      context.router.navigate(const PostRouteList());
+                      navigateToPostList();
                     }
                   },
                   child: const Text('Submit'),

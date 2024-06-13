@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
 
-class TextFieldBuild extends StatefulWidget {
+class TextFieldBuild extends StatelessWidget {
   TextFieldBuild(
       {super.key,
       required this.maxLines,
@@ -15,21 +15,16 @@ class TextFieldBuild extends StatefulWidget {
   final String? error;
 
   @override
-  State<TextFieldBuild> createState() => _TextFieldBuildState();
-}
-
-class _TextFieldBuildState extends State<TextFieldBuild> {
-  @override
   Widget build(BuildContext context) {
     return Consumer<PostProvider>(
       builder: (context, value, child) {
         return TextField(
-          controller: widget.controller,
-          maxLines: widget.maxLines,
+          controller: controller,
+          maxLines: maxLines,
           decoration: InputDecoration(
-            hintText: widget.hint,
+            hintText: hint,
             filled: true,
-            error: widget.error != null ? Text(widget.error!) : null,
+            error: error != null ? Text(error!) : null,
           ),
         );
       },

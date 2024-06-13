@@ -23,6 +23,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: buildAppBar(
             leading: BackButton(
               onPressed: () async {
@@ -38,6 +39,9 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                 } else {
                   navigatePostList;
                 }
+                
+                postController.toggleTitleError(false);
+                postController.toggleBodyError(false);
               },
             ),
             appBarTitle: "Post Update",
@@ -75,9 +79,18 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                   height: 50,
                   child: ElevatedButton(
                       onPressed: () async {
-                        await postController.updatePost(widget.id);
+                        bool isTitleEmpty =
+                            postController.titleController.text.isEmpty;
+                        bool isBodyEmpty =
+                            postController.bodyController.text.isEmpty;
 
-                        navigatePostList;
+                        postController.toggleTitleError(isTitleEmpty);
+                        postController.toggleBodyError(isBodyEmpty);
+
+                        if (!isTitleEmpty && !isBodyEmpty) {
+                          await postController.updatePost(widget.id);
+                          navigatePostList;
+                        }
                       },
                       child: const Text(
                         'Submit',
