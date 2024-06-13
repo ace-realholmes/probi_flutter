@@ -14,9 +14,14 @@ class PostProvider extends ChangeNotifier {
   List<Post> posts = [];
   List<int> favoritePostIds = [];
 
-  List<int> postId = [];
+  List<int> userIds = [];
+  List<int> postIds = [];
   List<String> titles = [];
   List<String> bodies = [];
+
+  List<String> draftTitles = [];
+  List<String> draftBodies = [];
+  List<int> draftPosts = [];
 
   String? titleError;
   String? bodyError;
@@ -25,12 +30,14 @@ class PostProvider extends ChangeNotifier {
 
   PostProvider() {
     getAllPosts();
+    retrievePostFromStorage();
   }
 
   getAllPosts() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
 
     posts = await PostApi().getAllPosts();
+    storePost(posts);
 
     EasyLoading.dismiss();
     notifyListeners();
@@ -60,6 +67,11 @@ class PostProvider extends ChangeNotifier {
     } else {
       favoritePostIds.add(id);
     }
+    // if (favoritePostIds.contains(id)) {
+    //   favoritePostIds.remove(id);
+    // } else {
+    //   favoritePostIds.add(id);
+    // }
     notifyListeners();
   }
 
@@ -82,48 +94,71 @@ class PostProvider extends ChangeNotifier {
     EasyLoading.dismiss();
   }
 
-  storePost(int? id) async {
+  storePost(List<Post> posts) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    titles.add(titleController.text);
-    bodies.add(bodyController.text);
-    postId.add(id!);
+    for (var post in posts) {
+      postIds.add(post.id);
+      userIds.add(post.userId);
+      titles.add(post.title);
+      bodies.add(post.body);
+    }
 
     await secureStorage.write(
-        key: "draftPosts",
-        value: jsonEncode({"title": titles, "body": bodies, "postId": postId}));
+        key: "probi_posts",
+        value: jsonEncode({
+          "postIds": postIds,
+          "userIds": userIds,
+          "titles": titles,
+          "bodies": bodies,
+        }));
 
-    Logger().i("Store Post\nTitle: $titles\nBody: $bodies\nPost ID: $postId");
-
-    titleController.clear();
-    bodyController.clear();
-    postId.clear();
+    Logger().i(
+        "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
 
     EasyLoading.dismiss();
   }
 
   retrievePostFromStorage() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    final dataString = await secureStorage.read(key: 'draftPosts');
+    final dataString = await secureStorage.read(key: 'probi_posts');
     if (dataString != null) {
       final data = jsonDecode(dataString);
       titles.clear();
       bodies.clear();
-      postId.clear();
-      titles.addAll(data['title'] as List<String>);
-      bodies.addAll(data['body'] as List<String>);
-      postId.addAll(data['postId'] as List<int>);
+      postIds.clear();
+      userIds.clear();
+      postIds.addAll(data['postIds'] as List<int>);
+      userIds.addAll(data['userIds'] as List<int>);
+      titles.addAll(data['titles'] as List<String>);
+      bodies.addAll(data['bodies'] as List<String>);
     }
+
+    EasyLoading.dismiss();
+  }
+
+  storeDraft() {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    bool isTitleEmpty = titleController.text.isEmpty;
+    bool isBodyEmpty = bodyController.text.isEmpty;
+
+    if (!isTitleEmpty && !isBodyEmpty) {
+      draftTitles.add(titleController.text);
+      draftBodies.add(bodyController.text);
+    }
+
+    titleController.clear();
+    bodyController.clear();
 
     EasyLoading.dismiss();
   }
 
   draftPost(int index) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    titleController.text = titles[index];
-    bodyController.text = bodies[index];
+    titleController.text = draftTitles[index];
+    bodyController.text = draftBodies[index];
 
-    titles.removeAt(index);
-    bodies.removeAt(index);
+    draftTitles.removeAt(index);
+    draftBodies.removeAt(index);
 
     EasyLoading.dismiss();
     notifyListeners();

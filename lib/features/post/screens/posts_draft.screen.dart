@@ -27,13 +27,13 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
             ),
             appBarTitle: "Post Draft"),
         body: ListView.builder(
-            itemCount: postController.titles.length,
+            itemCount: postController.draftTitles.length,
             padding: const EdgeInsets.all(4),
             itemBuilder: (BuildContext context, int index) {
               return buildListTile(
                   leadingWidget: const Icon(Icons.drafts),
-                  titleTile: postController.titles[index].toString(),
-                  subTile: postController.bodies[index].toString(),
+                  titleTile: postController.draftTitles[index].toString(),
+                  subTile: postController.draftBodies[index].toString(),
                   trailingWidget: IconButton(
                       onPressed: () async {
                         await postController.draftPost(index);

@@ -19,6 +19,8 @@ class PostScreenFavorites extends StatelessWidget {
           appBarTitle: "Post Favorites"),
       body: Consumer<PostProvider>(
         builder: (context, value, child) {
+          // value.retrievePostFromStorage();
+
           return ListView.builder(
               itemCount: value.favoritePostList.length,
               itemBuilder: (BuildContext context, int index) {

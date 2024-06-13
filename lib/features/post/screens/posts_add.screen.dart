@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
@@ -28,26 +29,17 @@ class _PostScreenAddState extends State<PostScreenAdd> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) async {
-        if (postController.titleController.text.isNotEmpty ||
-            postController.bodyController.text.isNotEmpty) {
-          await postController.storePost(0);
-          navigateToPostList();
-        } else {
-          navigateToPostList();
-        }
+        await postController.storeDraft();
+        navigateToPostList();
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: buildAppBar(
           leading: BackButton(
             onPressed: () async {
-              if (postController.titleController.text.isNotEmpty ||
-                  postController.bodyController.text.isNotEmpty) {
-                await postController.storePost(0);
-                navigateToPostList();
-              } else {
-                navigateToPostList();
-              }
+              await postController.storeDraft();
+
+              navigateToPostList();
 
               postController.toggleTitleError(false);
               postController.toggleBodyError(false);

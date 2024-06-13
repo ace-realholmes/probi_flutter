@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
@@ -62,7 +63,7 @@ class _PostScreenListState extends State<PostScreenList> {
             return GestureDetector(
               onTap: () {
                 context.router.push(PostRouteView(
-                    id: postController.posts[index].id, index: index));
+                    id: postController.postIds[index], index: index));
               },
               child: Card(
                 child: Padding(
@@ -76,22 +77,22 @@ class _PostScreenListState extends State<PostScreenList> {
                       ),
                       Row(
                         children: [
-                          Text("Post #${postController.posts[index].id}"),
+                          Text("Post #${postController.postIds[index]}"),
                           const SizedBox(
                             width: 6,
                           ),
                           Text(
-                              "- User #${postController.posts[index].userId.toString()}"),
+                              "- User #${postController.userIds[index].toString()}"),
                         ],
                       ),
                       Text(
-                        postController.posts[index].title,
+                        postController.titles[index],
                         style: const TextStyle(
                             fontWeight: FontWeight.w700,
                             overflow: TextOverflow.ellipsis),
                       ),
                       Text(
-                        postController.posts[index].body,
+                        postController.bodies[index],
                         style: const TextStyle(overflow: TextOverflow.ellipsis),
                       ),
                     ],

@@ -22,81 +22,74 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: buildAppBar(
-            leading: BackButton(
-              onPressed: () async {
-                if (postController.titleController.text.isNotEmpty ||
-                    postController.bodyController.text.isNotEmpty) {
-                  if (postController.postId.contains(widget.id.toInt())) {
-                    navigatePostList;
-                  } else {
-                    await postController.storePost(widget.id.toInt());
-                    Logger().i("Post ID: ${widget.id.toInt()}");
-                    navigatePostList;
-                  }
-                } else {
+    return PopScope(
+      onPopInvoked: (didPop) async => await postController.storeDraft(),
+      child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: buildAppBar(
+              leading: BackButton(
+                onPressed: () async {
+                  await postController.storeDraft();
                   navigatePostList;
-                }
-                
-                postController.toggleTitleError(false);
-                postController.toggleBodyError(false);
-              },
-            ),
-            appBarTitle: "Post Update",
-            actionWidgets: [
-              IconButton(
-                  onPressed: () {
-                    context.router.pushNamed("/post/draft");
-                  },
-                  icon: const Icon(Icons.drafts))
-            ]),
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFieldBuild(
-                  maxLines: 1,
-                  hint: "Title",
-                  controller: postController.titleController,
-                  error: postController.titleError,
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                TextFieldBuild(
-                  maxLines: 5,
-                  hint: "Body",
-                  controller: postController.bodyController,
-                  error: postController.bodyError,
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        bool isTitleEmpty =
-                            postController.titleController.text.isEmpty;
-                        bool isBodyEmpty =
-                            postController.bodyController.text.isEmpty;
 
-                        postController.toggleTitleError(isTitleEmpty);
-                        postController.toggleBodyError(isBodyEmpty);
+                  postController.toggleTitleError(false);
+                  postController.toggleBodyError(false);
+                },
+              ),
+              appBarTitle: "Post Update",
+              actionWidgets: [
+                IconButton(
+                    onPressed: () {
+                      context.router.pushNamed("/post/draft");
+                    },
+                    icon: const Icon(Icons.drafts))
+              ]),
+          body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  TextFieldBuild(
+                    maxLines: 1,
+                    hint: "Title",
+                    controller: postController.titleController,
+                    error: postController.titleError,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  TextFieldBuild(
+                    maxLines: 5,
+                    hint: "Body",
+                    controller: postController.bodyController,
+                    error: postController.bodyError,
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          bool isTitleEmpty =
+                              postController.titleController.text.isEmpty;
+                          bool isBodyEmpty =
+                              postController.bodyController.text.isEmpty;
 
-                        if (!isTitleEmpty && !isBodyEmpty) {
-                          await postController.updatePost(widget.id);
-                          navigatePostList;
-                        }
-                      },
-                      child: const Text(
-                        'Submit',
-                      )),
-                )
-              ],
-            )));
+                          postController.toggleTitleError(isTitleEmpty);
+                          postController.toggleBodyError(isBodyEmpty);
+
+                          if (!isTitleEmpty && !isBodyEmpty) {
+                            await postController.updatePost(widget.id);
+                            navigatePostList;
+                          }
+                        },
+                        child: const Text(
+                          'Submit',
+                        )),
+                  )
+                ],
+              ))),
+    );
   }
 }

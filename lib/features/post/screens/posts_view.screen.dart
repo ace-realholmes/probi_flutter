@@ -46,7 +46,7 @@ class _PostScreenViewState extends State<PostScreenView> {
                   width: 12,
                 ),
                 Text(
-                  'User #${postController.posts[widget.index].userId}',
+                  'User #${postController.userIds[widget.index].toString()}',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.w500),
                 ),
@@ -106,19 +106,19 @@ class _PostScreenViewState extends State<PostScreenView> {
             const SizedBox(
               height: 12,
             ),
-            Text("Post #${postController.posts[widget.index].id.toString()}"),
+            Text("Post #${postController.postIds[widget.id].toString()}"),
             const SizedBox(
               height: 6,
             ),
             Text(
-              postController.posts[widget.index].title,
+              postController.titles[widget.index],
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
             const SizedBox(
               height: 6,
             ),
             Text(
-              postController.posts[widget.index].body,
+              postController.bodies[widget.index],
               textAlign: TextAlign.justify,
             ),
           ],
