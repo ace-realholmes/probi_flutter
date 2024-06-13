@@ -21,7 +21,6 @@ class _PostScreenListState extends State<PostScreenList> {
 
   @override
   Widget build(BuildContext context) {
-    final themeController = Provider.of<ThemeProvider>(context);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -37,14 +36,22 @@ class _PostScreenListState extends State<PostScreenList> {
                 context.router.pushNamed("/post/favorites");
               },
               icon: const Icon(Icons.list)),
-          IconButton(
-            onPressed: () {
-              themeController.toggleTheme();
-              setState(() {
-                isDarkMode = !isDarkMode;
-              });
+          Consumer<ThemeProvider>(
+            builder: (context, value, child) {
+              bool isDarkMode = false;
+
+              if(value.themeMode == ThemeMode.light){
+                isDarkMode = false;
+              }else{
+                isDarkMode = true;
+              }
+              return IconButton(  
+                onPressed: () {
+                  value.toggleTheme();
+                },
+                icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
+              );
             },
-            icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
           )
         ]),
         body: GridView.count(
