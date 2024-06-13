@@ -16,6 +16,8 @@ class PostScreenDraft extends StatefulWidget {
 
 class _PostScreenDraftState extends State<PostScreenDraft> {
   late final postController = Provider.of<PostProvider>(context);
+  late var navigatePostAdd = context.router.popAndPush(const PostRouteAdd());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +27,18 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
             ),
             appBarTitle: "Post Draft"),
         body: ListView.builder(
-            itemCount: postController.title.length,
+            itemCount: postController.titles.length,
             padding: const EdgeInsets.all(4),
             itemBuilder: (BuildContext context, int index) {
               return buildListTile(
                   leadingWidget: const Icon(Icons.drafts),
-                  titleTile: postController.title[index].toString(),
-                  subTile: postController.body[index].toString(),
+                  titleTile: postController.titles[index].toString(),
+                  subTile: postController.bodies[index].toString(),
                   trailingWidget: IconButton(
                       onPressed: () async {
                         await postController.draftPost(index);
 
-                        context.router.popAndPush(const PostRouteAdd());
+                        navigatePostAdd;
                       },
                       icon: const Icon(Icons.edit)));
             }));

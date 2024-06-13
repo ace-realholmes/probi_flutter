@@ -17,6 +17,9 @@ class PostScreenView extends StatefulWidget {
 
 class _PostScreenViewState extends State<PostScreenView> {
   late final postController = Provider.of<PostProvider>(context);
+  late var navigatePostList = context.router.navigate(const PostRouteList());
+  late var navigatePostUpdate =
+      context.router.navigate(PostRouteUpdate(id: widget.id));
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +56,10 @@ class _PostScreenViewState extends State<PostScreenView> {
                 )),
                 Consumer<PostProvider>(
                   builder: (context, value, child) {
-                    final isFave = value.favoritePost.contains(widget.id);
+                    final isFave = value.favoritePostIds.contains(widget.id);
 
                     return IconButton(
-                      onPressed: () => value.toggleFavoritePosts(widget.id),
+                      onPressed: () => value.toggleFavoritePost(widget.id),
                       icon:
                           Icon(isFave ? Icons.favorite : Icons.favorite_border),
                     );
@@ -67,11 +70,11 @@ class _PostScreenViewState extends State<PostScreenView> {
                     if (result == 'update') {
                       await postController.toUpdatePost(widget.id);
 
-                      context.router.push(PostRouteUpdate(id: widget.id));
+                      navigatePostUpdate;
                     } else if (result == 'delete') {
                       await postController.deletePost(widget.id);
 
-                      context.router.pushNamed('/post/list');
+                      navigatePostList;
                     }
                   },
                   itemBuilder: (BuildContext context) =>

@@ -19,16 +19,16 @@ class PostScreenFavorites extends StatelessWidget {
           ),
           appBarTitle: "Post Favorites"),
       body: ListView.builder(
-          itemCount: postController.favoritePosts.length,
+          itemCount: postController.favoritePostList.length,
           itemBuilder: (BuildContext context, int index) {
             return buildListTile(
                 leadingWidget: const Icon(Icons.note),
-                titleTile: postController.favoritePosts[index].title.toString(),
-                subTile: postController.favoritePosts[index].body.toString(),
+                titleTile: postController.favoritePostList[index].title.toString(),
+                subTile: postController.favoritePostList[index].body.toString(),
                 trailingWidget: IconButton(
                     onPressed: () async {
-                      await postController.toggleFavoritePosts(
-                          postController.favoritePosts[index].id);
+                      await postController.toggleFavoritePost(
+                          postController.favoritePostList[index].id);
                     },
                     icon: const Icon(Icons.favorite)));
           }),

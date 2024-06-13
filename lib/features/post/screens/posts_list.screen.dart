@@ -17,7 +17,6 @@ class PostScreenList extends StatefulWidget {
 class _PostScreenListState extends State<PostScreenList> {
   bool isDarkMode = false;
   late var screenSize = MediaQuery.of(context).size;
-
   late final postController = Provider.of<PostProvider>(context);
 
   @override

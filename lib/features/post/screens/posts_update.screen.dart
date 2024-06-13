@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
+import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -17,6 +18,7 @@ class PostScreenUpdate extends StatefulWidget {
 
 class _PostScreenUpdateState extends State<PostScreenUpdate> {
   late final postController = Provider.of<PostProvider>(context);
+  late var navigatePostList = context.router.navigate(const PostRouteList());
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +29,14 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                 if (postController.titleController.text.isNotEmpty ||
                     postController.bodyController.text.isNotEmpty) {
                   if (postController.postId.contains(widget.id.toInt())) {
-                    context.router.navigateNamed("/post/list");
+                    navigatePostList;
                   } else {
                     await postController.storePost(widget.id.toInt());
                     Logger().i("Post ID: ${widget.id.toInt()}");
-                    context.router.navigateNamed("/post/list");
+                    navigatePostList;
                   }
                 } else {
-                  context.router.navigateNamed("/post/list");
+                  navigatePostList;
                 }
               },
             ),
@@ -71,7 +73,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
                       onPressed: () async {
                         await postController.updatePost(widget.id);
 
-                        context.router.replaceNamed('/post/list');
+                        navigatePostList;
                       },
                       child: const Text(
                         'Submit',

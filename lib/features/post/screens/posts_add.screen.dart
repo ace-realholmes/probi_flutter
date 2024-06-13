@@ -15,6 +15,8 @@ class PostScreenAdd extends StatefulWidget {
 
 class _PostScreenAddState extends State<PostScreenAdd> {
   late final postController = Provider.of<PostProvider>(context);
+  late var navigatePostList = context.router.navigate(const PostRouteList());
+  
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -22,10 +24,9 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
           await postController.storePost(0);
-          context.router.navigate(const PostRouteList());
-          
+          navigatePostList;
         } else {
-          context.router.navigate(const PostRouteList());
+          navigatePostList;
         }
       },
       child: Scaffold(
@@ -35,9 +36,9 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                   if (postController.titleController.text.isNotEmpty ||
                       postController.bodyController.text.isNotEmpty) {
                     await postController.storePost(0);
-                    context.router.navigateNamed("/post/list");
+                    navigatePostList;
                   } else {
-                    context.router.navigateNamed("/post/list");
+                    navigatePostList;
                   }
                 },
               ),
@@ -77,7 +78,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
                           postController.titleController.clear();
                           postController.bodyController.clear();
 
-                          context.router.pushNamed("/post/list");
+                          navigatePostList;
                         },
                         child: const Text(
                           'Submit',

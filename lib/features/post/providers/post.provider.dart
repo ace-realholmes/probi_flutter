@@ -12,11 +12,11 @@ class PostProvider extends ChangeNotifier {
   TextEditingController bodyController = TextEditingController();
 
   List<Post> posts = [];
-  List<int> favoritePost = [];
+  List<int> favoritePostIds = [];
 
   List<int> postId = [];
-  List<String> title = [];
-  List<String> body = [];
+  List<String> titles = [];
+  List<String> bodies = [];
 
   final secureStorage = const FlutterSecureStorage();
 
@@ -33,17 +33,17 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  toggleFavoritePosts(int id) async {
-    if (favoritePost.contains(id)) {
-      favoritePost.remove(id);
+  toggleFavoritePost(int id) async {
+    if (favoritePostIds.contains(id)) {
+      favoritePostIds.remove(id);
     } else {
-      favoritePost.add(id);
+      favoritePostIds.add(id);
     }
     notifyListeners();
   }
 
-  List<Post> get favoritePosts =>
-      posts.where((post) => favoritePost.contains(post.id)).toList();
+  List<Post> get favoritePostList =>
+      posts.where((post) => favoritePostIds.contains(post.id)).toList();
 
   createPost() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
@@ -63,15 +63,15 @@ class PostProvider extends ChangeNotifier {
 
   storePost(int? id) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    title.add(titleController.text);
-    body.add(bodyController.text);
+    titles.add(titleController.text);
+    bodies.add(bodyController.text);
     postId.add(id!);
 
     await secureStorage.write(
         key: "draftPosts",
-        value: jsonEncode({"title": title, "body": body, "postId": postId}));
+        value: jsonEncode({"title": titles, "body": bodies, "postId": postId}));
 
-    Logger().i("Store Post\nTitle: $title\nBody: $body\nPost ID: $postId");
+    Logger().i("Store Post\nTitle: $titles\nBody: $bodies\nPost ID: $postId");
 
     titleController.clear();
     bodyController.clear();
@@ -85,11 +85,11 @@ class PostProvider extends ChangeNotifier {
     final dataString = await secureStorage.read(key: 'draftPosts');
     if (dataString != null) {
       final data = jsonDecode(dataString);
-      title.clear();
-      body.clear();
+      titles.clear();
+      bodies.clear();
       postId.clear();
-      title.addAll(data['title'] as List<String>);
-      body.addAll(data['body'] as List<String>);
+      titles.addAll(data['title'] as List<String>);
+      bodies.addAll(data['body'] as List<String>);
       postId.addAll(data['postId'] as List<int>);
     }
 
@@ -98,11 +98,11 @@ class PostProvider extends ChangeNotifier {
 
   draftPost(int index) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    titleController.text = title[index];
-    bodyController.text = body[index];
+    titleController.text = titles[index];
+    bodyController.text = bodies[index];
 
-    title.removeAt(index);
-    body.removeAt(index);
+    titles.removeAt(index);
+    bodies.removeAt(index);
 
     EasyLoading.dismiss();
     notifyListeners();
