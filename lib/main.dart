@@ -38,8 +38,8 @@ class _MyAppState extends State<MyApp> {
         builder: (context, themeProvider, child) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: LightTheme().lightTheme,
-            darkTheme: DarkTheme().darkTheme,
+            theme: lightThemeData,
+            darkTheme: darkThemeData,
             themeMode: themeProvider.themeMode,
             routerConfig: _appRouter.config(),
             builder: EasyLoading.init(),

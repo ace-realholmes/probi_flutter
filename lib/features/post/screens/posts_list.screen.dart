@@ -19,10 +19,10 @@ class _PostScreenListState extends State<PostScreenList> {
   late var screenSize = MediaQuery.of(context).size;
 
   late final postController = Provider.of<PostProvider>(context);
-  late final themeController = Provider.of<ThemeProvider>(context);
 
   @override
   Widget build(BuildContext context) {
+    final themeController = Provider.of<ThemeProvider>(context);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
