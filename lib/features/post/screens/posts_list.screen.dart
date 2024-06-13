@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
+import 'package:probi_flutter/features/post/widgets/post_list_body.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
@@ -40,12 +41,12 @@ class _PostScreenListState extends State<PostScreenList> {
             builder: (context, value, child) {
               bool isDarkMode = false;
 
-              if(value.themeMode == ThemeMode.light){
+              if (value.themeMode == ThemeMode.light) {
                 isDarkMode = false;
-              }else{
+              } else {
                 isDarkMode = true;
               }
-              return IconButton(  
+              return IconButton(
                 onPressed: () {
                   value.toggleTheme();
                 },
@@ -54,52 +55,6 @@ class _PostScreenListState extends State<PostScreenList> {
             },
           )
         ]),
-        body: GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: 2,
-          childAspectRatio: screenSize.width / 0.4 / screenSize.height / 2,
-          children: List.generate(postController.posts.length, (index) {
-            return GestureDetector(
-              onTap: () {
-                context.router.push(PostRouteView(
-                    id: postController.postIds[index], index: index));
-              },
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Image(
-                        image: AssetImage('assets/sticky-notes.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                      Row(
-                        children: [
-                          Text("Post #${postController.postIds[index]}"),
-                          const SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                              "- User #${postController.userIds[index].toString()}"),
-                        ],
-                      ),
-                      Text(
-                        postController.titles[index],
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            overflow: TextOverflow.ellipsis),
-                      ),
-                      Text(
-                        postController.bodies[index],
-                        style: const TextStyle(overflow: TextOverflow.ellipsis),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }),
-        ));
+        body: const PostListBody());
   }
 }
