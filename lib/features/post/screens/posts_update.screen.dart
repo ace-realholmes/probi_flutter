@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:logger/logger.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/text_field.widget.dart';
@@ -18,7 +17,7 @@ class PostScreenUpdate extends StatefulWidget {
 
 class _PostScreenUpdateState extends State<PostScreenUpdate> {
   late final postController = Provider.of<PostProvider>(context);
-  late var navigatePostList = context.router.navigate(const PostRouteList());
+  late var navigateToPostList = context.router.navigate(const PostRouteList());
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
               leading: BackButton(
                 onPressed: () async {
                   await postController.storeDraft();
-                  navigatePostList;
+                  navigateToPostList;
 
                   postController.toggleTitleError(false);
                   postController.toggleBodyError(false);
@@ -81,7 +80,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
 
                           if (!isTitleEmpty && !isBodyEmpty) {
                             await postController.updatePost(widget.id);
-                            navigatePostList;
+                            navigateToPostList;
                           }
                         },
                         child: const Text(

@@ -36,7 +36,7 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
                   subTile: postController.draftBodies[index].toString(),
                   trailingWidget: IconButton(
                       onPressed: () async {
-                        await postController.draftPost(index);
+                        await postController.editDraftPost(index);
 
                         navigatePostAdd;
                       },

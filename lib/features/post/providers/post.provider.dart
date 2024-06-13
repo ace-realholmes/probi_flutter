@@ -43,7 +43,25 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleTitleError(bool isEmpty) {
+  retrievePostFromStorage() async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    final dataString = await secureStorage.read(key: 'probi_posts');
+    if (dataString != null) {
+      final data = jsonDecode(dataString);
+      titles.clear();
+      bodies.clear();
+      postIds.clear();
+      userIds.clear();
+      postIds.addAll(data['postIds'] as List<int>);
+      userIds.addAll(data['userIds'] as List<int>);
+      titles.addAll(data['titles'] as List<String>);
+      bodies.addAll(data['bodies'] as List<String>);
+    }
+
+    EasyLoading.dismiss();
+  }
+
+  toggleTitleError(bool isEmpty) {
     if (isEmpty) {
       titleError = "Title cannot be empty";
     } else {
@@ -52,7 +70,7 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleBodyError(bool isEmpty) {
+  toggleBodyError(bool isEmpty) {
     if (isEmpty) {
       bodyError = "Body cannot be empty";
     } else {
@@ -118,24 +136,6 @@ class PostProvider extends ChangeNotifier {
     EasyLoading.dismiss();
   }
 
-  retrievePostFromStorage() async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    final dataString = await secureStorage.read(key: 'probi_posts');
-    if (dataString != null) {
-      final data = jsonDecode(dataString);
-      titles.clear();
-      bodies.clear();
-      postIds.clear();
-      userIds.clear();
-      postIds.addAll(data['postIds'] as List<int>);
-      userIds.addAll(data['userIds'] as List<int>);
-      titles.addAll(data['titles'] as List<String>);
-      bodies.addAll(data['bodies'] as List<String>);
-    }
-
-    EasyLoading.dismiss();
-  }
-
   storeDraft() {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     bool isTitleEmpty = titleController.text.isEmpty;
@@ -152,7 +152,7 @@ class PostProvider extends ChangeNotifier {
     EasyLoading.dismiss();
   }
 
-  draftPost(int index) async {
+  editDraftPost(int index) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     titleController.text = draftTitles[index];
     bodyController.text = draftBodies[index];
