@@ -101,7 +101,7 @@ class PostProvider extends ChangeNotifier {
     EasyLoading.dismiss();
   }
 
-  retrieveUserData() async {
+  retrievePostFromStorage() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     final dataString = await secureStorage.read(key: 'draftPosts');
     if (dataString != null) {

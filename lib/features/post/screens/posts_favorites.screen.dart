@@ -11,27 +11,30 @@ class PostScreenFavorites extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final postController = Provider.of<PostProvider>(context);
     return Scaffold(
       appBar: buildAppBar(
           leading: BackButton(
             onPressed: () => context.router.back(),
           ),
           appBarTitle: "Post Favorites"),
-      body: ListView.builder(
-          itemCount: postController.favoritePostList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return buildListTile(
-                leadingWidget: const Icon(Icons.note),
-                titleTile: postController.favoritePostList[index].title.toString(),
-                subTile: postController.favoritePostList[index].body.toString(),
-                trailingWidget: IconButton(
-                    onPressed: () async {
-                      await postController.toggleFavoritePost(
-                          postController.favoritePostList[index].id);
-                    },
-                    icon: const Icon(Icons.favorite)));
-          }),
+      body: Consumer<PostProvider>(
+        builder: (context, value, child) {
+          return ListView.builder(
+              itemCount: value.favoritePostList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return buildListTile(
+                    leadingWidget: const Icon(Icons.note),
+                    titleTile: value.favoritePostList[index].title.toString(),
+                    subTile: value.favoritePostList[index].body.toString(),
+                    trailingWidget: IconButton(
+                        onPressed: () async {
+                          await value.toggleFavoritePost(
+                              value.favoritePostList[index].id);
+                        },
+                        icon: const Icon(Icons.favorite)));
+              });
+        },
+      ),
     );
   }
 }
