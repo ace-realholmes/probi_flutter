@@ -18,6 +18,9 @@ class PostProvider extends ChangeNotifier {
   List<String> titles = [];
   List<String> bodies = [];
 
+  String? titleError;
+  String? bodyError;
+
   final secureStorage = const FlutterSecureStorage();
 
   PostProvider() {
@@ -30,6 +33,24 @@ class PostProvider extends ChangeNotifier {
     posts = await PostApi().getAllPosts();
 
     EasyLoading.dismiss();
+    notifyListeners();
+  }
+
+  void toggleTitleError(bool isEmpty) {
+    if (isEmpty) {
+      titleError = "Title cannot be empty";
+    } else {
+      titleError = null;
+    }
+    notifyListeners();
+  }
+
+  void toggleBodyError(bool isEmpty) {
+    if (isEmpty) {
+      bodyError = "Body cannot be empty";
+    } else {
+      bodyError = null;
+    }
     notifyListeners();
   }
 

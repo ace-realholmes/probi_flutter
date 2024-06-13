@@ -53,16 +53,20 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
             child: Column(
               children: [
                 TextFieldBuild(
-                    maxLines: 1,
-                    hint: "Title",
-                    controller: postController.titleController),
+                  maxLines: 1,
+                  hint: "Title",
+                  controller: postController.titleController,
+                  error: postController.titleError,
+                ),
                 const SizedBox(
                   height: 12,
                 ),
                 TextFieldBuild(
-                    maxLines: 5,
-                    hint: "Body",
-                    controller: postController.bodyController),
+                  maxLines: 5,
+                  hint: "Body",
+                  controller: postController.bodyController,
+                  error: postController.bodyError,
+                ),
                 const SizedBox(
                   height: 24,
                 ),

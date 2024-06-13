@@ -15,8 +15,7 @@ class PostScreenAdd extends StatefulWidget {
 
 class _PostScreenAddState extends State<PostScreenAdd> {
   late final postController = Provider.of<PostProvider>(context);
-  late var navigatePostList = context.router.navigate(const PostRouteList());
-  
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -24,68 +23,80 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         if (postController.titleController.text.isNotEmpty ||
             postController.bodyController.text.isNotEmpty) {
           await postController.storePost(0);
-          navigatePostList;
+          context.router.navigate(const PostRouteList());
         } else {
-          navigatePostList;
+          context.router.navigate(const PostRouteList());
         }
       },
       child: Scaffold(
-          appBar: buildAppBar(
-              leading: BackButton(
-                onPressed: () async {
-                  if (postController.titleController.text.isNotEmpty ||
-                      postController.bodyController.text.isNotEmpty) {
-                    await postController.storePost(0);
-                    navigatePostList;
-                  } else {
-                    navigatePostList;
-                  }
-                },
+        resizeToAvoidBottomInset: false,
+        appBar: buildAppBar(
+          leading: BackButton(
+            onPressed: () async {
+              if (postController.titleController.text.isNotEmpty ||
+                  postController.bodyController.text.isNotEmpty) {
+                await postController.storePost(0);
+                context.router.navigate(const PostRouteList());
+              } else {
+                context.router.navigate(const PostRouteList());
+              }
+            },
+          ),
+          appBarTitle: "Post Add",
+          actionWidgets: [
+            IconButton(
+              onPressed: () {
+                context.router.pushNamed("/post/draft");
+              },
+              icon: const Icon(Icons.drafts),
+            )
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextFieldBuild(
+                maxLines: 1,
+                hint: "Title",
+                controller: postController.titleController,
+                error: postController.titleError,
               ),
-              appBarTitle: "Post Add",
-              actionWidgets: [
-                IconButton(
-                    onPressed: () {
-                      context.router.pushNamed("/post/draft");
-                    },
-                    icon: const Icon(Icons.drafts))
-              ]),
-          body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextFieldBuild(
-                      maxLines: 1,
-                      hint: "Title",
-                      controller: postController.titleController),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFieldBuild(
-                      maxLines: 5,
-                      hint: "Body",
-                      controller: postController.bodyController),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          await postController.createPost();
+              const SizedBox(height: 12),
+              TextFieldBuild(
+                maxLines: 5,
+                hint: "Body",
+                controller: postController.bodyController,
+                error: postController.bodyError,
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    bool isTitleEmpty =
+                        postController.titleController.text.isEmpty;
+                    bool isBodyEmpty =
+                        postController.bodyController.text.isEmpty;
 
-                          postController.titleController.clear();
-                          postController.bodyController.clear();
+                    postController.toggleTitleError(isTitleEmpty);
+                    postController.toggleBodyError(isBodyEmpty);
 
-                          navigatePostList;
-                        },
-                        child: const Text(
-                          'Submit',
-                        )),
-                  )
-                ],
-              ))),
+                    if (!isTitleEmpty && !isBodyEmpty) {
+                      postController.createPost();
+                      postController.titleController.clear();
+                      postController.bodyController.clear();
+                      context.router.navigate(const PostRouteList());
+                    }
+                  },
+                  child: const Text('Submit'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
