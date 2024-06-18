@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 final ThemeData lightThemeData = ThemeData(
     colorScheme: lightColorScheme,
-    canvasColor: lightColorScheme.background,
-    scaffoldBackgroundColor: lightColorScheme.background,
+    canvasColor: const Color(0xFFE6EBEB),
+    scaffoldBackgroundColor: const Color(0xFFE6EBEB),
     highlightColor: Colors.transparent,
     focusColor: lightColorScheme.primary,
     inputDecorationTheme:
@@ -16,8 +16,6 @@ const ColorScheme lightColorScheme = ColorScheme(
   onSecondary: Color(0xFF322942),
   error: Colors.redAccent,
   onError: Colors.white,
-  background: Color(0xFFE6EBEB),
-  onBackground: Colors.white,
   surface: Color(0xFFFAFBFB),
   onSurface: Color(0xFF241E30),
   brightness: Brightness.light,

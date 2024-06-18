@@ -28,7 +28,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
   late var navigateToPostList = context.router.navigate(const PostRouteList());
 
   /// Instance of `PostProvider` for managing post operations.
-  late final postController = Provider.of<PostProvider>(context);
+  late final postController = Provider.of<PostProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,10 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
       /// Called when the user attempts to navigate back.
       ///
       /// Stores the current draft and navigates to the post list.
-      onPopInvoked: (didPop) async => await postController.storeDraft(),
+      onPopInvoked: (didPop) async {
+        navigateToPostList;
+        await postController.storeDraft();
+      },
       child: Scaffold(
 
           /// Prevents the bottom inset adjustment when the keyboard is shown.

@@ -45,6 +45,7 @@ dependencies:
   logger: ^2.3.0
   flutter_secure_storage: ^4.2.1
   flutter_easyloading: ^3.0.5
+  dartdoc: ^8.0.8
 
 dev_dependencies:
   flutter_test:
