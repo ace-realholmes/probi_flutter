@@ -14,7 +14,6 @@ class PostScreenAdd extends StatefulWidget {
 }
 
 class _PostScreenAddState extends State<PostScreenAdd> {
-
   navigateToPostList() {
     context.router.navigate(const PostRouteList());
   }
@@ -23,7 +22,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
     context.router.pushNamed("/post/draft");
   }
 
-  late final postController = Provider.of<PostProvider>(context);
+  late final postController = Provider.of<PostProvider>(context, listen: false);
   @override
   Widget build(BuildContext context) {
     return PopScope(

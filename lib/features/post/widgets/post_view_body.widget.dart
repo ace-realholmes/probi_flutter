@@ -51,13 +51,13 @@ class PostViewBody extends StatelessWidget {
                   PopupMenuButton<String>(
                     onSelected: (String result) async {
                       if (result == 'update') {
-                        await value.toUpdatePost(id);
-
                         context.router.navigate(PostRouteUpdate(id: id));
-                      } else if (result == 'delete') {
-                        await value.deletePost(id);
 
+                        await value.toUpdatePost(id);
+                      } else if (result == 'delete') {
                         context.router.navigate(const PostRouteList());
+
+                        await value.deletePost(id);
                       }
                     },
                     itemBuilder: (BuildContext context) =>

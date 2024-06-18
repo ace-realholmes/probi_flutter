@@ -3,7 +3,7 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
 
 class TextFieldBuild extends StatelessWidget {
-  TextFieldBuild(
+  const TextFieldBuild(
       {super.key,
       required this.maxLines,
       required this.hint,

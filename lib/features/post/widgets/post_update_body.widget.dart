@@ -16,51 +16,50 @@ class PostUpdateBody extends StatelessWidget {
     return Consumer<PostProvider>(
       builder: (context, value, child) {
         return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextFieldBuild(
-                    maxLines: 1,
-                    hint: "Title",
-                    controller: value.titleController,
-                    error: value.titleError,
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextFieldBuild(
-                    maxLines: 5,
-                    hint: "Body",
-                    controller: value.bodyController,
-                    error: value.bodyError,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () async {
-                          bool isTitleEmpty =
-                              value.titleController.text.isEmpty;
-                          bool isBodyEmpty =
-                              value.bodyController.text.isEmpty;
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextFieldBuild(
+                  maxLines: 1,
+                  hint: "Title",
+                  controller: value.titleController,
+                  error: value.titleError,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextFieldBuild(
+                  maxLines: 5,
+                  hint: "Body",
+                  controller: value.bodyController,
+                  error: value.bodyError,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        bool isTitleEmpty = value.titleController.text.isEmpty;
+                        bool isBodyEmpty = value.bodyController.text.isEmpty;
 
-                          value.toggleTitleError(isTitleEmpty);
-                          value.toggleBodyError(isBodyEmpty);
+                        value.toggleTitleError(isTitleEmpty);
+                        value.toggleBodyError(isBodyEmpty);
 
-                          if (!isTitleEmpty && !isBodyEmpty) {
-                            await value.updatePost(id);
-                             context.router.navigate(const PostRouteList());
-                          }
-                        },
-                        child: const Text(
-                          'Submit',
-                        )),
-                  )
-                ],
-              ));
-      },);
+                        if (!isTitleEmpty && !isBodyEmpty) {
+                          context.router.navigate(const PostRouteList());
+                          await value.updatePost(id);
+                        }
+                      },
+                      child: const Text(
+                        'Submit',
+                      )),
+                )
+              ],
+            ));
+      },
+    );
   }
 }
