@@ -14,9 +14,7 @@ class PostApi {
 
       if (response.statusCode == 200) {
         List<dynamic> data = response.data as List<dynamic>;
-        List<Post> posts = data
-            .map((json) => Post.fromJson(json as Map<String, dynamic>))
-            .toList();
+        List<Post> posts = data.map((json) => Post.fromJson(json as Map<String, dynamic>)).toList();
 
         // Logger().d('Get Data: $data \n Get Posts: ${posts[10]}');
 
@@ -47,8 +45,7 @@ class PostApi {
 
   Future<Post> postPost(String title, String body) async {
     try {
-      final response = await dio
-          .post(baseUrl, data: {"userId": 11, "title": title, "body": body});
+      final response = await dio.post(baseUrl, data: {"userId": 11, "title": title, "body": body});
 
       Logger().d("Post Post Service: $response");
 
@@ -87,7 +84,7 @@ class PostApi {
 
       if (response.statusCode == 200) {
         Post post = Post.fromJson(response.data as Map<String, dynamic>);
-        
+
         return post;
       } else {
         throw Exception("Failed to patch post: ${response.statusMessage}");

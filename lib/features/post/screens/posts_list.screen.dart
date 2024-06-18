@@ -29,7 +29,8 @@ class _PostScreenListState extends State<PostScreenList> {
         /// user is navigated to add form, allowing him to add posts
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.push(const PostRouteAdd());
+            // context.router.push(const PostRouteAdd());
+            context.router.push(const SamplePostCreateRoute());
           },
           child: const Icon(
             Icons.add,
@@ -70,6 +71,6 @@ class _PostScreenListState extends State<PostScreenList> {
         /// Builds the body of the screen.
         ///
         /// Contains the list view builder to display list of posts.
-        body:  const PostListBody());
+        body: const PostListBody());
   }
 }
