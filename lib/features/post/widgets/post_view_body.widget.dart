@@ -21,117 +21,110 @@ class PostViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const CircleAvatar(
-                    child: Icon(Icons.person),
+              Animate(
+                effects: [
+                  FadeEffect(
+                    duration: (350.ms),
                   ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    'User #${value.userIds[index].toString()}',
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  const Expanded(
-                      child: SizedBox(
-                    height: 0,
-                  )),
-                  Consumer<PostProvider>(
-                    builder: (context, value, child) {
-                      final isFave = value.favoritePostIds.contains(id);
-
-                      return IconButton(
-                        onPressed: () => value.toggleFavoritePost(id),
-                        icon: Icon(
-                            isFave ? Icons.favorite : Icons.favorite_border),
-                      );
-                    },
-                  ),
-                  PopupMenuButton<String>(
-                    onSelected: (String result) async {
-                      if (result == 'update') {
-                        context.router.navigate(PostRouteUpdate(id: id));
-
-                        await value.toUpdatePost(id);
-                      } else if (result == 'delete') {
-                        context.router.navigate(const PostRouteList());
-
-                        await value.deletePost(id);
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      const PopupMenuItem<String>(
-                        value: 'update',
-                        child: Row(
-                          children: [
-                            Icon(Icons.edit, color: Colors.blue),
-                            SizedBox(width: 8),
-                            Text('Update'),
-                          ],
-                        ),
-                      ),
-                      const PopupMenuItem<String>(
-                        value: 'delete',
-                        child: Row(
-                          children: [
-                            Icon(Icons.delete, color: Colors.red),
-                            SizedBox(width: 8),
-                            Text('Delete'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  SlideEffect(duration: (350.ms), begin: const Offset(0, -0.5))
                 ],
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      child: Icon(Icons.person),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      'User #${value.userIds[index].toString()}',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    const Expanded(
+                        child: SizedBox(
+                      height: 0,
+                    )),
+                    Consumer<PostProvider>(
+                      builder: (context, value, child) {
+                        final isFave = value.favoritePostIds.contains(id);
+
+                        return IconButton(
+                          onPressed: () => value.toggleFavoritePost(id),
+                          icon: Icon(
+                              isFave ? Icons.favorite : Icons.favorite_border),
+                        );
+                      },
+                    ),
+                    PopupMenuButton<String>(
+                      onSelected: (String result) async {
+                        if (result == 'update') {
+                          context.router.navigate(PostRouteUpdate(id: id));
+
+                          await value.toUpdatePost(id);
+                        } else if (result == 'delete') {
+                          context.router.navigate(const PostRouteList());
+
+                          await value.deletePost(id);
+                        }
+                      },
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'update',
+                          child: Row(
+                            children: [
+                              Icon(Icons.edit, color: Colors.blue),
+                              SizedBox(width: 8),
+                              Text('Update'),
+                            ],
+                          ),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'delete',
+                          child: Row(
+                            children: [
+                              Icon(Icons.delete, color: Colors.red),
+                              SizedBox(width: 8),
+                              Text('Delete'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 12,
               ),
               Animate(
-                effects: const [
-                  FadeEffect(duration: Duration(milliseconds: 500)),
+                effects: [
+                  FadeEffect(duration: 350.ms, delay: (400.ms)),
                   SlideEffect(
-                    begin: Offset(-1, 0),
-                    duration:
-                        Duration(milliseconds: 500)
-                  ),
+                      duration: 350.ms,
+                      delay: (400.ms),
+                      begin: const Offset(-0.2, 0))
                 ],
-                child: Text("Post #${value.postIds[id].toString()}")),
-              const SizedBox(
-                height: 6,
-              ),
-              Animate(
-                effects: const [
-                  FadeEffect(duration: Duration(milliseconds: 500)),
-                  SlideEffect(
-                    begin: Offset(-0.7, 0),
-                    duration:
-                        Duration(milliseconds: 500)
-                  ),
-                ],
-                child: Text(
-                  value.titles[index],
-                  style: const TextStyle(fontWeight: FontWeight.w700),
-                ),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Animate(
-                effects:  const [
-                  FadeEffect(duration: Duration(milliseconds: 500)),
-                  SlideEffect(
-                    begin: Offset(-0.2, 0),
-                    duration:
-                        Duration(milliseconds: 500)
-                  ),
-                ],
-                child: Text(
-                  value.bodies[index],
-                  textAlign: TextAlign.justify,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Post #${value.postIds[id].toString()}"),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Text(
+                      value.titles[index],
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Text(
+                      value.bodies[index],
+                      textAlign: TextAlign.justify,
+                    ),
+                  ],
                 ),
               ),
             ],

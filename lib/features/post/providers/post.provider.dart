@@ -135,12 +135,12 @@ class PostProvider extends ChangeNotifier {
         await PostApi().postPost(titleController.text, bodyController.text);
     Logger().d("Create Post Provider: $post");
 
-    if (post.id == 11) {
-      getAllPosts();
-      titleController.clear();
-      bodyController.clear();
-    }
-    EasyLoading.dismiss();
+    getAllPosts();
+    titleController.clear();
+    bodyController.clear();
+
+    EasyLoading.showSuccess('Post Successfully Added',
+        duration: const Duration(milliseconds: 1200));
   }
 
   /// Stores the list of posts in secure storage.
