@@ -26,7 +26,7 @@ class PostViewBody extends StatelessWidget {
                   FadeEffect(
                     duration: (350.ms),
                   ),
-                  SlideEffect(duration: (350.ms), begin: const Offset(0, -0.5))
+                  SlideEffect(duration: (350.ms), begin: const Offset(0, -0.2))
                 ],
                 child: Row(
                   children: [
@@ -104,7 +104,7 @@ class PostViewBody extends StatelessWidget {
                   SlideEffect(
                       duration: 350.ms,
                       delay: (400.ms),
-                      begin: const Offset(-0.2, 0))
+                      begin: const Offset(-0.05, 0))
                 ],
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

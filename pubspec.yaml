@@ -48,6 +48,7 @@ dependencies:
   dartdoc: ^8.0.8
   flutter_animate: ^4.5.0
   auto_animated: ^3.2.0
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,11 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_native_splash:
+  background_image: "assets/splash_screen_light_bg.png"
+  image: assets/splash_screen_light_text.png
+  background_image_dark: "assets/splash_screen_dark_bg.png"
+  image_dark: assets/splash_screen_dark_text.png
 
 # The following section is specific to Flutter packages.
 flutter:

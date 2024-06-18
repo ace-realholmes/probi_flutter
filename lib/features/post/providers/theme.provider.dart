@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 /// This class handles updating of theme into light or dark mode
 /// It notifies listeners when there are updates.
 class ThemeProvider extends ChangeNotifier {
-  /// Setting the themeMode to light initially.
-  ThemeMode _themeMode = ThemeMode.light;
+  /// Setting the themeMode to base on system
+  ThemeMode _themeMode = ThemeMode.system;
 
   /// Return the value of _themeMode to themeMode
   ThemeMode get themeMode => _themeMode;
