@@ -5,6 +5,9 @@ import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/post_draft_body.widget.dart';
 import 'package:provider/provider.dart';
 
+/// A screen for displaying draft posts.
+///
+/// This screen provides an edit button to continue editing draft posts
 @RoutePage()
 class PostScreenDraft extends StatefulWidget {
   const PostScreenDraft({super.key});
@@ -14,17 +17,22 @@ class PostScreenDraft extends StatefulWidget {
 }
 
 class _PostScreenDraftState extends State<PostScreenDraft> {
-  late final postController = Provider.of<PostProvider>(context);
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+        /// Builds the app bar for the screen.
+        ///
+        /// Includes a back button for navigating back to add form
         appBar: buildAppBar(
             leading: BackButton(
               onPressed: () => context.router.back(),
             ),
             appBarTitle: "Post Draft"),
+
+        /// Builds the body of the screen.
+        ///
+        /// Contains the list view builder to display list of draft posts
         body: const PostDraftBody());
   }
 }

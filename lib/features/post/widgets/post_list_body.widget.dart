@@ -10,7 +10,7 @@ class PostListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return Consumer<PostProvider>(
       builder: (context, value, child) {
         return GridView.count(
@@ -20,8 +20,8 @@ class PostListBody extends StatelessWidget {
           children: List.generate(value.posts.length, (index) {
             return GestureDetector(
               onTap: () {
-                context.router.push(PostRouteView(
-                    id: value.postIds[index], index: index));
+                context.router.push(
+                    PostRouteView(id: value.postIds[index], index: index));
               },
               child: Card(
                 child: Padding(
@@ -39,8 +39,7 @@ class PostListBody extends StatelessWidget {
                           const SizedBox(
                             width: 6,
                           ),
-                          Text(
-                              "- User #${value.userIds[index].toString()}"),
+                          Text("- User #${value.userIds[index].toString()}"),
                         ],
                       ),
                       Text(

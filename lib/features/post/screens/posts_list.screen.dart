@@ -7,6 +7,12 @@ import 'package:probi_flutter/features/post/widgets/post_list_body.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:provider/provider.dart';
 
+/// A screen for displaying the list of posts.
+///* Home page of the application
+///
+/// This screen integrates with `PostProvider` to show a list of favorites posts.
+/// Provides a button in the app bar to toggle themes and navigation to favorite post
+/// lists and add form.
 @RoutePage()
 class PostScreenList extends StatefulWidget {
   const PostScreenList({super.key});
@@ -16,13 +22,12 @@ class PostScreenList extends StatefulWidget {
 }
 
 class _PostScreenListState extends State<PostScreenList> {
-  bool isDarkMode = false;
-  late var screenSize = MediaQuery.of(context).size;
-  late final postController = Provider.of<PostProvider>(context);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+        /// Includes floating action button on the screen, once clicked the
+        /// user is navigated to add form, allowing him to add posts
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             context.router.push(const PostRouteAdd());
@@ -31,6 +36,13 @@ class _PostScreenListState extends State<PostScreenList> {
             Icons.add,
           ),
         ),
+
+        /// Builds the app bar for the screen.
+        ///
+        /// Includes two action widgets
+        /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
+        /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
+        /// light theme.
         appBar: buildAppBar(appBarTitle: "Post List", actionWidgets: [
           IconButton(
               onPressed: () {
@@ -55,6 +67,10 @@ class _PostScreenListState extends State<PostScreenList> {
             },
           )
         ]),
+
+        /// Builds the body of the screen.
+        ///
+        /// Contains the list view builder to display list of posts.
         body: const PostListBody());
   }
 }

@@ -13,12 +13,7 @@ class PostDraftBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<PostProvider>(builder: (context, value, child) {
-      bool isDraftEmpty;
-      if (value.draftTitles.isEmpty) {
-        isDraftEmpty = true;
-      } else {
-        isDraftEmpty = false;
-      }
+      bool isDraftEmpty = value.draftTitles.isEmpty;
 
       return isDraftEmpty
           ? const Center(child: Text('No Draft to Display.'))
