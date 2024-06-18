@@ -35,7 +35,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
   }
 
   /// Instance of `PostProvider` for managing post operations.
-  late final postController = Provider.of<PostProvider>(context, listen: false);
+  late final postProvider = Provider.of<PostProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
       ///
       /// Stores the current draft and navigates to the post list.
       onPopInvoked: (didPop) async {
-        await postController.storeDraft();
+        await postProvider.storeDraft();
         navigateToPostList();
       },
       child: Scaffold(
@@ -58,12 +58,12 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         appBar: buildAppBar(
           leading: BackButton(
             onPressed: () async {
-              await postController.storeDraft();
+              await postProvider.storeDraft();
               navigateToPostList();
 
               // Reset the error states for title and body fields.
-              postController.toggleTitleError(false);
-              postController.toggleBodyError(false);
+              postProvider.toggleTitleError(false);
+              postProvider.toggleBodyError(false);
             },
           ),
           appBarTitle: "Post Add",

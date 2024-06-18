@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/post_view_body.widget.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
-import 'package:provider/provider.dart';
 
 /// A screen for viewing a specific post.
 ///
@@ -37,8 +35,6 @@ class PostScreenView extends StatefulWidget {
 /// Manages the lifecycle of the post viewing screen, including initializing the
 /// `PostProvider` and handling navigation.
 class _PostScreenViewState extends State<PostScreenView> {
-  /// Instance of `PostProvider` for managing post data.
-  late final postController = Provider.of<PostProvider>(context);
 
   /// Navigation method to go to the post list screen.
   late final navigatePostList = context.router.navigate(const PostRouteList());

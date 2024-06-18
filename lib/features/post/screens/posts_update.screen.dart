@@ -28,7 +28,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
   late var navigateToPostList = context.router.navigate(const PostRouteList());
 
   /// Instance of `PostProvider` for managing post operations.
-  late final postController = Provider.of<PostProvider>(context, listen: false);
+  late final postProvider = Provider.of<PostProvider>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
       /// Stores the current draft and navigates to the post list.
       onPopInvoked: (didPop) async {
         navigateToPostList;
-        await postController.storeDraft();
+        await postProvider.storeDraft();
       },
       child: Scaffold(
 
@@ -52,12 +52,12 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
           appBar: buildAppBar(
               leading: BackButton(
                 onPressed: () async {
-                  await postController.storeDraft();
+                  await postProvider.storeDraft();
                   navigateToPostList;
 
                   // Reset the error states for title and body fields.
-                  postController.toggleTitleError(false);
-                  postController.toggleBodyError(false);
+                  postProvider.toggleTitleError(false);
+                  postProvider.toggleBodyError(false);
                 },
               ),
               appBarTitle: "Post Update",
