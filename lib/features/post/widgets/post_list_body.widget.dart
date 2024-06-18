@@ -1,19 +1,17 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
-import 'package:probi_flutter/features/post/widgets/animate_item.widget.dart';
+import 'package:probi_flutter/features/post/widgets/card_post.widget.dart';
 import 'package:provider/provider.dart';
 class PostListBody extends StatelessWidget {
   const PostListBody({super.key});
 
   final options = const LiveOptions(
-    
-    showItemInterval: Duration(milliseconds: 300),
 
-    showItemDuration: Duration(milliseconds: 300),
+    showItemDuration: Duration(milliseconds: 500),
+    showItemInterval: Duration(milliseconds: 100),
 
     visibleFraction: 0.05,
-
     reAnimateOnVisibility: false,
   );
 

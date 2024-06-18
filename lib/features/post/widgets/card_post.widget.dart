@@ -10,19 +10,16 @@ Widget buildAnimatedItem(
   int index,
   Animation<double> animation,
 ) =>
-
     FadeTransition(
       opacity: Tween<double>(
         begin: 0,
         end: 1,
       ).animate(animation),
-
       child: SlideTransition(
         position: Tween<Offset>(
           begin: const Offset(0, -0.03),
           end: Offset.zero,
         ).animate(animation),
-
         child: Consumer<PostProvider>(
           builder: (context, value, child) {
             return GestureDetector(
