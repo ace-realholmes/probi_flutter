@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
 
@@ -89,20 +90,49 @@ class PostViewBody extends StatelessWidget {
               const SizedBox(
                 height: 12,
               ),
-              Text("Post #${value.postIds[id].toString()}"),
+              Animate(
+                effects: const [
+                  FadeEffect(duration: Duration(milliseconds: 500)),
+                  SlideEffect(
+                    begin: Offset(-1, 0),
+                    duration:
+                        Duration(milliseconds: 500)
+                  ),
+                ],
+                child: Text("Post #${value.postIds[id].toString()}")),
               const SizedBox(
                 height: 6,
               ),
-              Text(
-                value.titles[index],
-                style: const TextStyle(fontWeight: FontWeight.w700),
+              Animate(
+                effects: const [
+                  FadeEffect(duration: Duration(milliseconds: 500)),
+                  SlideEffect(
+                    begin: Offset(-0.7, 0),
+                    duration:
+                        Duration(milliseconds: 500)
+                  ),
+                ],
+                child: Text(
+                  value.titles[index],
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
               ),
               const SizedBox(
                 height: 6,
               ),
-              Text(
-                value.bodies[index],
-                textAlign: TextAlign.justify,
+              Animate(
+                effects:  const [
+                  FadeEffect(duration: Duration(milliseconds: 500)),
+                  SlideEffect(
+                    begin: Offset(-0.2, 0),
+                    duration:
+                        Duration(milliseconds: 500)
+                  ),
+                ],
+                child: Text(
+                  value.bodies[index],
+                  textAlign: TextAlign.justify,
+                ),
               ),
             ],
           ),

@@ -70,6 +70,6 @@ class _PostScreenListState extends State<PostScreenList> {
         /// Builds the body of the screen.
         ///
         /// Contains the list view builder to display list of posts.
-        body: const PostListBody());
+        body:  PostListBody());
   }
 }

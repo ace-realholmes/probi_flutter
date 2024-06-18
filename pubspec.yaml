@@ -46,6 +46,8 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   flutter_easyloading: ^3.0.5
   dartdoc: ^8.0.8
+  flutter_animate: ^4.5.0
+  auto_animated: ^3.2.0
 
 dev_dependencies:
   flutter_test:
