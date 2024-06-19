@@ -55,7 +55,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         ///
         /// Includes a back button which stores the draft and navigates to the post list,
         /// and an action button to navigate to the drafts screen.
-        appBar: AppBarWidget(
+        appBar: appBarWidget(
           leading: BackButton(
             onPressed: () async {
               await postProvider.storeDraft();

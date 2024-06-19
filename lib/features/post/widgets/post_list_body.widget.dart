@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/card_post.widget.dart';
 import 'package:provider/provider.dart';
-class PostListBody extends StatelessWidget {
-  const PostListBody({super.key});
+
+class PostListBodyWidget extends StatelessWidget {
+  const PostListBodyWidget({super.key});
 
   final options = const LiveOptions(
-
     showItemDuration: Duration(milliseconds: 500),
     showItemInterval: Duration(milliseconds: 100),
-
     visibleFraction: 0.05,
     reAnimateOnVisibility: false,
   );
@@ -21,8 +20,8 @@ class PostListBody extends StatelessWidget {
     return Consumer<PostProvider>(
       builder: (context, value, child) {
         return LiveGrid.options(
-            itemBuilder: buildAnimatedItem,
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+            itemBuilder: cardPostWidget,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: screenSize.width / 0.4 / screenSize.height / 2,
               crossAxisCount: 2,
             ),

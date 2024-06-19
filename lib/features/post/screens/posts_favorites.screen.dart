@@ -21,7 +21,7 @@ class PostScreenFavorites extends StatelessWidget {
       /// Builds the app bar for the screen.
       ///
       /// Includes a back button for navigation and sets the title to "Post Favorites".
-      appBar: AppBarWidget(
+      appBar: appBarWidget(
         leading: BackButton(
           onPressed: () => context.router.back(),
         ),

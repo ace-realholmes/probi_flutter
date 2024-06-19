@@ -22,7 +22,7 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
         /// Builds the app bar for the screen.
         ///
         /// Includes a back button for navigating back to add form
-        appBar: AppBarWidget(
+        appBar: appBarWidget(
             leading: BackButton(
               onPressed: () => context.router.back(),
             ),
@@ -31,6 +31,6 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
         /// Builds the body of the screen.
         ///
         /// Contains the list view builder to display list of draft posts
-        body: const PostDraftBody());
+        body: const PostDraftBodyWidget());
   }
 }

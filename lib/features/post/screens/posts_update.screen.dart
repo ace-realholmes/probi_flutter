@@ -49,7 +49,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
           ///
           /// Includes a back button which stores the draft and navigates to the post list,
           /// and an action button to navigate to the drafts screen.
-          appBar: AppBarWidget(
+          appBar: appBarWidget(
               leading: BackButton(
                 onPressed: () async {
                   await postProvider.storeDraft();
@@ -72,7 +72,7 @@ class _PostScreenUpdateState extends State<PostScreenUpdate> {
           /// Builds the body of the screen.
           ///
           /// Contains the form for updating an existing post.
-          body: PostUpdateBody(id: widget.id)),
+          body: PostUpdateBodyWidget(id: widget.id)),
     );
   }
 }

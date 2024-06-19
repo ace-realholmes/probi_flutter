@@ -28,7 +28,7 @@ class PostFavoriteBodyWidget extends StatelessWidget {
                           begin: Offset(0, 0.3),
                           duration: Duration(milliseconds: 500)),
                     ],
-                    child: buildListTile(
+                    child: listTileWidget(
                         leadingWidget: const Icon(Icons.note),
                         titleTile:
                             value.favoritePostList[index].title.toString(),

@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
 
-class PostViewBody extends StatelessWidget {
-  const PostViewBody({super.key, required this.id, required this.index});
+class PostViewBodyWidget extends StatelessWidget {
+  const PostViewBodyWidget({super.key, required this.id, required this.index});
 
   final int id;
   final int index;

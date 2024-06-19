@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
 
-class PostDraftBody extends StatelessWidget {
-  const PostDraftBody({super.key});
+class PostDraftBodyWidget extends StatelessWidget {
+  const PostDraftBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class PostDraftBody extends StatelessWidget {
                         begin: Offset(0, 0.5),
                         duration: Duration(milliseconds: 350)),
                   ],
-                  child: buildListTile(
+                  child: listTileWidget(
                       leadingWidget: const Icon(Icons.drafts),
                       titleTile: value.draftTitles[index].toString(),
                       subTile: value.draftBodies[index].toString(),

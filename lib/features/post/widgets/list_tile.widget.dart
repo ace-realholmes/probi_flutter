@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ListTile buildListTile({
+ListTile listTileWidget({
   Widget? leadingWidget,
   required String titleTile,
   required String subTile,

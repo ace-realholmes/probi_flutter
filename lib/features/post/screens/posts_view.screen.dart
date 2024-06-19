@@ -48,7 +48,7 @@ class _PostScreenViewState extends State<PostScreenView> {
       /// Builds the app bar for the screen.
       ///
       /// Includes a back button for navigation and sets the title to "Post View".
-      appBar: AppBarWidget(
+      appBar: appBarWidget(
         leading: IconButton(
           onPressed: () {
             context.router.back();
@@ -61,7 +61,7 @@ class _PostScreenViewState extends State<PostScreenView> {
       /// Builds the body of the screen.
       ///
       /// Displays the content of the post specified by [id] and [index].
-      body: PostViewBody(id: widget.id, index: widget.index),
+      body: PostViewBodyWidget(id: widget.id, index: widget.index),
     );
   }
 }

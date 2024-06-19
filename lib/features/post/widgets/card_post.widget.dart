@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
 
-Widget buildAnimatedItem(
+Widget cardPostWidget(
   BuildContext context,
   int index,
   Animation<double> animation,

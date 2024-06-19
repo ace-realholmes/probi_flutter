@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../routing/app.router.gr.dart';
 import 'text_field.widget.dart';
 
-class PostUpdateBody extends StatelessWidget {
-  const PostUpdateBody({super.key, required this.id});
+class PostUpdateBodyWidget extends StatelessWidget {
+  const PostUpdateBodyWidget({super.key, required this.id});
 
   final int id;
 
