@@ -10,31 +10,31 @@ import 'package:probi_flutter/routing/app.router.gr.dart';
 /// integrates with the `PostProvider` to retrieve and display post information.
 /// Provides navigation options to go back, list posts, or update the current post.
 @RoutePage()
-class PostScreenView extends StatefulWidget {
+class PostViewScreen extends StatefulWidget {
   /// The ID of the post to be viewed.
   final int id;
 
   /// The index of the post in the list.
   final int index;
 
-  /// Creates a `PostScreenView` widget.
+  /// Creates a `PostViewScreen` widget.
   ///
   /// Requires [id] and [index] to specify which post to view.
-  const PostScreenView({
+  const PostViewScreen({
     super.key,
     required this.id,
     required this.index,
   });
 
   @override
-  State<PostScreenView> createState() => _PostScreenViewState();
+  State<PostViewScreen> createState() => _PostViewScreenState();
 }
 
-/// State for `PostScreenView` widget.
+/// State for `PostViewScreen` widget.
 ///
 /// Manages the lifecycle of the post viewing screen, including initializing the
 /// `PostProvider` and handling navigation.
-class _PostScreenViewState extends State<PostScreenView> {
+class _PostViewScreenState extends State<PostViewScreen> {
   /// Navigation method to go to the post list screen.
   late final navigatePostList = context.router.navigate(const PostRouteList());
 

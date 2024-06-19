@@ -11,19 +11,19 @@ import 'package:provider/provider.dart';
 /// This screen provides a form for adding new posts and integrates with the
 /// `PostProvider` to handle draft storage and navigation.
 @RoutePage()
-class PostScreenAdd extends StatefulWidget {
-  /// Creates a `PostScreenAdd` widget.
-  const PostScreenAdd({super.key});
+class PostAddScreen extends StatefulWidget {
+  /// Creates a `PostAddScreen` widget.
+  const PostAddScreen({super.key});
 
   @override
-  State<PostScreenAdd> createState() => _PostScreenAddState();
+  State<PostAddScreen> createState() => _PostAddScreenState();
 }
 
-/// State for `PostScreenAdd` widget.
+/// State for `PostAddScreen` widget.
 ///
 /// Manages the form for adding posts, handles navigation to post list and draft screens,
 /// and stores drafts when the user attempts to leave the screen.
-class _PostScreenAddState extends State<PostScreenAdd> {
+class _PostAddScreenState extends State<PostAddScreen> {
   /// Navigation method to go to the post list screen.
   void navigateToPostList() {
     context.router.navigate(const PostRouteList());

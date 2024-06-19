@@ -13,14 +13,14 @@ import 'package:provider/provider.dart';
 /// Provides a button in the app bar to toggle themes and navigation to favorite post
 /// lists and add form.
 @RoutePage()
-class PostScreenList extends StatefulWidget {
-  const PostScreenList({super.key});
+class PostListScreen extends StatefulWidget {
+  const PostListScreen({super.key});
 
   @override
-  State<PostScreenList> createState() => _PostScreenListState();
+  State<PostListScreen> createState() => _PostListScreenState();
 }
 
-class _PostScreenListState extends State<PostScreenList> {
+class _PostListScreenState extends State<PostListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

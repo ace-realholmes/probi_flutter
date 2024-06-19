@@ -11,19 +11,19 @@ import 'package:provider/provider.dart';
 /// This screen provides a form for updating existing posts and integrates with the
 /// `PostProvider` to handle draft storage and navigation.
 @RoutePage()
-class PostScreenUpdate extends StatefulWidget {
-  const PostScreenUpdate({super.key, required this.id});
+class PostUpdateScreen extends StatefulWidget {
+  const PostUpdateScreen({super.key, required this.id});
   final int id;
 
   @override
-  State<PostScreenUpdate> createState() => _PostScreenUpdateState();
+  State<PostUpdateScreen> createState() => _PostUpdateScreenState();
 }
 
-/// State for `PostScreenUpdate` widget.
+/// State for `PostUpdateScreen` widget.
 ///
 /// Manages the form for updating posts, handles navigation to post list and draft screens,
 /// and stores drafts when the user attempts to leave the screen.
-class _PostScreenUpdateState extends State<PostScreenUpdate> {
+class _PostUpdateScreenState extends State<PostUpdateScreen> {
   /// Navigation method to go to the post list screen.
   late var navigateToPostList = context.router.navigate(const PostRouteList());
 

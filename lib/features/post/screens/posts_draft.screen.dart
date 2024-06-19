@@ -7,14 +7,14 @@ import 'package:probi_flutter/features/post/widgets/post_draft_body.widget.dart'
 ///
 /// This screen provides an edit button to continue editing draft posts
 @RoutePage()
-class PostScreenDraft extends StatefulWidget {
-  const PostScreenDraft({super.key});
+class PostDraftScreen extends StatefulWidget {
+  const PostDraftScreen({super.key});
 
   @override
-  State<PostScreenDraft> createState() => _PostScreenDraftState();
+  State<PostDraftScreen> createState() => _PostDraftScreenState();
 }
 
-class _PostScreenDraftState extends State<PostScreenDraft> {
+class _PostDraftScreenState extends State<PostDraftScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

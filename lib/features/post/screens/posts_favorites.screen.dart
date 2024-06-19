@@ -11,9 +11,9 @@ import 'package:provider/provider.dart';
 /// If there are no favorite posts, it displays a message indicating the absence
 /// of favorites.
 @RoutePage()
-class PostScreenFavorites extends StatelessWidget {
-  /// Creates a `PostScreenFavorites` widget.
-  const PostScreenFavorites({super.key});
+class PostFavoriteScreen extends StatelessWidget {
+  /// Creates a `PostFavoriteScreen` widget.
+  const PostFavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
