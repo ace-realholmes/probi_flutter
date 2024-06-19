@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../providers/post.provider.dart';
 import 'list_tile.widget.dart';
 
-class FavoritePostBody extends StatelessWidget {
-  const FavoritePostBody({super.key});
+class PostFavoriteBodyWidget extends StatelessWidget {
+  const PostFavoriteBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

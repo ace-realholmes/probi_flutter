@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
 
-class TextFieldBuild extends StatelessWidget {
-  const TextFieldBuild(
+class TextFieldWidget extends StatelessWidget {
+  const TextFieldWidget(
       {super.key,
       required this.maxLines,
       required this.hint,

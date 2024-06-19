@@ -55,7 +55,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         ///
         /// Includes a back button which stores the draft and navigates to the post list,
         /// and an action button to navigate to the drafts screen.
-        appBar: buildAppBar(
+        appBar: AppBarWidget(
           leading: BackButton(
             onPressed: () async {
               await postProvider.storeDraft();
@@ -80,7 +80,7 @@ class _PostScreenAddState extends State<PostScreenAdd> {
         /// Builds the body of the screen.
         ///
         /// Contains the form for adding a new post.
-        body: const PostFormAdd(),
+        body: const PostAddBodyWidget(),
       ),
     );
   }

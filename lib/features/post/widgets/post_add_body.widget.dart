@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
 
-class PostFormAdd extends StatelessWidget {
-  const PostFormAdd({super.key});
+class PostAddBodyWidget extends StatelessWidget {
+  const PostAddBodyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class PostFormAdd extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              TextFieldBuild(
+              TextFieldWidget(
                 maxLines: 1,
                 hint: "Title",
                 controller: value.titleController,
                 error: value.titleError,
               ),
               const SizedBox(height: 12),
-              TextFieldBuild(
+              TextFieldWidget(
                 maxLines: 5,
                 hint: "Body",
                 controller: value.bodyController,

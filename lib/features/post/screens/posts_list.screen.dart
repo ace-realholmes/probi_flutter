@@ -45,7 +45,7 @@ class _PostScreenListState extends State<PostScreenList> {
         /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
         /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
         /// light theme.
-        appBar: buildAppBar(appBarTitle: "Post List", actionWidgets: [
+        appBar: AppBarWidget(appBarTitle: "Post List", actionWidgets: [
           IconButton(
               onPressed: () {
                 context.router.pushNamed("/post/favorites");

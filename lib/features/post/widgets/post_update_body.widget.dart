@@ -19,7 +19,7 @@ class PostUpdateBody extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextFieldBuild(
+                TextFieldWidget(
                   maxLines: 1,
                   hint: "Title",
                   controller: value.titleController,
@@ -28,7 +28,7 @@ class PostUpdateBody extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                TextFieldBuild(
+                TextFieldWidget(
                   maxLines: 5,
                   hint: "Body",
                   controller: value.bodyController,

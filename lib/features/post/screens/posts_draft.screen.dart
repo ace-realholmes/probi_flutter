@@ -22,7 +22,7 @@ class _PostScreenDraftState extends State<PostScreenDraft> {
         /// Builds the app bar for the screen.
         ///
         /// Includes a back button for navigating back to add form
-        appBar: buildAppBar(
+        appBar: AppBarWidget(
             leading: BackButton(
               onPressed: () => context.router.back(),
             ),

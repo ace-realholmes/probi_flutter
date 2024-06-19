@@ -21,7 +21,7 @@ class PostScreenFavorites extends StatelessWidget {
       /// Builds the app bar for the screen.
       ///
       /// Includes a back button for navigation and sets the title to "Post Favorites".
-      appBar: buildAppBar(
+      appBar: AppBarWidget(
         leading: BackButton(
           onPressed: () => context.router.back(),
         ),
@@ -35,7 +35,7 @@ class PostScreenFavorites extends StatelessWidget {
           // Returns a message if there are no favorites, or the list of favorite posts otherwise.
           return isFavoritesEmpty
               ? const Center(child: Text('No Favorite Post to Display.'))
-              : const FavoritePostBody();
+              : const PostFavoriteBodyWidget();
         },
       ),
     );

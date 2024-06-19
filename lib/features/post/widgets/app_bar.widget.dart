@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar({
+AppBar AppBarWidget({
   Widget? leading,
   required String appBarTitle,
   List<Widget>? actionWidgets,

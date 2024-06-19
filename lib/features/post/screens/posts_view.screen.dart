@@ -35,7 +35,6 @@ class PostScreenView extends StatefulWidget {
 /// Manages the lifecycle of the post viewing screen, including initializing the
 /// `PostProvider` and handling navigation.
 class _PostScreenViewState extends State<PostScreenView> {
-
   /// Navigation method to go to the post list screen.
   late final navigatePostList = context.router.navigate(const PostRouteList());
 
@@ -49,7 +48,7 @@ class _PostScreenViewState extends State<PostScreenView> {
       /// Builds the app bar for the screen.
       ///
       /// Includes a back button for navigation and sets the title to "Post View".
-      appBar: buildAppBar(
+      appBar: AppBarWidget(
         leading: IconButton(
           onPressed: () {
             context.router.back();
@@ -58,6 +57,7 @@ class _PostScreenViewState extends State<PostScreenView> {
         ),
         appBarTitle: 'Post View',
       ),
+
       /// Builds the body of the screen.
       ///
       /// Displays the content of the post specified by [id] and [index].
