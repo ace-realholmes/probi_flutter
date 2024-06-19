@@ -5,7 +5,6 @@ import '../../../routing/app.router.gr.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 
-
 class PostViewBodyWidget extends StatelessWidget {
   const PostViewBodyWidget({super.key, required this.id, required this.index});
 
@@ -57,17 +56,8 @@ class PostViewBodyWidget extends StatelessWidget {
                       },
                     ),
                     PopupMenuButton<String>(
-                      onSelected: (String result) async {
-                        if (result == 'update') {
-                          context.router.navigate(PostUpdateRoute(id: id));
-
-                          await value.toUpdatePost(id);
-                        } else if (result == 'delete') {
-                          context.router.navigate(const PostListRoute());
-
-                          await value.deletePost(id);
-                        }
-                      },
+                      onSelected: (String result) =>
+                          onSelected(result, context, value),
                       itemBuilder: (BuildContext context) =>
                           <PopupMenuEntry<String>>[
                         const PopupMenuItem<String>(
@@ -91,7 +81,7 @@ class PostViewBodyWidget extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -132,5 +122,18 @@ class PostViewBodyWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> onSelected(
+      String? result, BuildContext context, PostProvider postProvider) async {
+    final router = context.router;
+
+    if (result == 'update') {
+      router.navigate(PostUpdateRoute(id: id));
+      await postProvider.toUpdatePost(id);
+    } else if (result == 'delete') {
+      await postProvider.deletePost(id);
+      router.navigate(const PostListRoute());
+    }
   }
 }

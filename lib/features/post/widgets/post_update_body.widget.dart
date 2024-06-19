@@ -7,7 +7,6 @@ import '../../../routing/app.router.gr.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 
-
 class PostUpdateBodyWidget extends StatelessWidget {
   PostUpdateBodyWidget({super.key, required this.id});
 
@@ -54,25 +53,7 @@ class PostUpdateBodyWidget extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      if (!formKey.currentState!.validate()) {
-                        return EasyLoading.showError('Form invalid!');
-                      }
-                      // bool isTitleEmpty = value.titleController.text.isEmpty;
-                      // bool isBodyEmpty = value.bodyController.text.isEmpty;
-
-                      // value.toggleTitleError(isTitleEmpty);
-                      // value.toggleBodyError(isBodyEmpty);
-
-                      // if (!isTitleEmpty && !isBodyEmpty) {
-                      context.router.navigate(const PostListRoute());
-
-                      post.id = id;
-                      post.title = value.titleController.text;
-                      post.body = value.bodyController.text;
-
-                      await value.updatePost(post);
-                    },
+                    onPressed: () => onSubmit(context, value),
                     child: const Text(
                       'Submit',
                     ),
@@ -84,5 +65,18 @@ class PostUpdateBodyWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> onSubmit(BuildContext context, PostProvider value) async {
+    if (!formKey.currentState!.validate()) {
+      return EasyLoading.showError('Form invalid!');
+    }
+    context.router.navigate(const PostListRoute());
+
+    post.id = id;
+    post.title = value.titleController.text;
+    post.body = value.bodyController.text;
+
+    await value.updatePost(post);
   }
 }

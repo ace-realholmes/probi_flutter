@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../providers/post.provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-
 class PostFavoriteBodyWidget extends StatelessWidget {
   const PostFavoriteBodyWidget({super.key});
 
@@ -34,10 +33,7 @@ class PostFavoriteBodyWidget extends StatelessWidget {
                       titleTile: value.favoritePostList[index].title.toString(),
                       subTile: value.favoritePostList[index].body.toString(),
                       trailingWidget: IconButton(
-                        onPressed: () async {
-                          await value.toggleFavoritePost(
-                              value.favoritePostList[index].id!);
-                        },
+                        onPressed: () => onSubmit(value, index),
                         icon: const Icon(Icons.favorite),
                       ),
                     ),
@@ -46,5 +42,9 @@ class PostFavoriteBodyWidget extends StatelessWidget {
               );
       },
     );
+  }
+
+  Future<void> onSubmit(PostProvider value, int index) async {
+    await value.toggleFavoritePost(value.favoritePostList[index].id!);
   }
 }

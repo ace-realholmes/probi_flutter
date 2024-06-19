@@ -6,7 +6,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/list_tile.widget.dart';
 
-
 class PostDraftBodyWidget extends StatelessWidget {
   const PostDraftBodyWidget({super.key});
 
@@ -34,10 +33,7 @@ class PostDraftBodyWidget extends StatelessWidget {
                       titleTile: value.draftTitles[index].toString(),
                       subTile: value.draftBodies[index].toString(),
                       trailingWidget: IconButton(
-                        onPressed: () async {
-                          context.router.popAndPush(const PostAddRoute());
-                          await value.editDraftPost(index);
-                        },
+                        onPressed: () => onSubmit(context, value, index),
                         icon: const Icon(Icons.edit),
                       ),
                     ),
@@ -46,5 +42,11 @@ class PostDraftBodyWidget extends StatelessWidget {
               );
       },
     );
+  }
+
+  Future<void> onSubmit(
+      BuildContext context, PostProvider value, int index) async {
+    context.router.popAndPush(const PostAddRoute());
+    await value.editDraftPost(index);
   }
 }
