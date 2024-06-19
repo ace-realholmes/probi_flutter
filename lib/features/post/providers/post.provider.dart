@@ -54,7 +54,7 @@ class PostProvider extends ChangeNotifier {
   /// when the posts are fetched.
   Future<void> getAllPosts() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    posts = await PostService().getAllPosts();
+    posts = await PostService.getAllPosts();
     storePost(posts);
     EasyLoading.dismiss();
     notifyListeners();
@@ -65,20 +65,43 @@ class PostProvider extends ChangeNotifier {
   /// Reads the stored posts data from secure storage and updates the lists of
   /// titles, bodies, post IDs, and user IDs.
   Future<void> retrievePostFromStorage() async {
-    // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     final dataString = await secureStorage.read(key: 'probi_posts');
+
     if (dataString != null) {
       final data = jsonDecode(dataString);
+
       titles.clear();
       bodies.clear();
       postIds.clear();
       userIds.clear();
-      postIds.addAll(data['postIds'] as List<int>);
-      userIds.addAll(data['userIds'] as List<int>);
-      titles.addAll(data['titles'] as List<String>);
-      bodies.addAll(data['bodies'] as List<String>);
+
+      if (data['postIds'] is List) {
+        postIds.addAll((data['postIds'] as List)
+            .map((item) =>
+                item is int ? item : int.tryParse(item.toString()) ?? 0)
+            .toList());
+      }
+
+      if (data['userIds'] is List) {
+        userIds.addAll((data['userIds'] as List)
+            .map((item) =>
+                item is int ? item : int.tryParse(item.toString()) ?? 0)
+            .toList());
+      }
+
+      if (data['titles'] is List) {
+        titles.addAll(
+            (data['titles'] as List).map((item) => item.toString()).toList());
+      }
+
+      if (data['bodies'] is List) {
+        bodies.addAll(
+            (data['bodies'] as List).map((item) => item.toString()).toList());
+      }
     }
-    // EasyLoading.dismiss();
+
+    EasyLoading.dismiss();
   }
 
   /// Validates the title text field.
@@ -131,14 +154,14 @@ class PostProvider extends ChangeNotifier {
   /// If successful, clears the text fields and fetches all posts again.
   Future<void> createPost(PostModel post) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    
+
     final postFields = PostModel(
       title: titleController.text,
       body: bodyController.text,
     );
 
     try {
-      PostModel createdPost = await PostService().postPost(postFields);
+      PostModel createdPost = await PostService.postPost(postFields);
 
       Logger().d("Create Post Provider: ${createdPost.toJson()}");
 
@@ -147,12 +170,13 @@ class PostProvider extends ChangeNotifier {
       titleController.clear();
       bodyController.clear();
 
-      EasyLoading.showSuccess('Post Successfully Added', duration: const Duration(milliseconds: 1200));
+      EasyLoading.showSuccess('Post Successfully Added',
+          duration: const Duration(milliseconds: 1200));
     } catch (e) {
       // Handle any errors
       Logger().e("Failed to create post: $e");
       EasyLoading.showError('Failed to add post!');
-    } 
+    }
   }
 
   /// Stores the list of posts in secure storage.
@@ -178,7 +202,7 @@ class PostProvider extends ChangeNotifier {
         }));
 
     // Logger().i(
-        // "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
+    // "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
 
     EasyLoading.dismiss();
   }
@@ -238,7 +262,7 @@ class PostProvider extends ChangeNotifier {
   /// fields.
   Future<void> updatePost(PostModel post) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    PostModel patchedPost = await PostService().patchPost(post);
+    PostModel patchedPost = await PostService.patchPost(post);
     Logger().d("Update Post Provider: $patchedPost");
 
     if (patchedPost.userId.toString().isNotEmpty ||
@@ -255,7 +279,7 @@ class PostProvider extends ChangeNotifier {
   /// Notifies listeners after the post is deleted.
   Future<void> deletePost(int id) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    await PostService().deletePost(id);
+    await PostService.deletePost(id);
     EasyLoading.dismiss();
     notifyListeners();
   }

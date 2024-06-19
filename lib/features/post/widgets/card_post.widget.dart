@@ -1,9 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:auto_route/auto_route.dart';
 import '../../../routing/app.router.gr.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+
 
 Widget cardPostWidget(
   BuildContext context,

@@ -1,8 +1,8 @@
-import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:auto_animated/auto_animated.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/card_post.widget.dart';
-import 'package:provider/provider.dart';
 
 class PostListBodyWidget extends StatelessWidget {
   const PostListBodyWidget({super.key});

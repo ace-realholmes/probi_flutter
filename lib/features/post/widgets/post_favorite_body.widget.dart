@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/post.provider.dart';
 import 'list_tile.widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/post.provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
 
 class PostFavoriteBodyWidget extends StatelessWidget {
   const PostFavoriteBodyWidget({super.key});

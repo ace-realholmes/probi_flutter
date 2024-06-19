@@ -1,10 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
+import '../../../routing/app.router.gr.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
-import 'package:provider/provider.dart';
 
-import '../../../routing/app.router.gr.dart';
 
 class PostViewBodyWidget extends StatelessWidget {
   const PostViewBodyWidget({super.key, required this.id, required this.index});

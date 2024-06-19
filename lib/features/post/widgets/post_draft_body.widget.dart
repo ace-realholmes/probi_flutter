@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
+import '../../../routing/app.router.gr.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/widgets/list_tile.widget.dart';
-import 'package:provider/provider.dart';
 
-import '../../../routing/app.router.gr.dart';
 
 class PostDraftBodyWidget extends StatelessWidget {
   const PostDraftBodyWidget({super.key});

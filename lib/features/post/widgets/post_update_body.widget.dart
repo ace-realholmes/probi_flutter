@@ -1,13 +1,12 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:probi_flutter/features/post/providers/post.provider.dart';
-import 'package:provider/provider.dart';
-
-import '../../../routing/app.router.gr.dart';
 import '../models/post.dart';
 import '../utils/validator.dart';
-import 'text_form_field.widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
+import '../../../routing/app.router.gr.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+
 
 class PostUpdateBodyWidget extends StatelessWidget {
   PostUpdateBodyWidget({super.key, required this.id});

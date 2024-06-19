@@ -6,11 +6,17 @@ import 'package:probi_flutter/common/env.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
 
 class PostService {
-  final dio = Dio();
+  static final _dio = Dio(BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com/'));
 
-  Future<List<PostModel>> getAllPosts() async {
+  PostService._();
+  static final _instance = PostService._();
+  factory PostService() {
+    return _instance;
+  }
+
+  static Future<List<PostModel>> getAllPosts() async {
     try {
-      final response = await dio.get(baseUrl);
+      final response = await _dio.get('/posts');
 
       if (response.statusCode == 200) {
         List<dynamic> data = response.data as List<dynamic>;
@@ -29,9 +35,9 @@ class PostService {
     }
   }
 
-  Future<PostModel> getPost(int id) async {
+  static Future<PostModel> getPost(int id) async {
     try {
-      final response = await dio.get("$baseUrl/$id");
+      final response = await _dio.get("/posts/$id");
 
       if (response.statusCode == 200) {
         PostModel post =
@@ -46,9 +52,9 @@ class PostService {
     }
   }
 
-  Future<PostModel> postPost(PostModel post) async {
+  static Future<PostModel> postPost(PostModel post) async {
     try {
-      final response = await dio.post(baseUrl,
+      final response = await _dio.post('/posts',
           data: {"userId": 11, "title": post.title, "body": post.body});
 
       Logger().d("Post Post Service: $response");
@@ -67,9 +73,9 @@ class PostService {
     }
   }
 
-  Future<PostModel> putPost(int id) async {
+  static Future<PostModel> putPost(int id) async {
     try {
-      final response = await dio.put("$baseUrl/$id");
+      final response = await _dio.put("/posts/$id");
 
       if (response.statusCode == 200) {
         PostModel post =
@@ -84,9 +90,9 @@ class PostService {
     }
   }
 
-  Future<PostModel> patchPost(PostModel post) async {
+  static Future<PostModel> patchPost(PostModel post) async {
     try {
-      final response = await dio.patch("$baseUrl/${post.id}",
+      final response = await _dio.patch("/posts/${post.id}",
           data: {"userId": 11, "title": post.title, "body": post.body});
 
       if (response.statusCode == 200) {
@@ -102,9 +108,9 @@ class PostService {
     }
   }
 
-  Future<void> deletePost(int id) async {
+  static Future<void> deletePost(int id) async {
     try {
-      final response = await dio.delete("$baseUrl/$id");
+      final response = await _dio.delete("/posts/$id");
 
       if (response.statusCode == 200) {
         Logger().d("Post Successfully Delete");
