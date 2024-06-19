@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/post_list_body.widget.dart';
-import 'package:probi_flutter/routing/app.router.gr.dart';
-import 'package:provider/provider.dart';
 
 /// A screen for displaying the list of posts.
 ///* Home page of the application

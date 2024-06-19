@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:probi_flutter/routing/app.router.gr.dart';
 import 'package:probi_flutter/features/post/widgets/app_bar.widget.dart';
 import 'package:probi_flutter/features/post/widgets/post_view_body.widget.dart';
-import 'package:probi_flutter/routing/app.router.gr.dart';
 
 /// A screen for viewing a specific post.
 ///
