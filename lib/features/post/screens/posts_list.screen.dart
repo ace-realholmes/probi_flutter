@@ -23,56 +23,58 @@ class PostListScreen extends StatefulWidget {
 class _PostListScreenState extends State<PostListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-        /// Includes floating action button on the screen, once clicked the
-        /// user is navigated to add form, allowing him to add posts
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.router.push(const PostAddRoute());
-
-            /// For Sample Create Post
-            // context.router.push(const SamplePostCreateRoute());
-          },
-          child: const Icon(
-            Icons.add,
-          ),
-        ),
-
-        /// Builds the app bar for the screen.
-        ///
-        /// Includes two action widgets
-        /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
-        /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
-        /// light theme.
-        appBar: appBarWidget(appBarTitle: "Post List", actionWidgets: [
-          IconButton(
-              onPressed: () {
-                context.router.pushNamed("/post/favorites");
-              },
-              icon: const Icon(Icons.list)),
-          Consumer<ThemeProvider>(
-            builder: (context, value, child) {
-              bool isDarkMode = false;
-
-              if (value.themeMode == ThemeMode.light) {
-                isDarkMode = false;
-              } else {
-                isDarkMode = true;
-              }
-              return IconButton(
-                onPressed: () {
-                  value.toggleTheme();
-                },
-                icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
-              );
+    return SafeArea(
+      child: Scaffold(
+      
+          /// Includes floating action button on the screen, once clicked the
+          /// user is navigated to add form, allowing him to add posts
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              context.router.push(const PostAddRoute());
+      
+              /// For Sample Create Post
+              // context.router.push(const SamplePostCreateRoute());
             },
-          )
-        ]),
-
-        /// Builds the body of the screen.
-        ///
-        /// Contains the list view builder to display list of posts.
-        body: const PostListBodyWidget());
+            child: const Icon(
+              Icons.add,
+            ),
+          ),
+      
+          /// Builds the app bar for the screen.
+          ///
+          /// Includes two action widgets
+          /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
+          /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
+          /// light theme.
+          appBar: appBarWidget(appBarTitle: "Post List", actionWidgets: [
+            IconButton(
+                onPressed: () {
+                  context.router.pushNamed("/post/favorites");
+                },
+                icon: const Icon(Icons.list)),
+            Consumer<ThemeProvider>(
+              builder: (context, value, child) {
+                bool isDarkMode = false;
+      
+                if (value.themeMode == ThemeMode.light) {
+                  isDarkMode = false;
+                } else {
+                  isDarkMode = true;
+                }
+                return IconButton(
+                  onPressed: () {
+                    value.toggleTheme();
+                  },
+                  icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
+                );
+              },
+            )
+          ]),
+      
+          /// Builds the body of the screen.
+          ///
+          /// Contains the list view builder to display list of posts.
+          body: const PostListBodyWidget()),
+    );
   }
 }

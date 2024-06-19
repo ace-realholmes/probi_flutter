@@ -17,20 +17,22 @@ class PostDraftScreen extends StatefulWidget {
 class _PostDraftScreenState extends State<PostDraftScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
+        
+          /// Builds the app bar for the screen.
+          ///
+          /// Includes a back button for navigating back to add form
+          appBar: appBarWidget(
+              leading: BackButton(
+                onPressed: () => context.router.back(),
+              ),
+              appBarTitle: "Post Draft"),
       
-        /// Builds the app bar for the screen.
-        ///
-        /// Includes a back button for navigating back to add form
-        appBar: appBarWidget(
-            leading: BackButton(
-              onPressed: () => context.router.back(),
-            ),
-            appBarTitle: "Post Draft"),
-
-        /// Builds the body of the screen.
-        ///
-        /// Contains the list view builder to display list of draft posts
-        body: const PostDraftBodyWidget());
+          /// Builds the body of the screen.
+          ///
+          /// Contains the list view builder to display list of draft posts
+          body: const PostDraftBodyWidget()),
+    );
   }
 }

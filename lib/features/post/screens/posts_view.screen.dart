@@ -44,24 +44,26 @@ class _PostViewScreenState extends State<PostViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      /// Builds the app bar for the screen.
-      ///
-      /// Includes a back button for navigation and sets the title to "Post View".
-      appBar: appBarWidget(
-        leading: IconButton(
-          onPressed: () {
-            context.router.back();
-          },
-          icon: const Icon(Icons.arrow_back),
+    return SafeArea(
+      child: Scaffold(
+        /// Builds the app bar for the screen.
+        ///
+        /// Includes a back button for navigation and sets the title to "Post View".
+        appBar: appBarWidget(
+          leading: IconButton(
+            onPressed: () {
+              context.router.back();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          appBarTitle: 'Post View',
         ),
-        appBarTitle: 'Post View',
+      
+        /// Builds the body of the screen.
+        ///
+        /// Displays the content of the post specified by [id] and [index].
+        body: PostViewBodyWidget(id: widget.id, index: widget.index),
       ),
-
-      /// Builds the body of the screen.
-      ///
-      /// Displays the content of the post specified by [id] and [index].
-      body: PostViewBodyWidget(id: widget.id, index: widget.index),
     );
   }
 }

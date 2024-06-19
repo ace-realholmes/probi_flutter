@@ -4,12 +4,17 @@ import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../routing/app.router.gr.dart';
-import 'text_field.widget.dart';
+import '../models/post.dart';
+import '../utils/validator.dart';
+import 'text_form_field.widget.dart';
 
 class PostUpdateBodyWidget extends StatelessWidget {
-  const PostUpdateBodyWidget({super.key, required this.id});
+  PostUpdateBodyWidget({super.key, required this.id});
 
   final int id;
+  final post = PostModel();
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,47 +22,60 @@ class PostUpdateBodyWidget extends StatelessWidget {
       builder: (context, value, child) {
         return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFieldWidget(
-                  maxLines: 1,
-                  hint: "Title",
-                  controller: value.titleController,
-                  error: value.titleError,
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                TextFieldWidget(
-                  maxLines: 5,
-                  hint: "Body",
-                  controller: value.bodyController,
-                  error: value.bodyError,
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        bool isTitleEmpty = value.titleController.text.isEmpty;
-                        bool isBodyEmpty = value.bodyController.text.isEmpty;
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    maxLines: 1,
+                    decoration: const InputDecoration(
+                      label: Text("Title"),
+                    ),
+                    controller: value.titleController,
+                    onChanged: (value) => post.title = value,
+                    validator: (value) => Validators.title(value),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  TextFormField(
+                    maxLines: 5,
+                    decoration: const InputDecoration(
+                      label: Text('Body')
+                    ),
+                    onChanged: (value) => post.body = value,
+                    validator: (value) => Validators.body(value),
+                    controller: value.bodyController,
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          // bool isTitleEmpty = value.titleController.text.isEmpty;
+                          // bool isBodyEmpty = value.bodyController.text.isEmpty;
 
-                        value.toggleTitleError(isTitleEmpty);
-                        value.toggleBodyError(isBodyEmpty);
+                          // value.toggleTitleError(isTitleEmpty);
+                          // value.toggleBodyError(isBodyEmpty);
 
-                        if (!isTitleEmpty && !isBodyEmpty) {
+                          // if (!isTitleEmpty && !isBodyEmpty) {
                           context.router.navigate(const PostListRoute());
-                          await value.updatePost(id);
-                        }
-                      },
-                      child: const Text(
-                        'Submit',
-                      )),
-                )
-              ],
+
+                          post.id = id;
+                          post.title = value.titleController.text;
+                          post.body = value.bodyController.text;
+
+                          await value.updatePost(post);
+                        },
+                        child: const Text(
+                          'Submit',
+                        )),
+                  )
+                ],
+              ),
             ));
       },
     );

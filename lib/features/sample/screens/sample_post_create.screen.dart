@@ -52,7 +52,6 @@ class _SamplePostCreateScreenState extends State<SamplePostCreateScreen> {
                   decoration: const InputDecoration(label: Text('Title')),
                   validator: Validators.title,
                   onChanged: (val) => post.title = val,
-
                   /// Alternatively, you can set validation behaviour for each field.
                   /// Validation will happen after the user input something.
                   autovalidateMode: AutovalidateMode.onUserInteraction,

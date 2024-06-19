@@ -54,7 +54,7 @@ class PostProvider extends ChangeNotifier {
   /// when the posts are fetched.
   Future<void> getAllPosts() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    posts = await PostApi().getAllPosts();
+    posts = await PostService().getAllPosts();
     storePost(posts);
     EasyLoading.dismiss();
     notifyListeners();
@@ -129,19 +129,23 @@ class PostProvider extends ChangeNotifier {
   ///
   /// Uses the text from `titleController` and `bodyController` to create the post.
   /// If successful, clears the text fields and fetches all posts again.
-  Future<void> createPost() async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    PostModel post =
-        await PostApi().postPost(titleController.text, bodyController.text);
-    Logger().d("Create Post Provider: $post");
+  // Future<void> createPost() async {
+  //   EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+  //    PostModel postFields;
+  //   postFields.title = titleController.text;
+  //   postFields.body = bodyController.text;
+    
+  //   PostModel post =
+  //       await PostService().postPost(titleController.text, bodyController.text);
+  //   Logger().d("Create Post Provider: $post");
 
-    getAllPosts();
-    titleController.clear();
-    bodyController.clear();
+  //   getAllPosts();
+  //   titleController.clear();
+  //   bodyController.clear();
 
-    EasyLoading.showSuccess('Post Successfully Added',
-        duration: const Duration(milliseconds: 1200));
-  }
+  //   EasyLoading.showSuccess('Post Successfully Added',
+  //       duration: const Duration(milliseconds: 1200));
+  // }
 
   /// Stores the list of posts in secure storage.
   ///
@@ -224,12 +228,13 @@ class PostProvider extends ChangeNotifier {
   ///
   /// If the update is successful, fetches all posts again and clears the text
   /// fields.
-  Future<void> updatePost(int id) async {
+  Future<void> updatePost(PostModel post) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    PostModel post = await PostApi().patchPost(id);
-    Logger().d("Update Post Provider: $post");
+    PostModel patchedPost = await PostService().patchPost(post);
+    Logger().d("Update Post Provider: $patchedPost");
 
-    if (post.userId.toString().isNotEmpty || post.id.toString().isNotEmpty) {
+    if (patchedPost.userId.toString().isNotEmpty ||
+        patchedPost.id.toString().isNotEmpty) {
       getAllPosts();
       titleController.clear();
       bodyController.clear();
@@ -242,7 +247,7 @@ class PostProvider extends ChangeNotifier {
   /// Notifies listeners after the post is deleted.
   Future<void> deletePost(int id) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    await PostApi().deletePost(id);
+    await PostService().deletePost(id);
     EasyLoading.dismiss();
     notifyListeners();
   }

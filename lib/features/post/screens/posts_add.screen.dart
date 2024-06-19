@@ -37,6 +37,9 @@ class _PostAddScreenState extends State<PostAddScreen> {
   /// Instance of `PostProvider` for managing post operations.
   late final postProvider = Provider.of<PostProvider>(context, listen: false);
 
+  ///
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -47,40 +50,42 @@ class _PostAddScreenState extends State<PostAddScreen> {
         await postProvider.storeDraft();
         navigateToPostList();
       },
-      child: Scaffold(
-        /// Prevents the bottom inset adjustment when the keyboard is shown.
-        resizeToAvoidBottomInset: false,
-
-        /// Builds the app bar for the screen.
-        ///
-        /// Includes a back button which stores the draft and navigates to the post list,
-        /// and an action button to navigate to the drafts screen.
-        appBar: appBarWidget(
-          leading: BackButton(
-            onPressed: () async {
-              await postProvider.storeDraft();
-              navigateToPostList();
-
-              // Reset the error states for title and body fields.
-              postProvider.toggleTitleError(false);
-              postProvider.toggleBodyError(false);
-            },
-          ),
-          appBarTitle: "Post Add",
-          actionWidgets: [
-            IconButton(
-              onPressed: () {
-                navigateToPostDraft();
+      child: SafeArea(
+        child: Scaffold(
+          /// Prevents the bottom inset adjustment when the keyboard is shown.
+          resizeToAvoidBottomInset: false,
+        
+          /// Builds the app bar for the screen.
+          ///
+          /// Includes a back button which stores the draft and navigates to the post list,
+          /// and an action button to navigate to the drafts screen.
+          appBar: appBarWidget(
+            leading: BackButton(
+              onPressed: () async {
+                await postProvider.storeDraft();
+                navigateToPostList();
+        
+                // Reset the error states for title and body fields.
+                postProvider.toggleTitleError(false);
+                postProvider.toggleBodyError(false);
               },
-              icon: const Icon(Icons.drafts),
-            )
-          ],
+            ),
+            appBarTitle: "Post Add",
+            actionWidgets: [
+              IconButton(
+                onPressed: () {
+                  navigateToPostDraft();
+                },
+                icon: const Icon(Icons.drafts),
+              )
+            ],
+          ),
+        
+          /// Builds the body of the screen.
+          ///
+          /// Contains the form for adding a new post.
+          body: PostAddBodyWidget(),
         ),
-
-        /// Builds the body of the screen.
-        ///
-        /// Contains the form for adding a new post.
-        body: const PostAddBodyWidget(),
       ),
     );
   }
