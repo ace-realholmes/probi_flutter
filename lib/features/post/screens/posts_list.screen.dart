@@ -29,7 +29,7 @@ class _PostListScreenState extends State<PostListScreen> {
         /// user is navigated to add form, allowing him to add posts
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.router.push(const PostRouteAdd());
+            context.router.push(const PostAddRoute());
 
             /// For Sample Create Post
             // context.router.push(const SamplePostCreateRoute());

@@ -36,7 +36,7 @@ class PostFavoriteBodyWidget extends StatelessWidget {
                         trailingWidget: IconButton(
                             onPressed: () async {
                               await value.toggleFavoritePost(
-                                  value.favoritePostList[index].id);
+                                  value.favoritePostList[index].id!);
                             },
                             icon: const Icon(Icons.favorite))),
                   );

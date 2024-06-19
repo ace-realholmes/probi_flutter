@@ -26,7 +26,7 @@ class PostAddScreen extends StatefulWidget {
 class _PostAddScreenState extends State<PostAddScreen> {
   /// Navigation method to go to the post list screen.
   void navigateToPostList() {
-    context.router.navigate(const PostRouteList());
+    context.router.navigate(const PostListRoute());
   }
 
   /// Navigation method to go to the post drafts screen.

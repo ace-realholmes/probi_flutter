@@ -30,45 +30,45 @@ abstract class $AppRouter extends _i8.RootStackRouter {
 
   @override
   final Map<String, _i8.PageFactory> pagesMap = {
-    PostRouteAdd.name: (routeData) {
+    PostAddRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.PostScreenAdd(),
+        child: const _i1.PostAddScreen(),
       );
     },
-    PostRouteDraft.name: (routeData) {
+    PostDraftRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.PostScreenDraft(),
+        child: const _i2.PostDraftScreen(),
       );
     },
-    PostRouteFavorites.name: (routeData) {
+    PostFavoriteRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.PostScreenFavorites(),
+        child: const _i3.PostFavoriteScreen(),
       );
     },
-    PostRouteList.name: (routeData) {
+    PostListRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.PostScreenList(),
+        child: const _i4.PostListScreen(),
       );
     },
-    PostRouteUpdate.name: (routeData) {
-      final args = routeData.argsAs<PostRouteUpdateArgs>();
+    PostUpdateRoute.name: (routeData) {
+      final args = routeData.argsAs<PostUpdateRouteArgs>();
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.PostScreenUpdate(
+        child: _i5.PostUpdateScreen(
           key: args.key,
           id: args.id,
         ),
       );
     },
-    PostRouteView.name: (routeData) {
-      final args = routeData.argsAs<PostRouteViewArgs>();
+    PostViewRoute.name: (routeData) {
+      final args = routeData.argsAs<PostViewRouteArgs>();
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.PostScreenView(
+        child: _i6.PostViewScreen(
           key: args.key,
           id: args.id,
           index: args.index,
@@ -85,85 +85,85 @@ abstract class $AppRouter extends _i8.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.PostScreenAdd]
-class PostRouteAdd extends _i8.PageRouteInfo<void> {
-  const PostRouteAdd({List<_i8.PageRouteInfo>? children})
+/// [_i1.PostAddScreen]
+class PostAddRoute extends _i8.PageRouteInfo<void> {
+  const PostAddRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          PostRouteAdd.name,
+          PostAddRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteAdd';
+  static const String name = 'PostAddRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.PostScreenDraft]
-class PostRouteDraft extends _i8.PageRouteInfo<void> {
-  const PostRouteDraft({List<_i8.PageRouteInfo>? children})
+/// [_i2.PostDraftScreen]
+class PostDraftRoute extends _i8.PageRouteInfo<void> {
+  const PostDraftRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          PostRouteDraft.name,
+          PostDraftRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteDraft';
+  static const String name = 'PostDraftRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i3.PostScreenFavorites]
-class PostRouteFavorites extends _i8.PageRouteInfo<void> {
-  const PostRouteFavorites({List<_i8.PageRouteInfo>? children})
+/// [_i3.PostFavoriteScreen]
+class PostFavoriteRoute extends _i8.PageRouteInfo<void> {
+  const PostFavoriteRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          PostRouteFavorites.name,
+          PostFavoriteRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteFavorites';
+  static const String name = 'PostFavoriteRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.PostScreenList]
-class PostRouteList extends _i8.PageRouteInfo<void> {
-  const PostRouteList({List<_i8.PageRouteInfo>? children})
+/// [_i4.PostListScreen]
+class PostListRoute extends _i8.PageRouteInfo<void> {
+  const PostListRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          PostRouteList.name,
+          PostListRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteList';
+  static const String name = 'PostListRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.PostScreenUpdate]
-class PostRouteUpdate extends _i8.PageRouteInfo<PostRouteUpdateArgs> {
-  PostRouteUpdate({
+/// [_i5.PostUpdateScreen]
+class PostUpdateRoute extends _i8.PageRouteInfo<PostUpdateRouteArgs> {
+  PostUpdateRoute({
     _i9.Key? key,
     required int id,
     List<_i8.PageRouteInfo>? children,
   }) : super(
-          PostRouteUpdate.name,
-          args: PostRouteUpdateArgs(
+          PostUpdateRoute.name,
+          args: PostUpdateRouteArgs(
             key: key,
             id: id,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteUpdate';
+  static const String name = 'PostUpdateRoute';
 
-  static const _i8.PageInfo<PostRouteUpdateArgs> page =
-      _i8.PageInfo<PostRouteUpdateArgs>(name);
+  static const _i8.PageInfo<PostUpdateRouteArgs> page =
+      _i8.PageInfo<PostUpdateRouteArgs>(name);
 }
 
-class PostRouteUpdateArgs {
-  const PostRouteUpdateArgs({
+class PostUpdateRouteArgs {
+  const PostUpdateRouteArgs({
     this.key,
     required this.id,
   });
@@ -174,21 +174,21 @@ class PostRouteUpdateArgs {
 
   @override
   String toString() {
-    return 'PostRouteUpdateArgs{key: $key, id: $id}';
+    return 'PostUpdateRouteArgs{key: $key, id: $id}';
   }
 }
 
 /// generated route for
-/// [_i6.PostScreenView]
-class PostRouteView extends _i8.PageRouteInfo<PostRouteViewArgs> {
-  PostRouteView({
+/// [_i6.PostViewScreen]
+class PostViewRoute extends _i8.PageRouteInfo<PostViewRouteArgs> {
+  PostViewRoute({
     _i9.Key? key,
     required int id,
     required int index,
     List<_i8.PageRouteInfo>? children,
   }) : super(
-          PostRouteView.name,
-          args: PostRouteViewArgs(
+          PostViewRoute.name,
+          args: PostViewRouteArgs(
             key: key,
             id: id,
             index: index,
@@ -196,14 +196,14 @@ class PostRouteView extends _i8.PageRouteInfo<PostRouteViewArgs> {
           initialChildren: children,
         );
 
-  static const String name = 'PostRouteView';
+  static const String name = 'PostViewRoute';
 
-  static const _i8.PageInfo<PostRouteViewArgs> page =
-      _i8.PageInfo<PostRouteViewArgs>(name);
+  static const _i8.PageInfo<PostViewRouteArgs> page =
+      _i8.PageInfo<PostViewRouteArgs>(name);
 }
 
-class PostRouteViewArgs {
-  const PostRouteViewArgs({
+class PostViewRouteArgs {
+  const PostViewRouteArgs({
     this.key,
     required this.id,
     required this.index,
@@ -217,7 +217,7 @@ class PostRouteViewArgs {
 
   @override
   String toString() {
-    return 'PostRouteViewArgs{key: $key, id: $id, index: $index}';
+    return 'PostViewRouteArgs{key: $key, id: $id, index: $index}';
   }
 }
 

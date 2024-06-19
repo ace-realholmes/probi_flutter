@@ -49,7 +49,7 @@ class PostUpdateBodyWidget extends StatelessWidget {
                         value.toggleBodyError(isBodyEmpty);
 
                         if (!isTitleEmpty && !isBodyEmpty) {
-                          context.router.navigate(const PostRouteList());
+                          context.router.navigate(const PostListRoute());
                           await value.updatePost(id);
                         }
                       },

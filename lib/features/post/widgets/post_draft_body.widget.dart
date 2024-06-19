@@ -34,7 +34,7 @@ class PostDraftBodyWidget extends StatelessWidget {
                       subTile: value.draftBodies[index].toString(),
                       trailingWidget: IconButton(
                           onPressed: () async {
-                            context.router.popAndPush(const PostRouteAdd());
+                            context.router.popAndPush(const PostAddRoute());
                             await value.editDraftPost(index);
                           },
                           icon: const Icon(Icons.edit))),

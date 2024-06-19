@@ -14,34 +14,39 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Post _$PostFromJson(Map<String, dynamic> json) {
-  return _Post.fromJson(json);
+PostModel _$PostModelFromJson(Map<String, dynamic> json) {
+  return _PostModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Post {
-  int get userId => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
+mixin _$PostModel {
+  int? get userId => throw _privateConstructorUsedError;
+  set userId(int? value) => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
+  set body(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
+  $PostModelCopyWith<PostModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PostCopyWith<$Res> {
-  factory $PostCopyWith(Post value, $Res Function(Post) then) =
-      _$PostCopyWithImpl<$Res, Post>;
+abstract class $PostModelCopyWith<$Res> {
+  factory $PostModelCopyWith(PostModel value, $Res Function(PostModel) then) =
+      _$PostModelCopyWithImpl<$Res, PostModel>;
   @useResult
-  $Res call({int userId, int id, String title, String body});
+  $Res call({int? userId, int? id, String title, String body});
 }
 
 /// @nodoc
-class _$PostCopyWithImpl<$Res, $Val extends Post>
-    implements $PostCopyWith<$Res> {
-  _$PostCopyWithImpl(this._value, this._then);
+class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
+    implements $PostModelCopyWith<$Res> {
+  _$PostModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -51,20 +56,20 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? id = null,
+    Object? userId = freezed,
+    Object? id = freezed,
     Object? title = null,
     Object? body = null,
   }) {
     return _then(_value.copyWith(
-      userId: null == userId
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
+              as int?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -78,39 +83,41 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 }
 
 /// @nodoc
-abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$$PostImplCopyWith(
-          _$PostImpl value, $Res Function(_$PostImpl) then) =
-      __$$PostImplCopyWithImpl<$Res>;
+abstract class _$$PostModelImplCopyWith<$Res>
+    implements $PostModelCopyWith<$Res> {
+  factory _$$PostModelImplCopyWith(
+          _$PostModelImpl value, $Res Function(_$PostModelImpl) then) =
+      __$$PostModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int userId, int id, String title, String body});
+  $Res call({int? userId, int? id, String title, String body});
 }
 
 /// @nodoc
-class __$$PostImplCopyWithImpl<$Res>
-    extends _$PostCopyWithImpl<$Res, _$PostImpl>
-    implements _$$PostImplCopyWith<$Res> {
-  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
+class __$$PostModelImplCopyWithImpl<$Res>
+    extends _$PostModelCopyWithImpl<$Res, _$PostModelImpl>
+    implements _$$PostModelImplCopyWith<$Res> {
+  __$$PostModelImplCopyWithImpl(
+      _$PostModelImpl _value, $Res Function(_$PostModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? id = null,
+    Object? userId = freezed,
+    Object? id = freezed,
     Object? title = null,
     Object? body = null,
   }) {
-    return _then(_$PostImpl(
-      userId: null == userId
+    return _then(_$PostModelImpl(
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
+              as int?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -125,78 +132,63 @@ class __$$PostImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PostImpl implements _Post {
-  _$PostImpl(
-      {required this.userId,
-      required this.id,
-      required this.title,
-      required this.body});
+class _$PostModelImpl implements _PostModel {
+  _$PostModelImpl({this.userId, this.id, this.title = '', this.body = ''});
 
-  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostImplFromJson(json);
+  factory _$PostModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostModelImplFromJson(json);
 
   @override
-  final int userId;
+  int? userId;
   @override
-  final int id;
+  int? id;
   @override
-  final String title;
+  @JsonKey()
+  String title;
   @override
-  final String body;
+  @JsonKey()
+  String body;
 
   @override
   String toString() {
-    return 'Post(userId: $userId, id: $id, title: $title, body: $body)';
+    return 'PostModel(userId: $userId, id: $id, title: $title, body: $body)';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PostImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.body, body) || other.body == body));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, userId, id, title, body);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
-      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
+  _$$PostModelImplCopyWith<_$PostModelImpl> get copyWith =>
+      __$$PostModelImplCopyWithImpl<_$PostModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PostImplToJson(
+    return _$$PostModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Post implements Post {
-  factory _Post(
-      {required final int userId,
-      required final int id,
-      required final String title,
-      required final String body}) = _$PostImpl;
+abstract class _PostModel implements PostModel {
+  factory _PostModel({int? userId, int? id, String title, String body}) =
+      _$PostModelImpl;
 
-  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
+  factory _PostModel.fromJson(Map<String, dynamic> json) =
+      _$PostModelImpl.fromJson;
 
   @override
-  int get userId;
+  int? get userId;
+  set userId(int? value);
   @override
-  int get id;
+  int? get id;
+  set id(int? value);
   @override
   String get title;
+  set title(String value);
   @override
   String get body;
+  set body(String value);
   @override
   @JsonKey(ignore: true)
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+  _$$PostModelImplCopyWith<_$PostModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

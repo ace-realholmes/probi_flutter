@@ -19,7 +19,7 @@ class PostProvider extends ChangeNotifier {
   TextEditingController bodyController = TextEditingController();
 
   /// List of all posts.
-  List<Post> posts = [];
+  List<PostModel> posts = [];
 
   /// List of IDs for favorite posts.
   List<int> favoritePostIds = [];
@@ -122,7 +122,7 @@ class PostProvider extends ChangeNotifier {
   ///
   /// Filters the `posts` list to include only posts whose IDs are in the
   /// `favoritePostIds` list.
-  List<Post> get favoritePostList =>
+  List<PostModel> get favoritePostList =>
       posts.where((post) => favoritePostIds.contains(post.id)).toList();
 
   /// Creates a new post using the API.
@@ -131,7 +131,7 @@ class PostProvider extends ChangeNotifier {
   /// If successful, clears the text fields and fetches all posts again.
   Future<void> createPost() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    Post post =
+    PostModel post =
         await PostApi().postPost(titleController.text, bodyController.text);
     Logger().d("Create Post Provider: $post");
 
@@ -147,11 +147,11 @@ class PostProvider extends ChangeNotifier {
   ///
   /// Saves the post IDs, user IDs, titles, and bodies in secure storage
   /// as a JSON-encoded string.
-  Future<void> storePost(List<Post> posts) async {
+  Future<void> storePost(List<PostModel> posts) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     for (var post in posts) {
-      postIds.add(post.id);
-      userIds.add(post.userId);
+      postIds.add(post.id!);
+      userIds.add(post.userId!);
       titles.add(post.title);
       bodies.add(post.body);
     }
@@ -226,7 +226,7 @@ class PostProvider extends ChangeNotifier {
   /// fields.
   Future<void> updatePost(int id) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    Post post = await PostApi().patchPost(id);
+    PostModel post = await PostApi().patchPost(id);
     Logger().d("Update Post Provider: $post");
 
     if (post.userId.toString().isNotEmpty || post.id.toString().isNotEmpty) {

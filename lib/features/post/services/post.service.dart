@@ -8,13 +8,13 @@ import 'package:probi_flutter/features/post/models/post.dart';
 class PostApi {
   final dio = Dio();
 
-  Future<List<Post>> getAllPosts() async {
+  Future<List<PostModel>> getAllPosts() async {
     try {
       final response = await dio.get(baseUrl);
 
       if (response.statusCode == 200) {
         List<dynamic> data = response.data as List<dynamic>;
-        List<Post> posts = data.map((json) => Post.fromJson(json as Map<String, dynamic>)).toList();
+        List<PostModel> posts = data.map((json) => PostModel.fromJson(json as Map<String, dynamic>)).toList();
 
         // Logger().d('Get Data: $data \n Get Posts: ${posts[10]}');
 
@@ -27,12 +27,12 @@ class PostApi {
     }
   }
 
-  Future<Post> getPost(int id) async {
+  Future<PostModel> getPost(int id) async {
     try {
       final response = await dio.get("$baseUrl/$id");
 
       if (response.statusCode == 200) {
-        Post post = Post.fromJson(response.data as Map<String, dynamic>);
+        PostModel post = PostModel.fromJson(response.data as Map<String, dynamic>);
         log('Get Post: ${post.body}');
         return post;
       } else {
@@ -43,14 +43,14 @@ class PostApi {
     }
   }
 
-  Future<Post> postPost(String title, String body) async {
+  Future<PostModel> postPost(String title, String body) async {
     try {
       final response = await dio.post(baseUrl, data: {"userId": 11, "title": title, "body": body});
 
       Logger().d("Post Post Service: $response");
 
       if (response.statusCode == 201) {
-        Post post = Post.fromJson(response.data as Map<String, dynamic>);
+        PostModel post = PostModel.fromJson(response.data as Map<String, dynamic>);
 
         Logger().d('Post Post: $post');
         return post;
@@ -62,12 +62,12 @@ class PostApi {
     }
   }
 
-  Future<Post> putPost(int id) async {
+  Future<PostModel> putPost(int id) async {
     try {
       final response = await dio.put("$baseUrl/$id");
 
       if (response.statusCode == 200) {
-        Post post = Post.fromJson(response.data as Map<String, dynamic>);
+        PostModel post = PostModel.fromJson(response.data as Map<String, dynamic>);
         log("Put Post: $post");
         return post;
       } else {
@@ -78,12 +78,12 @@ class PostApi {
     }
   }
 
-  Future<Post> patchPost(int id) async {
+  Future<PostModel> patchPost(int id) async {
     try {
       final response = await dio.patch("$baseUrl/$id");
 
       if (response.statusCode == 200) {
-        Post post = Post.fromJson(response.data as Map<String, dynamic>);
+        PostModel post = PostModel.fromJson(response.data as Map<String, dynamic>);
 
         return post;
       } else {

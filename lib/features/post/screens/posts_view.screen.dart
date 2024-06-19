@@ -36,11 +36,11 @@ class PostViewScreen extends StatefulWidget {
 /// `PostProvider` and handling navigation.
 class _PostViewScreenState extends State<PostViewScreen> {
   /// Navigation method to go to the post list screen.
-  late final navigatePostList = context.router.navigate(const PostRouteList());
+  late final navigatePostList = context.router.navigate(const PostListRoute());
 
   /// Navigation method to go to the post update screen.
   late final navigatePostUpdate =
-      context.router.navigate(PostRouteUpdate(id: widget.id));
+      context.router.navigate(PostUpdateRoute(id: widget.id));
 
   @override
   Widget build(BuildContext context) {

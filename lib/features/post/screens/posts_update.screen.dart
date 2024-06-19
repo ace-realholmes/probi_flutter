@@ -25,7 +25,7 @@ class PostUpdateScreen extends StatefulWidget {
 /// and stores drafts when the user attempts to leave the screen.
 class _PostUpdateScreenState extends State<PostUpdateScreen> {
   /// Navigation method to go to the post list screen.
-  late var navigateToPostList = context.router.navigate(const PostRouteList());
+  late var navigateToPostList = context.router.navigate(const PostListRoute());
 
   /// Instance of `PostProvider` for managing post operations.
   late final postProvider = Provider.of<PostProvider>(context, listen: false);

@@ -46,7 +46,7 @@ class PostAddBodyWidget extends StatelessWidget {
                       value.createPost();
                       value.titleController.clear();
                       value.bodyController.clear();
-                      context.router.navigate(const PostRouteList());
+                      context.router.navigate(const PostListRoute());
                     }
                   },
                   child: const Text('Submit'),
