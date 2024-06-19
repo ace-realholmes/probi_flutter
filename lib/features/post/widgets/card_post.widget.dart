@@ -25,7 +25,8 @@ Widget cardPostWidget(
             return GestureDetector(
               onTap: () {
                 context.router.push(
-                    PostViewRoute(id: value.postIds[index], index: index));
+                  PostViewRoute(id: value.postIds[index], index: index),
+                );
               },
               child: Card(
                 child: Padding(

@@ -5,9 +5,9 @@ AppBar appBarWidget({
   required String appBarTitle,
   List<Widget>? actionWidgets,
 }) => AppBar(
-  leading: leading ?? const SizedBox(),
+  leading: leading,
   title: Text(appBarTitle),
   automaticallyImplyLeading: false,
   centerTitle: true,
-  actions: actionWidgets ?? [],
+  actions: actionWidgets,
 );

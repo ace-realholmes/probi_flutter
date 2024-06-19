@@ -25,22 +25,25 @@ class PostFavoriteBodyWidget extends StatelessWidget {
                     effects: const [
                       FadeEffect(duration: Duration(milliseconds: 500)),
                       SlideEffect(
-                          begin: Offset(0, 0.3),
-                          duration: Duration(milliseconds: 500)),
+                        begin: Offset(0, 0.3),
+                        duration: Duration(milliseconds: 500),
+                      ),
                     ],
                     child: listTileWidget(
-                        leadingWidget: const Icon(Icons.note),
-                        titleTile:
-                            value.favoritePostList[index].title.toString(),
-                        subTile: value.favoritePostList[index].body.toString(),
-                        trailingWidget: IconButton(
-                            onPressed: () async {
-                              await value.toggleFavoritePost(
-                                  value.favoritePostList[index].id!);
-                            },
-                            icon: const Icon(Icons.favorite))),
+                      leadingWidget: const Icon(Icons.note),
+                      titleTile: value.favoritePostList[index].title.toString(),
+                      subTile: value.favoritePostList[index].body.toString(),
+                      trailingWidget: IconButton(
+                        onPressed: () async {
+                          await value.toggleFavoritePost(
+                              value.favoritePostList[index].id!);
+                        },
+                        icon: const Icon(Icons.favorite),
+                      ),
+                    ),
                   );
-                });
+                },
+              );
       },
     );
   }

@@ -12,34 +12,39 @@ class PostDraftBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PostProvider>(builder: (context, value, child) {
-      bool isDraftEmpty = value.draftTitles.isEmpty;
+    return Consumer<PostProvider>(
+      builder: (context, value, child) {
+        bool isDraftEmpty = value.draftTitles.isEmpty;
 
-      return isDraftEmpty
-          ? const Center(child: Text('No Draft to Display.'))
-          : ListView.builder(
-              itemCount: value.draftTitles.length,
-              padding: const EdgeInsets.all(4),
-              itemBuilder: (BuildContext context, int index) {
-                return Animate(
-                  effects: const [
-                    FadeEffect(duration: Duration(milliseconds: 350)),
-                    SlideEffect(
-                        begin: Offset(0, 0.5),
-                        duration: Duration(milliseconds: 350)),
-                  ],
-                  child: listTileWidget(
+        return isDraftEmpty
+            ? const Center(child: Text('No Draft to Display.'))
+            : ListView.builder(
+                itemCount: value.draftTitles.length,
+                padding: const EdgeInsets.all(4),
+                itemBuilder: (BuildContext context, int index) {
+                  return Animate(
+                    effects: const [
+                      FadeEffect(duration: Duration(milliseconds: 350)),
+                      SlideEffect(
+                          begin: Offset(0, 0.5),
+                          duration: Duration(milliseconds: 350)),
+                    ],
+                    child: listTileWidget(
                       leadingWidget: const Icon(Icons.drafts),
                       titleTile: value.draftTitles[index].toString(),
                       subTile: value.draftBodies[index].toString(),
                       trailingWidget: IconButton(
-                          onPressed: () async {
-                            context.router.popAndPush(const PostAddRoute());
-                            await value.editDraftPost(index);
-                          },
-                          icon: const Icon(Icons.edit))),
-                );
-              });
-    });
+                        onPressed: () async {
+                          context.router.popAndPush(const PostAddRoute());
+                          await value.editDraftPost(index);
+                        },
+                        icon: const Icon(Icons.edit),
+                      ),
+                    ),
+                  );
+                },
+              );
+      },
+    );
   }
 }

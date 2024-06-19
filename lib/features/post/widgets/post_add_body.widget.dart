@@ -29,15 +29,21 @@ class PostAddBodyWidget extends StatelessWidget {
               children: [
                 TextFormField(
                   maxLines: 1,
-                  decoration: const InputDecoration(label: Text('Title')),
+                  decoration:
+                      const InputDecoration(label: Text('Title'), filled: true),
                   controller: value.titleController,
+                  onChanged: (value) => post.title = value,
+                  validator: (value) => Validators.title(value),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   maxLines: 5,
-                  decoration: const InputDecoration(label: Text('Body')),
+                  decoration:
+                      const InputDecoration(label: Text('Body'), filled: true),
                   onChanged: (value) => post.body = value,
                   validator: (value) => Validators.body(value),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -45,26 +51,16 @@ class PostAddBodyWidget extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
+                      final router = context.router;
+
                       /// Validate the form
                       if (!formKey.currentState!.validate()) {
                         return EasyLoading.showError('Form invalid!');
                       }
 
-                      try {
-                        EasyLoading.show(
-                            status: "Loading",
-                            maskType: EasyLoadingMaskType.black);
-                        final created = await PostService().postPost(post);
-                        EasyLoading.showSuccess('Post Published!');
-                        Logger().i('Created: ${created.toJson()}');
+                      await value.createPost(post);
 
-                        context.router.navigate(const PostListRoute());
-                      } catch (e) {
-                        EasyLoading.showToast('Failed to publish post');
-                        Logger().e('Error: $e');
-                      } finally {
-                        EasyLoading.dismiss();
-                      }
+                      router.navigate(const PostListRoute());
                     },
                     child: const Text('Submit'),
                   ),

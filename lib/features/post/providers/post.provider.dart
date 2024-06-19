@@ -65,7 +65,7 @@ class PostProvider extends ChangeNotifier {
   /// Reads the stored posts data from secure storage and updates the lists of
   /// titles, bodies, post IDs, and user IDs.
   Future<void> retrievePostFromStorage() async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     final dataString = await secureStorage.read(key: 'probi_posts');
     if (dataString != null) {
       final data = jsonDecode(dataString);
@@ -78,7 +78,7 @@ class PostProvider extends ChangeNotifier {
       titles.addAll(data['titles'] as List<String>);
       bodies.addAll(data['bodies'] as List<String>);
     }
-    EasyLoading.dismiss();
+    // EasyLoading.dismiss();
   }
 
   /// Validates the title text field.
@@ -129,23 +129,31 @@ class PostProvider extends ChangeNotifier {
   ///
   /// Uses the text from `titleController` and `bodyController` to create the post.
   /// If successful, clears the text fields and fetches all posts again.
-  // Future<void> createPost() async {
-  //   EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-  //    PostModel postFields;
-  //   postFields.title = titleController.text;
-  //   postFields.body = bodyController.text;
+  Future<void> createPost(PostModel post) async {
+    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     
-  //   PostModel post =
-  //       await PostService().postPost(titleController.text, bodyController.text);
-  //   Logger().d("Create Post Provider: $post");
+    final postFields = PostModel(
+      title: titleController.text,
+      body: bodyController.text,
+    );
 
-  //   getAllPosts();
-  //   titleController.clear();
-  //   bodyController.clear();
+    try {
+      PostModel createdPost = await PostService().postPost(postFields);
 
-  //   EasyLoading.showSuccess('Post Successfully Added',
-  //       duration: const Duration(milliseconds: 1200));
-  // }
+      Logger().d("Create Post Provider: ${createdPost.toJson()}");
+
+      // Refresh the post list and clear the controllers
+      await getAllPosts();
+      titleController.clear();
+      bodyController.clear();
+
+      EasyLoading.showSuccess('Post Successfully Added', duration: const Duration(milliseconds: 1200));
+    } catch (e) {
+      // Handle any errors
+      Logger().e("Failed to create post: $e");
+      EasyLoading.showError('Failed to add post!');
+    } 
+  }
 
   /// Stores the list of posts in secure storage.
   ///
@@ -169,8 +177,8 @@ class PostProvider extends ChangeNotifier {
           "bodies": bodies,
         }));
 
-    Logger().i(
-        "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
+    // Logger().i(
+        // "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
 
     EasyLoading.dismiss();
   }

@@ -20,14 +20,15 @@ class PostListBodyWidget extends StatelessWidget {
     return Consumer<PostProvider>(
       builder: (context, value, child) {
         return LiveGrid.options(
-            itemBuilder: cardPostWidget,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: screenSize.width / 0.4 / screenSize.height / 2,
-              crossAxisCount: 2,
-            ),
-            shrinkWrap: true,
-            itemCount: value.postIds.length,
-            options: options);
+          itemBuilder: cardPostWidget,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: screenSize.width / 0.4 / screenSize.height / 2,
+            crossAxisCount: 2,
+          ),
+          shrinkWrap: true,
+          itemCount: value.postIds.length,
+          options: options,
+        );
       },
     );
   }
