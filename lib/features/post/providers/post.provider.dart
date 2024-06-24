@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:logger/logger.dart';
+import 'package:probi_flutter/features/common/services/easy_loading.services.dart';
 import 'dart:convert';
 import '../models/post.dart';
 import '../services/post.service.dart';
@@ -55,6 +56,7 @@ class PostProvider extends ChangeNotifier {
   /// Displays a loading indicator during the operation and notifies listeners
   /// when the posts are fetched.
   Future<void> getAllPosts() async {
+    EasyLoadingHelper.instance.dismiss();
     // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
     isLoading = true;
     posts = await PostService.instance.getAllPosts();
@@ -70,7 +72,6 @@ class PostProvider extends ChangeNotifier {
   /// Reads the stored posts data from secure storage and updates the lists of
   /// titles, bodies, post IDs, and user IDs.
   Future<void> retrievePostFromStorage() async {
-    
     final dataString = await secureStorage.read(key: 'probi_posts');
 
     if (dataString != null) {
@@ -105,8 +106,6 @@ class PostProvider extends ChangeNotifier {
             (data['bodies'] as List).map((item) => item.toString()).toList());
       }
     }
-
-    
   }
 
   /// Validates the title text field.
@@ -158,7 +157,7 @@ class PostProvider extends ChangeNotifier {
   /// Uses the text from `titleController` and `bodyController` to create the post.
   /// If successful, clears the text fields and fetches all posts again.
   Future<void> createPost(PostModel post) async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoadingHelper.instance.show('Loading...');
 
     final postFields = PostModel(
       title: titleController.text,
@@ -166,21 +165,18 @@ class PostProvider extends ChangeNotifier {
     );
 
     try {
-      PostModel createdPost = await PostService.instance.postPost(postFields);
+      final createdPost = await PostService.instance.postPost(postFields);
 
       Logger().d("Create Post Provider: ${createdPost.toJson()}");
 
-      // Refresh the post list and clear the controllers
-      await getAllPosts();
       titleController.clear();
       bodyController.clear();
 
-      EasyLoading.showSuccess('Post Successfully Added',
-          duration: const Duration(milliseconds: 1200));
+      EasyLoadingHelper.instance.success('Post Successfully Added');
     } catch (e) {
       // Handle any errors
       Logger().e("Failed to create post: $e");
-      EasyLoading.showError('Failed to add post!');
+      EasyLoadingHelper.instance.error('Failed to add post!');
     }
   }
 
@@ -189,7 +185,8 @@ class PostProvider extends ChangeNotifier {
   /// Saves the post IDs, user IDs, titles, and bodies in secure storage
   /// as a JSON-encoded string.
   Future<void> storePost(List<PostModel> posts) async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoadingHelper.instance.show('Loading');
     for (var post in posts) {
       postIds.add(post.id!);
       userIds.add(post.userId!);
@@ -209,7 +206,7 @@ class PostProvider extends ChangeNotifier {
     // Logger().i(
     // "Store Post\nPost Id: $postIds\nUser Id: $userIds\nTitles: $titles\nBody: $bodies");
 
-    EasyLoading.dismiss();
+    EasyLoadingHelper.instance.dismiss();
   }
 
   /// Stores a draft of the current post.
@@ -217,7 +214,8 @@ class PostProvider extends ChangeNotifier {
   /// If both the title and body are not empty, adds them to the draft lists
   /// and clears the text fields.
   storeDraft() {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoadingHelper.instance.show('Loading');
     bool isTitleEmpty = titleController.text.isEmpty;
     bool isBodyEmpty = bodyController.text.isEmpty;
 
@@ -228,7 +226,7 @@ class PostProvider extends ChangeNotifier {
 
     titleController.clear();
     bodyController.clear();
-    EasyLoading.dismiss();
+    EasyLoadingHelper.instance.dismiss;
   }
 
   /// Edits a draft post by its index.
@@ -236,13 +234,13 @@ class PostProvider extends ChangeNotifier {
   /// Sets the text controllers to the draft content at the specified index
   /// and removes the draft from the lists.
   Future<void> editDraftPost(int index) async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoadingHelper.instance.show('Loading');
     titleController.text = draftTitles[index];
     bodyController.text = draftBodies[index];
 
     draftTitles.removeAt(index);
     draftBodies.removeAt(index);
-    EasyLoading.dismiss();
+    EasyLoadingHelper.instance.dismiss;
     notifyListeners();
   }
 
@@ -266,7 +264,7 @@ class PostProvider extends ChangeNotifier {
   /// If the update is successful, fetches all posts again and clears the text
   /// fields.
   Future<void> updatePost(PostModel post) async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    EasyLoadingHelper.instance.show('Loading');
     PostModel patchedPost = await PostService.instance.patchPost(post);
     Logger().d("Update Post Provider: $patchedPost");
 
@@ -276,16 +274,16 @@ class PostProvider extends ChangeNotifier {
       titleController.clear();
       bodyController.clear();
     }
-    EasyLoading.dismiss();
+    EasyLoadingHelper.instance.dismiss();
   }
 
   /// Deletes a post by its ID using the API.
   ///
   /// Notifies listeners after the post is deleted.
   Future<void> deletePost(int id) async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    
     await PostService.instance.deletePost(id);
-    EasyLoading.dismiss();
     notifyListeners();
+    
   }
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:probi_flutter/features/common/services/easy_loading.services.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
 
 class PostService {
@@ -18,6 +19,7 @@ class PostService {
 
 
    Future<List<PostModel>> getAllPosts() async {
+    EasyLoadingHelper.instance.dismiss();
     try {
       final response = await _dio?.get('/posts');
 
@@ -112,17 +114,22 @@ class PostService {
   }
 
    Future<void> deletePost(int id) async {
+    
     try {
       final response = await _dio?.delete("/posts/$id");
 
       if (response?.statusCode == 200) {
         Logger().d("Post Successfully Delete");
+        
       } else {
         Logger().d("Post failed to delete");
+        
         throw Exception("Failed to delete post: ${response?.statusMessage}");
       }
     } catch (e) {
+      EasyLoadingHelper.instance.dismiss();
       throw Exception("Failed to delete post: $e");
     }
+    
   }
 }

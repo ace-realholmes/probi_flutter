@@ -50,7 +50,7 @@ class PostAddBodyWidget extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () => onSubmit(context),
+                    onPressed: () => onSubmit(context, value),
                     child: const Text('Submit'),
                   ),
                 ),
@@ -62,7 +62,7 @@ class PostAddBodyWidget extends StatelessWidget {
     );
   }
 
-  Future<void> onSubmit(BuildContext context) async {
+  Future<void> onSubmit(BuildContext context, PostProvider value) async {
     final router = context.router;
 
     /// Validate the form
@@ -72,13 +72,14 @@ class PostAddBodyWidget extends StatelessWidget {
 
     try {
       // final created = await PostService().postPost(post);
-      final created = await PostService.instance.postPost(post);
+      // final created = await PostService.instance.postPost(post);
+      // Logger().i('Created: ${created.toJson()}');
+      await value.createPost(post);
 
-      Logger().i('Created: ${created.toJson()}');
     } catch (e) {
       throw Exception('Failed to Create Post');
     }
 
-    router.navigate(const PostListRoute());
+    router.push(const PostListRoute());
   }
 }

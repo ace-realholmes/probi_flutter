@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:logger/logger.dart';
-import 'package:probi_flutter/common/env.dart';
+import 'package:probi_flutter/features/common/env.dart';
+import 'package:probi_flutter/features/common/services/easy_loading.services.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
 import 'package:probi_flutter/features/post/services/post.service.dart';
@@ -17,10 +17,11 @@ import 'package:provider/provider.dart';
 ///
 /// Loads environment variables and runs the app.
 Future main() async {
-
+  ///initializing Post Service
   final baseConfig = Dio(BaseOptions(baseUrl: Env.baseUrl));
   PostService.instance.init(baseConfig);
   baseConfig.interceptors.add(dioInterceptor);
+  
   Logger().d('Base URL: ${Env.baseUrl}');
 
   // Run the Flutter application.

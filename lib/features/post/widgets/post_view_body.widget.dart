@@ -133,7 +133,7 @@ class PostViewBodyWidget extends StatelessWidget {
       await postProvider.toUpdatePost(id);
     } else if (result == 'delete') {
       await postProvider.deletePost(id);
-      router.navigate(const PostListRoute());
+      router.push(const PostListRoute());
     }
   }
 }
