@@ -125,6 +125,7 @@ dependencies:
   pinput: ^4.0.0
   flutter_multi_formatter: ^2.12.4
   extended_masked_text: ^2.3.1
+  envied_generator: ^0.5.4+1
 
 
 dev_dependencies:

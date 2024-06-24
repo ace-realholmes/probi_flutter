@@ -1,3 +1,9 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:envied/envied.dart';
 
-String baseUrl = dotenv.env['DOMAIN']!;
+part 'env.g.dart';
+
+@Envied(path: '.env')
+abstract class Env{
+  @EnviedField(varName: 'DOMAIN', defaultValue: '', obfuscate: true)
+  static String baseUrl= _Env.key;
+}

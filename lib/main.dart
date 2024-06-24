@@ -17,13 +17,11 @@ import 'package:provider/provider.dart';
 ///
 /// Loads environment variables and runs the app.
 Future main() async {
-  // Load environment variables from the .env file.
-  await dotenv.load(fileName: ".env");
 
-  final baseConfig = Dio(BaseOptions(baseUrl: baseUrl));
+  final baseConfig = Dio(BaseOptions(baseUrl: Env.baseUrl));
   PostService.instance.init(baseConfig);
   baseConfig.interceptors.add(dioInterceptor);
-  Logger().d('Base URL: $baseUrl');
+  Logger().d('Base URL: ${Env.baseUrl}');
 
   // Run the Flutter application.
   runApp(const MyApp());
