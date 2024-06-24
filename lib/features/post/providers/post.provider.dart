@@ -37,6 +37,8 @@ class PostProvider extends ChangeNotifier {
   String? titleError;
   String? bodyError;
 
+  bool isLoading = true;
+
   /// Secure storage instance for persistent storage.
   final secureStorage = const FlutterSecureStorage();
 
@@ -53,10 +55,13 @@ class PostProvider extends ChangeNotifier {
   /// Displays a loading indicator during the operation and notifies listeners
   /// when the posts are fetched.
   Future<void> getAllPosts() async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    // EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    isLoading = true;
     posts = await PostService.instance.getAllPosts();
+    await Future.delayed(const Duration(seconds: 2));
     storePost(posts);
-    EasyLoading.dismiss();
+    // EasyLoading.dismiss();
+    isLoading = false;
     notifyListeners();
   }
 
@@ -65,7 +70,7 @@ class PostProvider extends ChangeNotifier {
   /// Reads the stored posts data from secure storage and updates the lists of
   /// titles, bodies, post IDs, and user IDs.
   Future<void> retrievePostFromStorage() async {
-    EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
+    
     final dataString = await secureStorage.read(key: 'probi_posts');
 
     if (dataString != null) {
@@ -101,7 +106,7 @@ class PostProvider extends ChangeNotifier {
       }
     }
 
-    EasyLoading.dismiss();
+    
   }
 
   /// Validates the title text field.

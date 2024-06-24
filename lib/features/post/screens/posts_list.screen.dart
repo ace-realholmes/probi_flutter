@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:probi_flutter/features/post/providers/post.provider.dart';
+import 'package:probi_flutter/features/post/widgets/shimmer_grid_load.widget.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:probi_flutter/routing/app.router.gr.dart';
@@ -21,60 +23,63 @@ class PostListScreen extends StatefulWidget {
 }
 
 class _PostListScreenState extends State<PostListScreen> {
+  /// for loading shimmer instead of card
+  bool isLoading = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-      
-          /// Includes floating action button on the screen, once clicked the
-          /// user is navigated to add form, allowing him to add posts
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              context.router.push(const PostAddRoute());
-      
-              /// For Sample Create Post
-              // context.router.push(const SamplePostCreateRoute());
-            },
-            child: const Icon(
-              Icons.add,
-            ),
+        /// Includes floating action button on the screen, once clicked the
+        /// user is navigated to add form, allowing him to add posts
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.router.push(const PostAddRoute());
+
+            /// For Sample Create Post
+            // context.router.push(const SamplePostCreateRoute());
+          },
+          child: const Icon(
+            Icons.add,
           ),
-      
-          /// Builds the app bar for the screen.
-          ///
-          /// Includes two action widgets
-          /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
-          /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
-          /// light theme.
-          appBar: appBarWidget(appBarTitle: "Post List", actionWidgets: [
-            IconButton(
-                onPressed: () {
-                  context.router.pushNamed("/post/favorites");
-                },
-                icon: const Icon(Icons.list)),
-            Consumer<ThemeProvider>(
-              builder: (context, value, child) {
-                bool isDarkMode = false;
-      
-                if (value.themeMode == ThemeMode.light) {
-                  isDarkMode = false;
-                } else {
-                  isDarkMode = true;
-                }
-                return IconButton(
-                  onPressed: () {
-                    value.toggleTheme();
-                  },
-                  icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
-                );
+        ),
+
+        /// Builds the app bar for the screen.
+        ///
+        /// Includes two action widgets
+        /// [1] Favorite Lists - once clicked, the user is navigated to list of favorites
+        /// [2] Theme Mode - once clicked, the theme of the app will be updated to dark or
+        /// light theme.
+        appBar: appBarWidget(appBarTitle: "Post List", actionWidgets: [
+          IconButton(
+              onPressed: () {
+                context.router.pushNamed("/post/favorites");
               },
-            )
-          ]),
-      
-          /// Builds the body of the screen.
-          ///
-          /// Contains the list view builder to display list of posts.
-          body: const PostListBodyWidget()),
+              icon: const Icon(Icons.list)),
+          Consumer<ThemeProvider>(
+            builder: (context, value, child) {
+              bool isDarkMode = false;
+
+              if (value.themeMode == ThemeMode.light) {
+                isDarkMode = false;
+              } else {
+                isDarkMode = true;
+              }
+              return IconButton(
+                onPressed: () {
+                  value.toggleTheme();
+                },
+                icon: Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode),
+              );
+            },
+          )
+        ]),
+
+        /// Builds the body of the screen.
+        ///
+        /// Contains the list view builder to display list of posts.
+        body: const PostListBodyWidget(),
+      ),
     );
   }
 }
