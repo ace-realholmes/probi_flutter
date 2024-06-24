@@ -6,20 +6,24 @@ import 'package:probi_flutter/common/env.dart';
 import 'package:probi_flutter/features/post/models/post.dart';
 
 class PostService {
-  static final _dio = Dio(BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com/'));
-
   PostService._();
-  static final _instance = PostService._();
-  factory PostService() {
-    return _instance;
+  static final instance = PostService._();
+  // static final _dio =
+  //     Dio(BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com/'));
+
+  late Dio? _dio;
+
+  init([Dio? dio]){
+    _dio = dio;
   }
 
-  static Future<List<PostModel>> getAllPosts() async {
-    try {
-      final response = await _dio.get('/posts');
 
-      if (response.statusCode == 200) {
-        List<dynamic> data = response.data as List<dynamic>;
+   Future<List<PostModel>> getAllPosts() async {
+    try {
+      final response = await _dio?.get('/posts');
+
+      if (response?.statusCode == 200) {
+        List<dynamic> data = response?.data as List<dynamic>;
         List<PostModel> posts = data
             .map((json) => PostModel.fromJson(json as Map<String, dynamic>))
             .toList();
@@ -35,88 +39,88 @@ class PostService {
     }
   }
 
-  static Future<PostModel> getPost(int id) async {
+   Future<PostModel> getPost(int id) async {
     try {
-      final response = await _dio.get("/posts/$id");
+      final response = await _dio?.get("/posts/$id");
 
-      if (response.statusCode == 200) {
+      if (response?.statusCode == 200) {
         PostModel post =
-            PostModel.fromJson(response.data as Map<String, dynamic>);
+            PostModel.fromJson(response?.data as Map<String, dynamic>);
         log('Get Post: ${post.body}');
         return post;
       } else {
-        throw Exception('Failed to Get Post: ${response.statusMessage}');
+        throw Exception('Failed to Get Post: ${response?.statusMessage}');
       }
     } catch (e) {
       throw Exception('Failed to Get Post: $e');
     }
   }
 
-  static Future<PostModel> postPost(PostModel post) async {
+   Future<PostModel> postPost(PostModel post) async {
     try {
-      final response = await _dio.post('/posts',
+      final response = await _dio?.post('/posts',
           data: {"userId": 11, "title": post.title, "body": post.body});
 
       Logger().d("Post Post Service: $response");
 
-      if (response.statusCode == 201) {
+      if (response?.statusCode == 201) {
         PostModel post =
-            PostModel.fromJson(response.data as Map<String, dynamic>);
+            PostModel.fromJson(response?.data as Map<String, dynamic>);
 
         Logger().d('Post Post: $post');
         return post;
       } else {
-        throw Exception('Failed to Post Post: ${response.statusMessage}');
+        throw Exception('Failed to Post Post: ${response?.statusMessage}');
       }
     } catch (e) {
       throw Exception('Failed to Post Post: $e');
     }
   }
 
-  static Future<PostModel> putPost(int id) async {
+   Future<PostModel> putPost(int id) async {
     try {
-      final response = await _dio.put("/posts/$id");
+      final response = await _dio?.put("/posts/$id");
 
-      if (response.statusCode == 200) {
+      if (response?.statusCode == 200) {
         PostModel post =
-            PostModel.fromJson(response.data as Map<String, dynamic>);
+            PostModel.fromJson(response?.data as Map<String, dynamic>);
         log("Put Post: $post");
         return post;
       } else {
-        throw Exception("Failed to Put Post: ${response.statusMessage}");
+        throw Exception("Failed to Put Post: ${response?.statusMessage}");
       }
     } catch (e) {
       throw Exception("Failed to Put Post: $e");
     }
   }
 
-  static Future<PostModel> patchPost(PostModel post) async {
+   Future<PostModel> patchPost(PostModel post) async {
     try {
-      final response = await _dio.patch("/posts/${post.id}",
+      final response = await _dio?.patch("/posts/${post.id}",
           data: {"userId": 11, "title": post.title, "body": post.body});
 
-      if (response.statusCode == 200) {
+      if (response?.statusCode == 200) {
         PostModel post =
-            PostModel.fromJson(response.data as Map<String, dynamic>);
+            PostModel.fromJson(response?.data as Map<String, dynamic>);
 
         return post;
       } else {
-        throw Exception("Failed to patch post: ${response.statusMessage}");
+        throw Exception("Failed to patch post: ${response?.statusMessage}");
       }
     } catch (e) {
       throw Exception("Failed to patch post: $e");
     }
   }
 
-  static Future<void> deletePost(int id) async {
+   Future<void> deletePost(int id) async {
     try {
-      final response = await _dio.delete("/posts/$id");
+      final response = await _dio?.delete("/posts/$id");
 
-      if (response.statusCode == 200) {
+      if (response?.statusCode == 200) {
         Logger().d("Post Successfully Delete");
       } else {
         Logger().d("Post failed to delete");
-        throw Exception("Failed to delete post: ${response.statusMessage}");
+        throw Exception("Failed to delete post: ${response?.statusMessage}");
       }
     } catch (e) {
       throw Exception("Failed to delete post: $e");

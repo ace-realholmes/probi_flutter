@@ -54,7 +54,7 @@ class PostProvider extends ChangeNotifier {
   /// when the posts are fetched.
   Future<void> getAllPosts() async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    posts = await PostService.getAllPosts();
+    posts = await PostService.instance.getAllPosts();
     storePost(posts);
     EasyLoading.dismiss();
     notifyListeners();
@@ -161,7 +161,7 @@ class PostProvider extends ChangeNotifier {
     );
 
     try {
-      PostModel createdPost = await PostService.postPost(postFields);
+      PostModel createdPost = await PostService.instance.postPost(postFields);
 
       Logger().d("Create Post Provider: ${createdPost.toJson()}");
 
@@ -262,7 +262,7 @@ class PostProvider extends ChangeNotifier {
   /// fields.
   Future<void> updatePost(PostModel post) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    PostModel patchedPost = await PostService.patchPost(post);
+    PostModel patchedPost = await PostService.instance.patchPost(post);
     Logger().d("Update Post Provider: $patchedPost");
 
     if (patchedPost.userId.toString().isNotEmpty ||
@@ -279,7 +279,7 @@ class PostProvider extends ChangeNotifier {
   /// Notifies listeners after the post is deleted.
   Future<void> deletePost(int id) async {
     EasyLoading.show(status: "Loading", maskType: EasyLoadingMaskType.black);
-    await PostService.deletePost(id);
+    await PostService.instance.deletePost(id);
     EasyLoading.dismiss();
     notifyListeners();
   }

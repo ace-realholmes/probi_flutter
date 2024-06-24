@@ -71,7 +71,8 @@ class PostAddBodyWidget extends StatelessWidget {
     }
 
     try {
-      final created = await PostService.postPost(post);
+      // final created = await PostService().postPost(post);
+      final created = await PostService.instance.postPost(post);
 
       Logger().i('Created: ${created.toJson()}');
     } catch (e) {

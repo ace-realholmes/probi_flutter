@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:logger/logger.dart';
+import 'package:probi_flutter/common/env.dart';
 import 'package:probi_flutter/features/post/providers/post.provider.dart';
 import 'package:probi_flutter/features/post/providers/theme.provider.dart';
+import 'package:probi_flutter/features/post/services/post.service.dart';
+import 'package:probi_flutter/features/post/utils/dio_interceptor.utils.dart';
 import 'package:probi_flutter/routing/app.router.dart';
 import 'package:probi_flutter/themes/dark.theme.dart';
 import 'package:probi_flutter/themes/default.theme.dart';
@@ -14,6 +19,11 @@ import 'package:provider/provider.dart';
 Future main() async {
   // Load environment variables from the .env file.
   await dotenv.load(fileName: ".env");
+
+  final baseConfig = Dio(BaseOptions(baseUrl: baseUrl));
+  PostService.instance.init(baseConfig);
+  baseConfig.interceptors.add(dioInterceptor);
+  Logger().d('Base URL: $baseUrl');
 
   // Run the Flutter application.
   runApp(const MyApp());
